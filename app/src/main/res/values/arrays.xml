@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+
+    <!-- Screen Colors -->
+    <string-array name="colors">
+        <item>@string/red</item>
+        <item>@string/green</item>
+        <item>@string/blue</item>
+    </string-array>
+    <!-- Profiles -->
+    <string-array name="profile_options">
+    <item>@string/create</item>
+    <item>@string/import_item</item>
+</string-array>
+
+</resources>
