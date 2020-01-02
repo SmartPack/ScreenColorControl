@@ -42,6 +42,7 @@
     <string name="klapse">K-lapse</string>
     <string name="klapse_summary">Kernel-based Lapse ("K-lapse") is a linear RGB scaling module that shifts RGB based on time or brightness (&lt;a href="https://github.com/tanish2k09/KLapse-Livedisplay">Read More&lt;a>).</string>
     <string name="klapse_enable">Select preferred K-lapse mode.</string>
+    <string name="time_mode_warning">Due to the K-lapse time schedule settings, it will take some time to get this change in full effect. For immediate effect, please disable K-Lapse and try again.</string>
     <string name="minus" translatable="false">-</string>
     <string name="more">More</string>
     <string name="name_empty">Name is empty! Aborting.</string>
