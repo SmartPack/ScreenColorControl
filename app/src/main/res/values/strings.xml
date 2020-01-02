@@ -40,7 +40,7 @@
     <string name="import_item">Import</string>
     <string name="invert_screen">Invert Screen</string>
     <string name="klapse">K-lapse</string>
-    <string name="klapse_summary">Kernel-based Lapse ("K-lapse") is a linear RGB scaling module that shifts RGB based on time or brightness. &lt;a href="https://github.com/tanish2k09/KLapse-Livedisplay">Read More&lt;a></string>
+    <string name="klapse_summary">Kernel-based Lapse ("K-lapse") is a linear RGB scaling module that shifts RGB based on time or brightness (&lt;a href="https://github.com/tanish2k09/KLapse-Livedisplay">Read More&lt;a>).</string>
     <string name="klapse_enable">Select preferred K-lapse mode.</string>
     <string name="minus" translatable="false">-</string>
     <string name="more">More</string>
