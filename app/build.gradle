@@ -18,8 +18,8 @@ android {
         applicationId "com.smartpack.colorcontrol"
         minSdkVersion 23
         targetSdkVersion 28
-        versionCode 1
-        versionName "beta1-" + getDate()
+        versionCode 2
+        versionName "beta2-" + getDate()
         vectorDrawables.useSupportLibrary = true
         archivesBaseName = "$applicationId-$versionName"
     }
