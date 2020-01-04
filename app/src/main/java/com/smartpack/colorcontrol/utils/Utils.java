@@ -212,6 +212,10 @@ public class Utils {
         RootUtils.runCommand("echo '" + value + "' > '" + path + "'");
     }
 
+    public static void downloadFile(String path, String url) {
+        RootUtils.runCommand("curl -L -o " + path + " " + url);
+    }
+
     public static boolean existFile(String file) {
         return existFile(file, true);
     }
