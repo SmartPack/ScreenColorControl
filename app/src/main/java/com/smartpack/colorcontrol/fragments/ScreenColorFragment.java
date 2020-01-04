@@ -17,6 +17,7 @@ import com.smartpack.colorcontrol.utils.Klapse;
 import com.smartpack.colorcontrol.utils.Prefs;
 import com.smartpack.colorcontrol.utils.Profile;
 import com.smartpack.colorcontrol.utils.ScreenColor;
+import com.smartpack.colorcontrol.utils.UpdateCheck;
 import com.smartpack.colorcontrol.utils.Utils;
 import com.smartpack.colorcontrol.views.dialog.Dialog;
 import com.smartpack.colorcontrol.views.recyclerview.CardView;
@@ -305,6 +306,19 @@ public class ScreenColorFragment extends RecyclerViewFragment {
         boolean showDialog = Prefs.getBoolean("welcomeMessage", true, getActivity());
         if (showDialog) {
             WelcomeDialog();
+        }
+
+        // Initialize manual Update Check, if play store not found
+        if (!UpdateCheck.isPlayStoreInstalled(getActivity())) {
+            if (!Utils.checkWriteStoragePermission(getActivity())) {
+                Utils.toast(getString(R.string.update_check_failed) + " " + getString(R.string.permission_denied_write_storage), getActivity());
+                return;
+            }
+            if (!Utils.isNetworkAvailable(getContext())) {
+                Utils.toast(getString(R.string.update_check_failed) + " " + getString(R.string.no_internet), getActivity());
+                return;
+            }
+            UpdateCheck.autoUpdateCheck(getActivity());
         }
     }
     

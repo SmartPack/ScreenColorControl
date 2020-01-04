@@ -23,10 +23,7 @@ import com.smartpack.colorcontrol.fragments.KlapseFragment;
 import com.smartpack.colorcontrol.fragments.OtherSettingsFragment;
 import com.smartpack.colorcontrol.fragments.ProfileFragment;
 import com.smartpack.colorcontrol.fragments.ScreenColorFragment;
-import com.smartpack.colorcontrol.utils.DRMColor;
-import com.smartpack.colorcontrol.utils.Klapse;
 import com.smartpack.colorcontrol.utils.PagerAdapter;
-import com.smartpack.colorcontrol.utils.ScreenColor;
 import com.smartpack.colorcontrol.utils.Utils;
 import com.smartpack.colorcontrol.utils.root.RootUtils;
 
