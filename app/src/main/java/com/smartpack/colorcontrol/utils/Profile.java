@@ -8,6 +8,7 @@
 
 package com.smartpack.colorcontrol.utils;
 
+import com.smartpack.colorcontrol.utils.root.RootFile;
 import com.smartpack.colorcontrol.utils.root.RootUtils;
 
 import java.io.File;
@@ -31,6 +32,11 @@ public class Profile {
         }
         file.mkdirs();
         RootUtils.runCommand("cp " + string + " " + PROFILE);
+    }
+
+    public static void createProfile(String file, String text) {
+        RootFile f = new RootFile(file);
+        f.write(text, false);
     }
 
     public static void deleteProfile(String path) {

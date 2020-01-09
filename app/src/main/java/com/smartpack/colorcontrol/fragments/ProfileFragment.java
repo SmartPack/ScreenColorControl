@@ -26,6 +26,7 @@ import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.smartpack.colorcontrol.R;
 import com.smartpack.colorcontrol.utils.DRMColor;
+import com.smartpack.colorcontrol.utils.EditorActivity;
 import com.smartpack.colorcontrol.utils.Klapse;
 import com.smartpack.colorcontrol.utils.Profile;
 import com.smartpack.colorcontrol.utils.ScreenColor;
@@ -51,6 +52,7 @@ public class ProfileFragment extends RecyclerViewFragment {
 
     private Dialog mOptionsDialog;
 
+    private String mEditProfile;
     private String mPath;
 
     @Override
@@ -149,7 +151,8 @@ public class ProfileFragment extends RecyclerViewFragment {
                     public void onMenuReady(CardView cardView, PopupMenu popupMenu) {
                         Menu menu = popupMenu.getMenu();
                         menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.apply));
-                        menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.delete));
+                        menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.edit));
+                        menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.delete));
 
                         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                             @Override
@@ -203,6 +206,13 @@ public class ProfileFragment extends RecyclerViewFragment {
                                                 .show();
                                         break;
                                     case 1:
+                                        mEditProfile = profiles.toString();
+                                        Intent intent = new Intent(getActivity(), EditorActivity.class);
+                                        intent.putExtra(EditorActivity.TITLE_INTENT, profiles);
+                                        intent.putExtra(EditorActivity.TEXT_INTENT, Profile.readProfile(profiles.toString()));
+                                        startActivityForResult(intent, 0);
+                                        break;
+                                    case 2:
                                         new Dialog(getActivity())
                                                 .setMessage(getString(R.string.sure_question, profiles.getName().replace(".sh", "")))
                                                 .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
@@ -246,6 +256,9 @@ public class ProfileFragment extends RecyclerViewFragment {
 
         if (data == null) return;
         if (requestCode == 0) {
+            Profile.createProfile(mEditProfile, data.getCharSequenceExtra(EditorActivity.TEXT_INTENT).toString());
+            reload();
+        } else if (requestCode == 1) {
             Uri uri = data.getData();
             File file = new File(uri.getPath());
             mPath = Utils.getPath(file);
@@ -309,7 +322,7 @@ public class ProfileFragment extends RecyclerViewFragment {
                     case 1:
                         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                         intent.setType("*/*");
-                        startActivityForResult(intent, 0);
+                        startActivityForResult(intent, 1);
                         break;
                 }
             }

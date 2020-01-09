@@ -28,6 +28,7 @@
     <string name="donate_me_playstore">\nPlease note: I can accept donations either via PayPal, or through SmartPack Donation Package in PlayStore.\n</string>
     <string name="donate_me_summary">Want to appreciate my work with a Donation? Click here</string>
     <string name="donate_nope">Not Now</string>
+    <string name="edit">Edit</string>
     <string name="end_time">End</string>
     <string name="fadeback_time">Fade-back Time (Minute)</string>
     <string name="fadeback_time_summary">The number of minutes before End Time when RGB should start going back to Daytime colors.</string>
@@ -72,6 +73,7 @@
     <string name="pulse_freq_summary">The number of milliseconds after which klapse_pulse is called.</string>
     <string name="purchase_app">Donation App</string>
     <string name="red">Red</string>
+    <string name="save">Save</string>
     <string name="saturation_intensity">Saturation Intensity</string>
     <string name="scaling_rate">Scaling Rate (Minute)</string>
     <string name="scaling_rate_summary">Controls how soon the RGB reaches from Daytime to Night Mode inside of start and stop hour range.</string>
