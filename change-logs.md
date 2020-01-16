@@ -1,6 +1,10 @@
 # Change-logs
 
-## 2. January 04, 2019
+## 3. January 16, 2020
+*Release-tag: beta3*<br>
+Profiles: Added ability to edit profiles. Profiles: Fixed picking profiles from /sdcard root. Miscellaneous changes.
+
+## 2. January 04, 2020
 *Release-tag: beta2*<br>
 Screen Color: RGB Control: Link with K-lapse (day/night) values if supported & enabled. Main: Update notifications for non-google play devices. Miscellaneous changes.
 

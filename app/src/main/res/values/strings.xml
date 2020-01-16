@@ -14,7 +14,7 @@
     <string name="blue">Blue</string>
     <string name="cancel">Cancel</string>
     <string name="change_logs">Change-logs</string>
-    <string name="change_logs_message" translatable="false">- Screen Color: RGB Control: Link with K-lapse (day/night) values if supported &amp; enabled.\n\n- Miscellaneous changes.</string>
+    <string name="change_logs_message" translatable="false">- Profiles: Added ability to edit profiles.\n\n- Profiles: Fixed picking profiles from /sdcard root. Miscellaneous changes.\n\n- Miscellaneous changes.</string>
     <string name="change_logs_summary">View Change-logs</string>
     <string name="create">Create</string>
     <string name="credits">Credits</string>
