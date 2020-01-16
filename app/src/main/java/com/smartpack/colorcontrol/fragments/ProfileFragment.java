@@ -278,7 +278,7 @@ public class ProfileFragment extends RecyclerViewFragment {
                 Utils.toast(getString(R.string.wrong_profile, file.getName().replace(".sh", "")), getActivity());
                 return;
             }
-            if (Utils.existFile(Profile.profileExistsCheck(file.getName()))) {
+            if (Utils.existFile(Profile.profileExistsCheck(file.getName().replace("primary:", "")))) {
                 Utils.toast(getString(R.string.profile_exists, file.getName()), getActivity());
                 return;
             }
