@@ -270,7 +270,7 @@ public class ProfileFragment extends RecyclerViewFragment {
                 dialogueDocumentsUI.show();
                 return;
             }
-            if (!Utils.getExtension(file.getName()).equals("sh")) {
+            if (!Utils.getExtension(mPath).equals("sh")) {
                 Utils.toast(getString(R.string.wrong_extension, ".sh"), getActivity());
                 return;
             }
@@ -283,7 +283,7 @@ public class ProfileFragment extends RecyclerViewFragment {
                 return;
             }
             Dialog selectQuestion = new Dialog(getActivity());
-            selectQuestion.setMessage(getString(R.string.select_question, file.getName()));
+            selectQuestion.setMessage(getString(R.string.select_question, file.getName().replace("primary:", "")));
             selectQuestion.setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
             });
             selectQuestion.setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> {
