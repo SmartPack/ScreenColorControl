@@ -18,6 +18,8 @@
     <string name="change_logs_summary">View Change-logs</string>
     <string name="create">Create</string>
     <string name="credits">Credits</string>
+    <string name="dark_theme">Dark Theme</string>
+    <string name="dark_theme_message">Theme will be changed on next app launch.</string>
     <string name="daytime_rgb">Daytime Colors</string>
     <string name="delete">Delete</string>
     <string name="dimming">Dimming</string>
@@ -66,7 +68,6 @@
     <string name="playstore_summary">Visit Screen Color Control page on PlayStore</string>
     <string name="plus" translatable="false">+</string>
     <string name="profiles">Profiles</string>
-    <string name="profiles_message">When you make a profile, the current color settings are exported into \'%s\' as a well formatted shell script. You can later re-apply (with in few clicks using the app) or share the above saved shell scripts (using any social networking app) with your friends and colleges. Clicking the plus button also offer you an option to import a color control profile from your \'sdcard\'.</string>
     <string name="profile_summary">In this section, you can create, import, view and easily apply Screen Color profiles within few clicks.</string>
     <string name="profile_exists">A profile named %s is already exists! Aborting.</string>
     <string name="pulse_freq">Pulse Frequency</string>
@@ -88,7 +89,6 @@
     <string name="share_app_summary">Share Screen Color Control with your friends</string>
     <string name="share_app_message">Get Screen Color Control %s from PlayStore: https://play.google.com/store/apps/details?id=com.smartpack.colorcontrol</string>
     <string name="srgb">sRGB</string>
-    <string name="srgb_message">Please note: The display settings on some OEM\'s might overwrite this value anytime.</string>
     <string name="start_time">Start</string>
     <string name="sure_question">Delete %s?</string>
     <string name="unknown">Unknown</string>

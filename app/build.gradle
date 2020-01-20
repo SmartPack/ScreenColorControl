@@ -64,6 +64,5 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.preference:preference:1.1.0'
     implementation 'com.google.android.material:material:1.2.0-alpha03'
-    implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'org.adw.library:discrete-seekbar:1.0.1'
 }

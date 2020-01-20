@@ -6,8 +6,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/rcBackground_light" >
+        android:layout_height="match_parent" >
 
         <TextView
             android:id="@+id/no_root_Text"
@@ -15,9 +14,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_gravity="center"
-            android:textSize="30sp"
-            android:textColor="@color/colorPrimary"
-            android:textColorHighlight="@color/colorPrimaryDark" />
+            android:textSize="30sp" />
     </FrameLayout>
 
     <com.google.android.material.appbar.AppBarLayout
@@ -25,9 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        app:itemIconTint="@color/colorOnPrimary"
-        app:itemTextColor="@color/colorOnPrimary"
-        android:background="@color/colorPrimary" >
+        android:background="?attr/colorSecondary" >
 
         <com.google.android.material.tabs.TabLayout
             android:layout_width="match_parent"
@@ -37,8 +32,8 @@
             app:tabMode="scrollable"
             android:textAlignment="center"
             android:background="@color/colorPrimary"
-            app:tabTextColor="@color/rcBackground_light"
-            app:tabSelectedTextColor="@color/colorOnPrimary"
+            app:tabTextColor="@color/colorOnPrimary"
+            app:tabSelectedTextColor="?attr/colorSecondary"
             android:id="@+id/tabLayoutID" />
 
     </com.google.android.material.appbar.AppBarLayout>

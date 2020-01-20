@@ -8,4 +8,4 @@
     android:textIsSelectable="true"
     android:textSize="18sp"
     android:paddingLeft="10dp"
-    android:textColor="@color/blue"/>
+    android:textColor="?attr/colorSecondary"/>

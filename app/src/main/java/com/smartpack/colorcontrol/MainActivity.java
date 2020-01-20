@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
 import androidx.viewpager.widget.ViewPager;
 
@@ -24,6 +25,7 @@ import com.smartpack.colorcontrol.fragments.OtherSettingsFragment;
 import com.smartpack.colorcontrol.fragments.ProfileFragment;
 import com.smartpack.colorcontrol.fragments.ScreenColorFragment;
 import com.smartpack.colorcontrol.utils.PagerAdapter;
+import com.smartpack.colorcontrol.utils.Prefs;
 import com.smartpack.colorcontrol.utils.Utils;
 import com.smartpack.colorcontrol.utils.root.RootUtils;
 
@@ -35,6 +37,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        if (Prefs.getBoolean("dark_theme", true, this)) {
+            AppCompatDelegate.setDefaultNightMode(
+                    AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(
+                    AppCompatDelegate.MODE_NIGHT_NO);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 

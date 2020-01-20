@@ -11,12 +11,15 @@ package com.smartpack.colorcontrol.fragments;
 import android.content.Intent;
 
 import com.smartpack.colorcontrol.BuildConfig;
+import com.smartpack.colorcontrol.MainActivity;
 import com.smartpack.colorcontrol.R;
+import com.smartpack.colorcontrol.utils.Prefs;
 import com.smartpack.colorcontrol.utils.UpdateCheck;
 import com.smartpack.colorcontrol.utils.Utils;
 import com.smartpack.colorcontrol.views.dialog.Dialog;
 import com.smartpack.colorcontrol.views.recyclerview.DescriptionView;
 import com.smartpack.colorcontrol.views.recyclerview.RecyclerViewItem;
+import com.smartpack.colorcontrol.views.recyclerview.SwitchView;
 import com.smartpack.colorcontrol.views.recyclerview.TitleView;
 
 import java.util.List;
@@ -60,25 +63,19 @@ public class AboutFragment extends RecyclerViewFragment {
 
         items.add(versioninfo);
 
-        DescriptionView changelogs = new DescriptionView();
-        changelogs.setDrawable(getResources().getDrawable(R.drawable.ic_changelog));
-        changelogs.setTitle(getString(R.string.change_logs));
-        changelogs.setSummary(getString(R.string.change_logs_summary));
-        changelogs.setOnItemClickListener(new RecyclerViewItem.OnItemClickListener() {
+        SwitchView dark_theme = new SwitchView();
+        dark_theme.setDrawable(getResources().getDrawable(R.drawable.ic_color));
+        dark_theme.setSummary(getString(R.string.dark_theme));
+        dark_theme.setChecked(Prefs.getBoolean("dark_theme", true, getActivity()));
+        dark_theme.addOnSwitchListener(new SwitchView.OnSwitchListener() {
             @Override
-            public void onClick(RecyclerViewItem item) {
-                new Dialog(getActivity())
-                        .setIcon(R.mipmap.ic_launcher)
-                        .setTitle(BuildConfig.VERSION_NAME)
-                        .setMessage(getString(R.string.change_logs_message))
-                        .setPositiveButton(getString(R.string.cancel), (dialogInterface, i) -> {
-                        })
-
-                        .show();
+            public void onChanged(SwitchView switchview, boolean isChecked) {
+                Prefs.saveBoolean("dark_theme", isChecked, getActivity());
+                Utils.toast(R.string.dark_theme_message, getActivity());
             }
         });
 
-        items.add(changelogs);
+        items.add(dark_theme);
 
         if (UpdateCheck.isPlayStoreInstalled(getActivity())) {
             DescriptionView playstore = new DescriptionView();
@@ -114,6 +111,26 @@ public class AboutFragment extends RecyclerViewFragment {
 
             items.add(updateCheck);
         }
+
+        DescriptionView changelogs = new DescriptionView();
+        changelogs.setDrawable(getResources().getDrawable(R.drawable.ic_changelog));
+        changelogs.setTitle(getString(R.string.change_logs));
+        changelogs.setSummary(getString(R.string.change_logs_summary));
+        changelogs.setOnItemClickListener(new RecyclerViewItem.OnItemClickListener() {
+            @Override
+            public void onClick(RecyclerViewItem item) {
+                new Dialog(getActivity())
+                        .setIcon(R.mipmap.ic_launcher)
+                        .setTitle(BuildConfig.VERSION_NAME)
+                        .setMessage(getString(R.string.change_logs_message))
+                        .setPositiveButton(getString(R.string.cancel), (dialogInterface, i) -> {
+                        })
+
+                        .show();
+            }
+        });
+
+        items.add(changelogs);
 
         DescriptionView share = new DescriptionView();
         share.setDrawable(getResources().getDrawable(R.drawable.ic_share));

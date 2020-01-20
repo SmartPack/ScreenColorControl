@@ -5,10 +5,8 @@
     android:layout_height="wrap_content"
     android:focusable="false"
     android:foreground="?attr/selectableItemBackground"
-    app:cardBackgroundColor="@color/rcBackground_light"
     app:cardCornerRadius="@dimen/cardview_radius"
-    app:cardElevation="@dimen/cardview_elevation"
-    app:cardUseCompatPadding="true">
+    app:cardElevation="@dimen/cardview_elevation" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,7 +32,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:focusable="false"
-                    android:textColor="@color/blue"
+                    android:textColor="?attr/colorSecondary"
                     android:textSize="18sp" />
 
                 <androidx.appcompat.widget.AppCompatImageView

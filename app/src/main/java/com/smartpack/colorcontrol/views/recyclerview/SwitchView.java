@@ -1,8 +1,10 @@
 package com.smartpack.colorcontrol.views.recyclerview;
 
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.CompoundButton;
 
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.SwitchCompat;
 
@@ -21,10 +23,12 @@ public class SwitchView extends RecyclerViewItem {
         void onChanged(SwitchView switchView, boolean isChecked);
     }
 
+    private AppCompatImageView mImageView;
     private AppCompatTextView mTitle;
     private AppCompatTextView mSummary;
     private SwitchCompat mSwitcher;
 
+    private Drawable mImage;
     private CharSequence mTitleText;
     private CharSequence mSummaryText;
     private boolean mChecked;
@@ -38,6 +42,7 @@ public class SwitchView extends RecyclerViewItem {
 
     @Override
     public void onCreateView(View view) {
+        mImageView = view.findViewById(R.id.image);
         mTitle = view.findViewById(R.id.title);
         mSummary = view.findViewById(R.id.summary);
         mSwitcher = view.findViewById(R.id.switcher);
@@ -63,6 +68,11 @@ public class SwitchView extends RecyclerViewItem {
                 }
             }
         });
+    }
+
+    public void setDrawable(Drawable drawable) {
+        mImage = drawable;
+        refresh();
     }
 
     public void setTitle(CharSequence title) {
@@ -92,9 +102,17 @@ public class SwitchView extends RecyclerViewItem {
         mOnSwitchListeners.add(onSwitchListener);
     }
 
+    public void clearOnSwitchListener() {
+        mOnSwitchListeners.clear();
+    }
+
     @Override
     protected void refresh() {
         super.refresh();
+        if (mImageView != null && mImage != null) {
+            mImageView.setImageDrawable(mImage);
+            mImageView.setVisibility(View.VISIBLE);
+        }
         if (mTitle != null) {
             if (mTitleText != null) {
                 mTitle.setText(mTitleText);

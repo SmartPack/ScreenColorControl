@@ -11,12 +11,10 @@ package com.smartpack.colorcontrol.utils;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.TypedArray;
-import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.widget.AppCompatEditText;
@@ -27,11 +25,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.smartpack.colorcontrol.R;
 import com.smartpack.colorcontrol.views.dialog.Dialog;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
-
-import java.util.HashSet;
-import java.util.Set;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on January 01, 2020
@@ -77,59 +70,6 @@ public class ViewUtils {
         TypedValue value = new TypedValue();
         context.getTheme().resolveAttribute(R.attr.colorAccent, value, true);
         return value.data;
-    }
-
-    private static final Set<CustomTarget> mProtectedFromGarbageCollectorTargets = new HashSet<>();
-
-    private static class CustomTarget implements Target {
-        private ImageView mImageView;
-        private int mMaxWidth;
-        private int mMaxHeight;
-
-        private CustomTarget(ImageView imageView, int maxWidth, int maxHeight) {
-            mImageView = imageView;
-            mMaxWidth = maxWidth;
-            mMaxHeight = maxHeight;
-        }
-
-        @Override
-        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-            mImageView.setImageBitmap(scaleDownBitmap(bitmap, mMaxWidth, mMaxHeight));
-            mProtectedFromGarbageCollectorTargets.remove(this);
-        }
-
-        @Override
-        public void onBitmapFailed(Drawable errorDrawable) {
-            mProtectedFromGarbageCollectorTargets.remove(this);
-        }
-
-        @Override
-        public void onPrepareLoad(Drawable placeHolderDrawable) {
-        }
-    }
-
-    private static Bitmap scaleDownBitmap(Bitmap bitmap, int maxWidth, int maxHeight) {
-        int width = bitmap.getWidth();
-        int height = bitmap.getHeight();
-
-        int newWidth = width;
-        int newHeight = height;
-
-        if (maxWidth != 0 && newWidth > maxWidth) {
-            newHeight = Math.round((float) maxWidth / newWidth * newHeight);
-            newWidth = maxWidth;
-        }
-
-        if (maxHeight != 0 && newHeight > maxHeight) {
-            newWidth = Math.round((float) maxHeight / newHeight * newWidth);
-            newHeight = maxHeight;
-        }
-
-        return width != newWidth || height != newHeight ? resizeBitmap(bitmap, newWidth, newHeight) : bitmap;
-    }
-
-    private static Bitmap resizeBitmap(Bitmap bitmap, int newWidth, int newHeight) {
-        return Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, false);
     }
 
     public interface OnDialogEditTextListener {
