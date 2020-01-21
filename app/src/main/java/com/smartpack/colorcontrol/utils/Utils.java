@@ -241,6 +241,11 @@ public class Utils {
         }
     }
 
+    public static String  restartApp() {
+        RootUtils.runCommand("sleep 1");
+        return RootUtils.runCommand("am start -n com.smartpack.colorcontrol/com.smartpack.colorcontrol.MainActivity");
+    }
+
     public static String getPath(File file) {
         if (file.getAbsolutePath().contains("/document/raw:")) {
             return file.getAbsolutePath().replace("/document/raw:", "");

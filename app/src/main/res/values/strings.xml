@@ -19,7 +19,7 @@
     <string name="create">Create</string>
     <string name="credits">Credits</string>
     <string name="dark_theme">Dark Theme</string>
-    <string name="dark_theme_message">Theme will be changed on next app launch.</string>
+    <string name="dark_theme_message">%s theme will be applied on next app launch!</string>
     <string name="daytime_rgb">Daytime Colors</string>
     <string name="delete">Delete</string>
     <string name="dimming">Dimming</string>

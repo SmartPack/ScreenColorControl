@@ -11,7 +11,6 @@ package com.smartpack.colorcontrol.fragments;
 import android.content.Intent;
 
 import com.smartpack.colorcontrol.BuildConfig;
-import com.smartpack.colorcontrol.MainActivity;
 import com.smartpack.colorcontrol.R;
 import com.smartpack.colorcontrol.utils.Prefs;
 import com.smartpack.colorcontrol.utils.UpdateCheck;
@@ -71,7 +70,8 @@ public class AboutFragment extends RecyclerViewFragment {
             @Override
             public void onChanged(SwitchView switchview, boolean isChecked) {
                 Prefs.saveBoolean("dark_theme", isChecked, getActivity());
-                Utils.toast(R.string.dark_theme_message, getActivity());
+                Utils.toast(getString(R.string.dark_theme_message, Prefs.getBoolean("dark_theme", true,
+                        getActivity()) ? "Dark" : "Light"), getActivity());
             }
         });
 
