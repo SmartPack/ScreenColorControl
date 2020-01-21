@@ -12,9 +12,9 @@
 2. BusyBox
 
 ## Features
-Screen Color Control is a simple and very basic app, even without a settings menu and additional themes, which can do the following things
+Screen Color Control is a simple and very basic app, even without a settings menu, which can do the following things
 * Offer advanced control over the screen color of devices having KCAL/K-lapse support.
-* Allows to create, import and easily apply color control profiles.
+* Allows to create, import apply, and easily share color control profiles.
 
 ## Donations
 If you like to appreciate my work, please consider donating to me (either via [PayPal](https://www.paypal.me/sunilpaulmathew/), or [Ko-fi](https://ko-fi.com/sunilpaulmathew/), or by purchasing the [SmartPack Donation Package](https://play.google.com/store/apps/details?id=com.smartpack.donate) from playstore) as it is helpful to continue my projects more active, although it is not at all necessary.

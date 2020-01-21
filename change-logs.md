@@ -1,5 +1,9 @@
 # Change-logs
 
+## 4. January 21, 2020
+*Release-tag: beta4*<br>
+Profiles: Added ability to share profiles. Theme: Switched to dark mode with an option to select light theme in About page. Miscellaneous changes.
+
 ## 3. January 16, 2020
 *Release-tag: beta3*<br>
 Profiles: Added ability to edit profiles. Profiles: Fixed picking profiles from /sdcard root. Miscellaneous changes.
