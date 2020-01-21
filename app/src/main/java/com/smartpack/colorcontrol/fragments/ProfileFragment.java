@@ -22,8 +22,10 @@ import android.view.MenuItem;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.core.graphics.drawable.DrawableCompat;
 
+import com.smartpack.colorcontrol.BuildConfig;
 import com.smartpack.colorcontrol.R;
 import com.smartpack.colorcontrol.utils.DRMColor;
 import com.smartpack.colorcontrol.utils.EditorActivity;
@@ -152,7 +154,8 @@ public class ProfileFragment extends RecyclerViewFragment {
                         Menu menu = popupMenu.getMenu();
                         menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.apply));
                         menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.edit));
-                        menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.delete));
+                        menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.share));
+                        menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.delete));
 
                         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                             @Override
@@ -213,6 +216,18 @@ public class ProfileFragment extends RecyclerViewFragment {
                                         startActivityForResult(intent, 0);
                                         break;
                                     case 2:
+                                        Uri uriFile = FileProvider.getUriForFile(getActivity(),
+                                                BuildConfig.APPLICATION_ID + ".provider", new File(profiles.toString()));
+                                        Intent shareScript = new Intent(Intent.ACTION_SEND);
+                                        shareScript.setType("application/sh");
+                                        shareScript.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_by, profiles.getName()));
+                                        shareScript.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_message) +
+                                                (getString(R.string.share_app_message, BuildConfig.VERSION_NAME)));
+                                        shareScript.putExtra(Intent.EXTRA_STREAM, uriFile);
+                                        shareScript.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                                        startActivity(Intent.createChooser(shareScript, getString(R.string.share_with)));
+                                        break;
+                                    case 3:
                                         new Dialog(getActivity())
                                                 .setMessage(getString(R.string.sure_question, profiles.getName().replace(".sh", "")))
                                                 .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
