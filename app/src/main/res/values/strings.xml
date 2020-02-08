@@ -14,7 +14,6 @@
     <string name="blue">Blue</string>
     <string name="cancel">Cancel</string>
     <string name="change_logs">Change-logs</string>
-    <string name="change_logs_message" translatable="false">- Profiles: Added ability to share profiles.\n\n- Theme: Switched to dark mode with an option to select light theme in About page.\n\n- Miscellaneous changes.</string>
     <string name="change_logs_summary">View Change-logs</string>
     <string name="create">Create</string>
     <string name="credits">Credits</string>

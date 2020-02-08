@@ -119,14 +119,11 @@ public class AboutFragment extends RecyclerViewFragment {
         changelogs.setOnItemClickListener(new RecyclerViewItem.OnItemClickListener() {
             @Override
             public void onClick(RecyclerViewItem item) {
-                new Dialog(getActivity())
-                        .setIcon(R.mipmap.ic_launcher)
-                        .setTitle(BuildConfig.VERSION_NAME)
-                        .setMessage(getString(R.string.change_logs_message))
-                        .setPositiveButton(getString(R.string.cancel), (dialogInterface, i) -> {
-                        })
-
-                        .show();
+                if (!Utils.isNetworkAvailable(getContext())) {
+                    Utils.toast(R.string.no_internet, getActivity());
+                    return;
+                }
+                Utils.launchUrl("https://github.com/SmartPack/ScreenColorControl/raw/master/change-logs.md", requireActivity());
             }
         });
 
