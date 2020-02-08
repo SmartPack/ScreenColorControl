@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.tabs.TabLayout;
 import com.smartpack.colorcontrol.fragments.AboutFragment;
 import com.smartpack.colorcontrol.fragments.KlapseFragment;
@@ -70,5 +71,10 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
+
+        // Initialize Google Ads
+        if (!Utils.isDonated(this)) {
+            MobileAds.initialize(this, "ca-app-pub-2781194772510522~5128022573");
+        }
     }
 }
