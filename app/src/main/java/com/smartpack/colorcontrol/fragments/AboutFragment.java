@@ -96,6 +96,7 @@ public class AboutFragment extends RecyclerViewFragment {
             items.add(playstore);
         } else {
             DescriptionView updateCheck = new DescriptionView();
+            updateCheck.setDrawable(getResources().getDrawable(R.drawable.ic_update));
             updateCheck.setTitle(getString(R.string.update_check));
             updateCheck.setSummary(getString(R.string.update_check_summary));
             updateCheck.setOnItemClickListener(new RecyclerViewItem.OnItemClickListener() {
