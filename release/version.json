@@ -1,0 +1,5 @@
+{
+  "changelog": "Change-logs\n - Profiles: Added ability to share profiles.\n - Theme: Switched to dark mode with an option to select light theme in About page.\n - Miscellaneous changes.",
+  "versionName": "beta4",
+  "versionCode": 4
+}

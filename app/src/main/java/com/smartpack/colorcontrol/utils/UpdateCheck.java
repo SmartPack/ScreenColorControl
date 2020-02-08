@@ -15,6 +15,9 @@ import com.smartpack.colorcontrol.BuildConfig;
 import com.smartpack.colorcontrol.R;
 import com.smartpack.colorcontrol.views.dialog.Dialog;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 
 /**
@@ -24,9 +27,9 @@ import java.io.File;
 public class UpdateCheck {
 
     private static final String PLAY_STORE = "com.android.vending";
-    private static final String LATEST_VERSION = Utils.getInternalDataStorage() + "/.version";
-    private static final String LATEST_VERSION_URL = "";
-    private static final String DOWNLOAD_PAGE_URL = "";
+    private static final String LATEST_VERSION = Utils.getInternalDataStorage() + "/version";
+    private static final String LATEST_VERSION_URL = "https://raw.githubusercontent.com/SmartPack/ScreenColorControl/master/release/version.json?raw=true";
+    private static final String DOWNLOAD_PAGE_URL = "https://github.com/SmartPack/ScreenColorControl/tree/master/release";
 
 
     public static boolean isPlayStoreInstalled(Context context) {
@@ -48,7 +51,34 @@ public class UpdateCheck {
     }
 
     private static int getLatestVersionNumber() {
-        return Utils.strToInt(Utils.readFile(LATEST_VERSION));
+        try {
+            JSONObject obj = new JSONObject(Utils.readFile(LATEST_VERSION));
+            return (obj.getInt("versionCode"));
+        } catch (JSONException e) {
+            return BuildConfig.VERSION_CODE;
+        }
+    }
+
+    private static String getLatestVersionName() {
+        try {
+            JSONObject obj = new JSONObject(Utils.readFile(LATEST_VERSION));
+            return (obj.getString("versionName"));
+        } catch (JSONException e) {
+            return "Unavailable";
+        }
+    }
+
+    private static String getChangelogs() {
+        try {
+            JSONObject obj = new JSONObject(Utils.readFile(LATEST_VERSION));
+            return (obj.getString("changelog"));
+        } catch (JSONException e) {
+            return "Unavailable";
+        }
+    }
+
+    private static long lastModified() {
+        return new File(LATEST_VERSION).lastModified();
     }
 
     public static boolean hasVersionInfo() {
@@ -57,7 +87,8 @@ public class UpdateCheck {
 
     private static void updateAvailableDialog(Context context) {
         new Dialog(context)
-                .setMessage(context.getString(R.string.update_available))
+                .setTitle(context.getString(R.string.update_available) + getLatestVersionName())
+                .setMessage(context.getString(R.string.update_available_summary, getChangelogs()))
                 .setCancelable(false)
                 .setNegativeButton(context.getString(R.string.cancel), (dialog, id) -> {
                 })
@@ -68,13 +99,13 @@ public class UpdateCheck {
     }
 
     public static void autoUpdateCheck(Context context) {
-        getVersionInfo();
+        if (!hasVersionInfo() && lastModified() + 89280000L < System.currentTimeMillis()) {
+            getVersionInfo();
+        }
         if (hasVersionInfo()) {
             if (BuildConfig.VERSION_CODE < getLatestVersionNumber()) {
                 updateAvailableDialog(context);
             }
-        } else {
-            Utils.toast(context.getString(R.string.update_check_failed) + " " + context.getString(R.string.no_internet), context);
         }
     }
 

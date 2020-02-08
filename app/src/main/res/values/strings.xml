@@ -100,7 +100,8 @@
     <string name="update_check">Check for update</string>
     <string name="update_check_failed">Failed to get latest version information!</string>
     <string name="update_check_summary">Check for a new versions of Smart Flasher</string>
-    <string name="update_available">New update available! Please download and manually update the app.</string>
+    <string name="update_available">New update available!\nv</string>
+    <string name="update_available_summary">%s\n\n**Important: Please download and manually update the app!**</string>
     <string name="uptodate_message">Congrats! You are up-to-date.</string>
     <string name="version">Version</string>
     <string name="welcome_message">Welcome to Screen Color Control.\n\nThis app is made to offer advanced control over the screen colour of smart devices having KCAL/K-lapse support. The profile section of this app helps you to create color control profiles, which are basically very well formatted shell scripts saved in \'%s\'. You can later re-apply the above mentioned profiles with in few clicks, or manually share them with your friends and colleges using any social networking app. The app also offers an option to import proper profiles from \'SD card\'.</string>
