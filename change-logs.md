@@ -1,5 +1,9 @@
 # Change-logs
 
+## 5. February 08, 2020
+*Release-tag: 1.5*<br>
+Profiles: Import: Updated to work with more file manager apps. Main: Added a simple banner Ad view at the bottom. Misc: Updated update notification for non-google play devices. Miscellaneous changes.
+
 ## 4. January 21, 2020
 *Release-tag: beta4*<br>
 Profiles: Added ability to share profiles. Theme: Switched to dark mode with an option to select light theme in About page. Miscellaneous changes.
