@@ -216,6 +216,10 @@ public class Utils {
         RootUtils.runCommand("curl -L -o " + path + " " + url);
     }
 
+    public static String create(String text, String path) {
+        return RootUtils.runCommand("echo '" + text + "' > " + path);
+    }
+
     public static boolean existFile(String file) {
         return existFile(file, true);
     }
@@ -241,27 +245,33 @@ public class Utils {
         }
     }
 
-    public static String  restartApp() {
-        RootUtils.runCommand("sleep 1");
-        return RootUtils.runCommand("am start -n com.smartpack.colorcontrol/com.smartpack.colorcontrol.MainActivity");
+    public static String errorLog() {
+        return Utils.getInternalDataStorage() + "/file_path_error_log";
     }
 
     public static String getPath(File file) {
-        if (file.getAbsolutePath().contains("/document/raw:")) {
-            return file.getAbsolutePath().replace("/document/raw:", "");
-        } else if (file.getAbsolutePath().contains("/document/primary:")) {
-            return (Environment.getExternalStorageDirectory() + ("/") + file.getAbsolutePath().replace("/document/primary:", ""));
-        } else if (file.getAbsolutePath().contains("/document/")) {
-            return file.getAbsolutePath().replace("/document/", "/storage/").replace(":", "/");
-        } else if (file.getAbsolutePath().contains("/storage_root")) {
-            return file.getAbsolutePath().replace("storage_root", "storage/emulated/0");
-        } else if (file.getAbsolutePath().contains("/external")) {
-            return file.getAbsolutePath().replace("external", "storage/emulated/0");
-        } else if (file.getAbsolutePath().contains("/root/")) {
-            return file.getAbsolutePath().replace("/root", "");
-        } else {
-            return file.getAbsolutePath();
+        String path = file.getAbsolutePath();
+        if (path.startsWith("/document/raw:")) {
+            path = path.replace("/document/raw:", "");
+        } else if (path.startsWith("/document/primary:")) {
+            path = (Environment.getExternalStorageDirectory() + ("/") + path.replace("/document/primary:", ""));
+        } else if (path.startsWith("/document/")) {
+            path = path.replace("/document/", "/storage/").replace(":", "/");
         }
+        if (path.startsWith("/storage_root/storage/emulated/0")) {
+            path = path.replace("/storage_root/storage/emulated/0", "/storage/emulated/0");
+        } else if (path.startsWith("/storage_root")) {
+            path = path.replace("storage_root", "storage/emulated/0");
+        }
+        if (path.startsWith("/external")) {
+            path = path.replace("external", "storage/emulated/0");
+        } if (path.startsWith("/root/")) {
+            path = path.replace("/root", "");
+        }
+        if (path.contains("file%3A%2F%2F%2F")) {
+            path = path.replace("file%3A%2F%2F%2F", "").replace("%2F", "/");
+        }
+        return path;
     }
 
     public static boolean isDocumentsUI(Uri uri) {

@@ -276,8 +276,18 @@ public class ProfileFragment extends RecyclerViewFragment {
         } else if (requestCode == 1) {
             Uri uri = data.getData();
             File file = new File(uri.getPath());
+            String fileName = file.getName();
+            if (fileName.contains("primary")) {
+                fileName = fileName.replace("primary:", "");
+            }
+            if (fileName.contains("file%3A%2F%2F%2F")) {
+                fileName = fileName.replace("file%3A%2F%2F%2F", "").replace("%2F", "/");
+            }
+            if (fileName.contains("%2F")) {
+                fileName = fileName.replace("%2F", "/");
+            }                
             mPath = Utils.getPath(file);
-            if (Utils.isDocumentsUI(uri)) {
+            if (Utils.isDocumentsUI(uri) && !Utils.existFile(mPath)) {
                 Dialog dialogueDocumentsUI = new Dialog(getActivity());
                 dialogueDocumentsUI.setMessage(getString(R.string.documentsui_message));
                 dialogueDocumentsUI.setPositiveButton(getString(R.string.ok), (dialogInterface, i) -> {
@@ -285,7 +295,27 @@ public class ProfileFragment extends RecyclerViewFragment {
                 dialogueDocumentsUI.show();
                 return;
             }
-            if (!Utils.getExtension(mPath).equals("sh")) {
+            if (!Utils.existFile(mPath) && Utils.getExtension(mPath).equals("sh")) {
+                Utils.create(file.getAbsolutePath(), Utils.errorLog());
+                new Dialog(getActivity())
+                        .setMessage(getString(R.string.file_selection_error) + "\n" + getString(R.string.share_log,
+                                Utils.errorLog()))
+                        .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
+                        })
+                        .setPositiveButton(getString(R.string.share), (dialogInterface, i) -> {
+                            Uri uriFile = FileProvider.getUriForFile(getActivity(),
+                                    BuildConfig.APPLICATION_ID + ".provider", new File(Utils.errorLog()));
+                            Intent sharelog = new Intent(Intent.ACTION_SEND);
+                            sharelog.setType("text/plain");
+                            sharelog.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_by, Utils.errorLog()));
+                            sharelog.putExtra(Intent.EXTRA_STREAM, uriFile);
+                            sharelog.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                            startActivity(Intent.createChooser(sharelog, getString(R.string.share_with)));
+                        })
+                        .show();
+                return;
+            }
+            if (!Utils.getExtension(mPath).equals("sh") && Utils.existFile(mPath)) {
                 Utils.toast(getString(R.string.wrong_extension, ".sh"), getActivity());
                 return;
             }
@@ -293,12 +323,12 @@ public class ProfileFragment extends RecyclerViewFragment {
                 Utils.toast(getString(R.string.wrong_profile, file.getName().replace(".sh", "")), getActivity());
                 return;
             }
-            if (Utils.existFile(Profile.profileExistsCheck(file.getName().replace("primary:", "")))) {
+            if (Utils.existFile(Profile.profileExistsCheck(fileName))) {
                 Utils.toast(getString(R.string.profile_exists, file.getName()), getActivity());
                 return;
             }
             Dialog selectQuestion = new Dialog(getActivity());
-            selectQuestion.setMessage(getString(R.string.select_question, file.getName().replace("primary:", "")));
+            selectQuestion.setMessage(getString(R.string.select_question, fileName));
             selectQuestion.setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
             });
             selectQuestion.setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> {
