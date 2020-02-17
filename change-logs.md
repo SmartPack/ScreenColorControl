@@ -1,5 +1,9 @@
 # Change-logs
 
+## 6. February 17, 2020
+*Release-tag: 1.6*<br>
+Profiles: Import: Updated to work with default Documents UI. res: Brand new icon. About: Added option to disable ads. Miscellaneous changes.
+
 ## 5. February 08, 2020
 *Release-tag: 1.5*<br>
 Profiles: Import: Updated to work with more file manager apps. Main: Added a simple banner Ad view at the bottom. Misc: Updated update notification for non-google play devices. Miscellaneous changes.

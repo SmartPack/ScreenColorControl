@@ -1,5 +1,5 @@
 {
-  "changelog": "Change-logs\n - Profiles: Import: Updated to work with more file manager apps.\n - Main: Added a simple banner Ad view at the bottom.\n - Misc: Updated update notification for non-google play devices.\n - Miscellaneous changes.",
-  "versionName": "1.5",
-  "versionCode": 5
+  "changelog": "Change-logs\n - Profiles: Import: Updated to work with default Documents UI.\n - res: Brand new icon.\n - About: Added option to disable ads.\n - Miscellaneous changes.",
+  "versionName": "1.6",
+  "versionCode": 6
 }
