@@ -70,7 +70,7 @@
         android:layout_alignParentBottom="true"
         ads:adSize="BANNER"
         android:background="@android:color/transparent"
-        ads:adUnitId="ca-app-pub-2781194772510522/5040586182" >
+        ads:adUnitId="ca-app-pub-7791710838910455/9669309911" >
     </com.google.android.gms.ads.AdView>
 
     <androidx.cardview.widget.CardView

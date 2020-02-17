@@ -62,6 +62,45 @@ public class AboutFragment extends RecyclerViewFragment {
 
         items.add(versioninfo);
 
+        DescriptionView changelogs = new DescriptionView();
+        changelogs.setDrawable(getResources().getDrawable(R.drawable.ic_changelog));
+        changelogs.setTitle(getString(R.string.change_logs));
+        changelogs.setSummary(getString(R.string.change_logs_summary));
+        changelogs.setOnItemClickListener(new RecyclerViewItem.OnItemClickListener() {
+            @Override
+            public void onClick(RecyclerViewItem item) {
+                if (!Utils.isNetworkAvailable(getContext())) {
+                    Utils.toast(R.string.no_internet, getActivity());
+                    return;
+                }
+                Utils.launchUrl("https://github.com/SmartPack/ScreenColorControl/raw/master/change-logs.md", requireActivity());
+            }
+        });
+
+        items.add(changelogs);
+
+        SwitchView allow_ads = new SwitchView();
+        allow_ads.setDrawable(getResources().getDrawable(R.drawable.ic_ads));
+        allow_ads.setSummary(getString(R.string.allow_ads));
+        allow_ads.setChecked(Prefs.getBoolean("google_ads", true, getActivity()));
+        allow_ads.addOnSwitchListener(new SwitchView.OnSwitchListener() {
+            @Override
+            public void onChanged(SwitchView switchview, boolean isChecked) {
+                Prefs.saveBoolean("google_ads", isChecked, getActivity());
+                if (!isChecked) {
+                    new Dialog(getActivity())
+                            .setMessage(R.string.disable_ads_message)
+                            .setPositiveButton(R.string.ok, (dialog, id) -> {
+                            })
+                            .show();
+                } else {
+                    Utils.toast(R.string.allow_ads_message, getActivity());
+                }
+            }
+        });
+
+        items.add(allow_ads);
+
         SwitchView dark_theme = new SwitchView();
         dark_theme.setDrawable(getResources().getDrawable(R.drawable.ic_color));
         dark_theme.setSummary(getString(R.string.dark_theme));
@@ -112,23 +151,6 @@ public class AboutFragment extends RecyclerViewFragment {
 
             items.add(updateCheck);
         }
-
-        DescriptionView changelogs = new DescriptionView();
-        changelogs.setDrawable(getResources().getDrawable(R.drawable.ic_changelog));
-        changelogs.setTitle(getString(R.string.change_logs));
-        changelogs.setSummary(getString(R.string.change_logs_summary));
-        changelogs.setOnItemClickListener(new RecyclerViewItem.OnItemClickListener() {
-            @Override
-            public void onClick(RecyclerViewItem item) {
-                if (!Utils.isNetworkAvailable(getContext())) {
-                    Utils.toast(R.string.no_internet, getActivity());
-                    return;
-                }
-                Utils.launchUrl("https://github.com/SmartPack/ScreenColorControl/raw/master/change-logs.md", requireActivity());
-            }
-        });
-
-        items.add(changelogs);
 
         DescriptionView share = new DescriptionView();
         share.setDrawable(getResources().getDrawable(R.drawable.ic_share));
