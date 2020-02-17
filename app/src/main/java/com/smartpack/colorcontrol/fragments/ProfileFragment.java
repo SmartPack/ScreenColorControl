@@ -13,9 +13,12 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Environment;
+import android.provider.OpenableColumns;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -285,37 +288,17 @@ public class ProfileFragment extends RecyclerViewFragment {
             }
             if (fileName.contains("%2F")) {
                 fileName = fileName.replace("%2F", "/");
-            }                
-            mPath = Utils.getPath(file);
-            if (Utils.isDocumentsUI(uri) && !Utils.existFile(mPath)) {
-                Dialog dialogueDocumentsUI = new Dialog(getActivity());
-                dialogueDocumentsUI.setMessage(getString(R.string.documentsui_message));
-                dialogueDocumentsUI.setPositiveButton(getString(R.string.ok), (dialogInterface, i) -> {
-                });
-                dialogueDocumentsUI.show();
-                return;
             }
-            if (!Utils.existFile(mPath) && Utils.getExtension(mPath).equals("sh")) {
-                Utils.create(file.getAbsolutePath(), Utils.errorLog());
-                new Dialog(getActivity())
-                        .setMessage(getString(R.string.file_selection_error) + "\n" + getString(R.string.share_log,
-                                Utils.errorLog()))
-                        .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
-                        })
-                        .setPositiveButton(getString(R.string.share), (dialogInterface, i) -> {
-                            Uri uriFile = FileProvider.getUriForFile(getActivity(),
-                                    BuildConfig.APPLICATION_ID + ".provider", new File(Utils.errorLog()));
-                            Intent sharelog = new Intent(Intent.ACTION_SEND);
-                            sharelog.setType("text/plain");
-                            sharelog.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_by, Utils.errorLog()));
-                            sharelog.putExtra(Intent.EXTRA_STREAM, uriFile);
-                            sharelog.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                            startActivity(Intent.createChooser(sharelog, getString(R.string.share_with)));
-                        })
-                        .show();
-                return;
+            if (Utils.isDocumentsUI(uri)) {
+                Cursor cursor = getActivity().getContentResolver().query(uri, null, null, null, null);
+                if (cursor != null && cursor.moveToFirst()) {
+                    mPath = Environment.getExternalStorageDirectory().toString() + "/Download/" +
+                            cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                }
+            } else {
+                mPath = Utils.getPath(file);
             }
-            if (!Utils.getExtension(mPath).equals("sh") && Utils.existFile(mPath)) {
+            if (!Utils.getExtension(mPath).equals("sh")) {
                 Utils.toast(getString(R.string.wrong_extension, ".sh"), getActivity());
                 return;
             }
