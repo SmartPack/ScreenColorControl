@@ -56,7 +56,7 @@ public class AboutFragment extends RecyclerViewFragment {
         items.add(about);
 
         DescriptionView versioninfo = new DescriptionView();
-        versioninfo.setDrawable(getResources().getDrawable(R.drawable.ic_about));
+        versioninfo.setDrawable(getResources().getDrawable(R.mipmap.ic_launcher));
         versioninfo.setTitle(getString(R.string.version));
         versioninfo.setSummary(BuildConfig.VERSION_NAME);
 
@@ -210,6 +210,23 @@ public class AboutFragment extends RecyclerViewFragment {
         });
 
         items.add(grarak);
+
+        DescriptionView toxinpiper = new DescriptionView();
+        toxinpiper.setDrawable(getResources().getDrawable(R.mipmap.ic_launcher));
+        toxinpiper.setTitle("Toxinpiper");
+        toxinpiper.setSummary("App Icon");
+        toxinpiper.setOnItemClickListener(new RecyclerViewItem.OnItemClickListener() {
+            @Override
+            public void onClick(RecyclerViewItem item) {
+                if (!Utils.isNetworkAvailable(getContext())) {
+                    Utils.toast(R.string.no_internet, getActivity());
+                    return;
+                }
+                Utils.launchUrl("https://t.me/toxinpiper", getActivity());
+            }
+        });
+
+        items.add(toxinpiper);
 
         DescriptionView burst = new DescriptionView();
         burst.setDrawable(getResources().getDrawable(R.drawable.ic_burst));

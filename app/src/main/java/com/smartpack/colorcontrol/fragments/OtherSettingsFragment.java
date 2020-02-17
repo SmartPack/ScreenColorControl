@@ -40,7 +40,7 @@ public class OtherSettingsFragment extends RecyclerViewFragment {
             otherItemsInit(items);
         } else {
             DescriptionView unsupported = new DescriptionView();
-            unsupported.setDrawable(getResources().getDrawable(R.drawable.ic_about));
+            unsupported.setDrawable(getResources().getDrawable(R.mipmap.ic_launcher));
             unsupported.setSummary(getString(R.string.no_support, "KCAL"));
 
             items.add(unsupported);

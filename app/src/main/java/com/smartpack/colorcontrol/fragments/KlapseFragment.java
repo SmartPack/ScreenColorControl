@@ -46,7 +46,7 @@ public class KlapseFragment extends RecyclerViewFragment {
             reload();
         } else {
             DescriptionView unsupported = new DescriptionView();
-            unsupported.setDrawable(getResources().getDrawable(R.drawable.ic_about));
+            unsupported.setDrawable(getResources().getDrawable(R.mipmap.ic_launcher));
             unsupported.setSummary(getString(R.string.no_support, getString(R.string.klapse)));
 
             items.add(unsupported);

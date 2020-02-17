@@ -31,4 +31,5 @@ If you like to appreciate my work, please consider donating to me (either via [P
 
 ## Credits
 * [Grarak](https://github.com/Grarak/), Kernel Adiutor, from where I took a lot of code
+* [Toxinpiper](https://t.me/toxinpiper), App Icon
 * [Burst](https://burst.shopify.com/photos/child-picking-dandelions-in-field?q=child+picking), Screen Color Image
