@@ -109,8 +109,7 @@ public class AboutFragment extends RecyclerViewFragment {
             @Override
             public void onChanged(SwitchView switchview, boolean isChecked) {
                 Prefs.saveBoolean("dark_theme", isChecked, getActivity());
-                Utils.toast(getString(R.string.dark_theme_message, Prefs.getBoolean("dark_theme", true,
-                        getActivity()) ? "Dark" : "Light"), getActivity());
+                onBackPressed();
             }
         });
 

@@ -39,4 +39,8 @@ public abstract class BaseFragment extends Fragment {
     public void onViewFinished() {
     }
 
+    public boolean onBackPressed() {
+        return false;
+    }
+
 }
