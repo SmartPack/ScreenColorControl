@@ -1,5 +1,5 @@
 {
-  "changelog": "Change-logs\n - Profiles: Import: Updated to work with default Documents UI.\n - res: Brand new icon.\n - About: Added option to disable ads.\n - Miscellaneous changes.",
-  "versionName": "1.6",
-  "versionCode": 6
+  "changelog": "Change-logs\n - Profiles: Fixed crashes on some devices.\n - About: Improved theme switching.\n - Main: Improved app UI.\n - Miscellaneous changes.",
+  "versionName": "1.7",
+  "versionCode": 7
 }

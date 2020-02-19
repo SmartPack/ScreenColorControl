@@ -1,5 +1,9 @@
 # Change-logs
 
+## 7. February 19, 2020
+*Release-tag: 1.7*<br>
+Profiles: Fixed crashes on some devices. About: Improved theme switching. Main: Improved app UI. Miscellaneous changes.
+
 ## 6. February 17, 2020
 *Release-tag: 1.6*<br>
 Profiles: Import: Updated to work with default Documents UI. res: Brand new icon. About: Added option to disable ads. Miscellaneous changes.
