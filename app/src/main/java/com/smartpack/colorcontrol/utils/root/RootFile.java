@@ -36,6 +36,10 @@ public class RootFile {
         mSU = su;
     }
 
+    public void mkdir() {
+        mSU.runCommand("mkdir -p '" + mFile + "'");
+    }
+
     public String getName() {
         return new File(mFile).getName();
     }

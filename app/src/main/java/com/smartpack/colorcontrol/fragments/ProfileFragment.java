@@ -147,7 +147,8 @@ public class ProfileFragment extends RecyclerViewFragment {
                 && !DRMColor.supported()) {
             return;
         }
-        for (final File profiles : Profile.ProfileFile().listFiles()) {
+        for (final String profileItems : Profile.profileItems()) {
+            File profiles = new File(Profile.ProfileFile() + "/" + profileItems);
             if (Profile.ProfileFile().length() > 0 && Utils.getExtension(profiles.toString()).equals("sh")
                     && Profile.isColorConrolProfile(profiles.toString())) {
                 CardView cardView = new CardView(getActivity());

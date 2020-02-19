@@ -12,6 +12,7 @@ import com.smartpack.colorcontrol.utils.root.RootFile;
 import com.smartpack.colorcontrol.utils.root.RootUtils;
 
 import java.io.File;
+import java.util.List;
 
 /**
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on January 01, 2020
@@ -23,6 +24,14 @@ public class Profile {
 
     public static File ProfileFile() {
         return new File(PROFILE);
+    }
+
+    public static List<String> profileItems() {
+        RootFile file = new RootFile(ProfileFile().toString());
+        if (!file.exists()) {
+            file.mkdir();
+        }
+        return file.list();
     }
 
     public static void importProfile(String string) {
