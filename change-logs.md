@@ -1,5 +1,9 @@
 # Change-logs
 
+## 8. February 21, 2020
+*Release-tag: 1.8*<br>
+Main: Disabled Ads by default. Misc: Clean un-used resources. Miscellaneous changes.
+
 ## 7. February 19, 2020
 *Release-tag: 1.7*<br>
 Profiles: Fixed crashes on some devices. About: Improved theme switching. Main: Improved app UI. Miscellaneous changes.

@@ -70,10 +70,6 @@ public class AboutFragment extends RecyclerViewFragment {
         changelogs.setOnItemClickListener(new RecyclerViewItem.OnItemClickListener() {
             @Override
             public void onClick(RecyclerViewItem item) {
-                if (!Utils.isNetworkAvailable(getContext())) {
-                    Utils.toast(R.string.no_internet, getActivity());
-                    return;
-                }
                 Utils.launchUrl("https://github.com/SmartPack/ScreenColorControl/raw/master/change-logs.md", requireActivity());
             }
         });
@@ -130,10 +126,6 @@ public class AboutFragment extends RecyclerViewFragment {
             playstore.setOnItemClickListener(new RecyclerViewItem.OnItemClickListener() {
                 @Override
                 public void onClick(RecyclerViewItem item) {
-                    if (!Utils.isNetworkAvailable(getContext())) {
-                        Utils.toast(R.string.no_internet, getActivity());
-                        return;
-                    }
                     Utils.launchUrl("https://play.google.com/store/apps/details?id=com.smartpack.colorcontrol", requireActivity());
                 }
             });
@@ -165,10 +157,6 @@ public class AboutFragment extends RecyclerViewFragment {
         share.setOnItemClickListener(new RecyclerViewItem.OnItemClickListener() {
             @Override
             public void onClick(RecyclerViewItem item) {
-                if (!Utils.isNetworkAvailable(getContext())) {
-                    Utils.toast(R.string.no_internet, getActivity());
-                    return;
-                }
                 Intent shareapp = new Intent()
                         .setAction(Intent.ACTION_SEND)
                         .putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name))
@@ -188,10 +176,6 @@ public class AboutFragment extends RecyclerViewFragment {
         donatetome.setOnItemClickListener(new RecyclerViewItem.OnItemClickListener() {
             @Override
             public void onClick(RecyclerViewItem item) {
-                if (!Utils.isNetworkAvailable(getContext())) {
-                    Utils.toast(R.string.no_internet, getActivity());
-                    return;
-                }
                 Dialog donate_to_me = new Dialog(getActivity());
                 donate_to_me.setIcon(R.mipmap.ic_launcher);
                 donate_to_me.setTitle(getString(R.string.donate_me));
@@ -229,10 +213,6 @@ public class AboutFragment extends RecyclerViewFragment {
         grarak.setOnItemClickListener(new RecyclerViewItem.OnItemClickListener() {
             @Override
             public void onClick(RecyclerViewItem item) {
-                if (!Utils.isNetworkAvailable(getContext())) {
-                    Utils.toast(R.string.no_internet, getActivity());
-                    return;
-                }
                 Utils.launchUrl("https://github.com/Grarak", getActivity());
             }
         });
@@ -246,10 +226,6 @@ public class AboutFragment extends RecyclerViewFragment {
         toxinpiper.setOnItemClickListener(new RecyclerViewItem.OnItemClickListener() {
             @Override
             public void onClick(RecyclerViewItem item) {
-                if (!Utils.isNetworkAvailable(getContext())) {
-                    Utils.toast(R.string.no_internet, getActivity());
-                    return;
-                }
                 Utils.launchUrl("https://t.me/toxinpiper", getActivity());
             }
         });
@@ -263,10 +239,6 @@ public class AboutFragment extends RecyclerViewFragment {
         burst.setOnItemClickListener(new RecyclerViewItem.OnItemClickListener() {
             @Override
             public void onClick(RecyclerViewItem item) {
-                if (!Utils.isNetworkAvailable(getContext())) {
-                    Utils.toast(R.string.no_internet, getActivity());
-                    return;
-                }
                 Utils.launchUrl("https://burst.shopify.com/photos/child-picking-dandelions-in-field?q=child+picking", getActivity());
             }
         });

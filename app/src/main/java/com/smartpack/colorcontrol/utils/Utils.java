@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import androidx.annotation.StringRes;
 
+import com.smartpack.colorcontrol.R;
 import com.smartpack.colorcontrol.utils.root.RootFile;
 import com.smartpack.colorcontrol.utils.root.RootUtils;
 
@@ -143,6 +144,10 @@ public class Utils {
     }
 
     public static void launchUrl(String url, Context context) {
+        if (!Utils.isNetworkAvailable(context)) {
+            Utils.toast(R.string.no_internet, context);
+            return;
+        }
         try {
             Intent i = new Intent(Intent.ACTION_VIEW);
             i.setData(Uri.parse(url));

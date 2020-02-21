@@ -1,5 +1,5 @@
 {
-  "changelog": "Change-logs\n - Profiles: Fixed crashes on some devices.\n - About: Improved theme switching.\n - Main: Improved app UI.\n - Miscellaneous changes.",
-  "versionName": "1.7",
-  "versionCode": 7
+  "changelog": "Change-logs\n - Main: Disabled Ads by default.\n - Miscellaneous changes.",
+  "versionName": "1.8",
+  "versionCode": 8
 }
