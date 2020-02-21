@@ -4,7 +4,7 @@
     <string name="about">About</string>
     <string name="about_me" translatable="false">Screen Color Control is an app made to offer advanced control over the screen colour of smart devices having KCAL/K-lapse support.</string>
     <string name="allow_ads">Allow Ads</string>
-    <string name="allow_ads_message">Thank you very much for supporting the developer by allowing Ads!</string>
+    <string name="allow_ads_message">Thank you very much for supporting the developer by allowing Ads!\n\nHowever, please be noted that allowing Ads sometimes results weired behaviour. If you encounter any such issues, feel free to disable it.</string>
     <string name="always_show">Always Show</string>
     <string name="apply">Apply</string>
     <string name="apply_question">Apply %s?</string>

@@ -11,6 +11,7 @@ package com.smartpack.colorcontrol.fragments;
 import android.content.Intent;
 
 import com.smartpack.colorcontrol.BuildConfig;
+import com.smartpack.colorcontrol.MainActivity;
 import com.smartpack.colorcontrol.R;
 import com.smartpack.colorcontrol.utils.Prefs;
 import com.smartpack.colorcontrol.utils.UpdateCheck;
@@ -82,7 +83,7 @@ public class AboutFragment extends RecyclerViewFragment {
         SwitchView allow_ads = new SwitchView();
         allow_ads.setDrawable(getResources().getDrawable(R.drawable.ic_ads));
         allow_ads.setSummary(getString(R.string.allow_ads));
-        allow_ads.setChecked(Prefs.getBoolean("google_ads", true, getActivity()));
+        allow_ads.setChecked(Prefs.getBoolean("google_ads", false, getActivity()));
         allow_ads.addOnSwitchListener(new SwitchView.OnSwitchListener() {
             @Override
             public void onChanged(SwitchView switchview, boolean isChecked) {
@@ -94,7 +95,11 @@ public class AboutFragment extends RecyclerViewFragment {
                             })
                             .show();
                 } else {
-                    Utils.toast(R.string.allow_ads_message, getActivity());
+                    new Dialog(getActivity())
+                            .setMessage(R.string.allow_ads_message)
+                            .setPositiveButton(R.string.ok, (dialog, id) -> {
+                            })
+                            .show();
                 }
             }
         });
@@ -109,7 +114,9 @@ public class AboutFragment extends RecyclerViewFragment {
             @Override
             public void onChanged(SwitchView switchview, boolean isChecked) {
                 Prefs.saveBoolean("dark_theme", isChecked, getActivity());
-                onBackPressed();
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             }
         });
 

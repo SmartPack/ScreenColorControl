@@ -8,14 +8,12 @@
 
 package com.smartpack.colorcontrol;
 
-import android.Manifest;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.core.app.ActivityCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.gms.ads.MobileAds;
@@ -27,7 +25,6 @@ import com.smartpack.colorcontrol.fragments.ProfileFragment;
 import com.smartpack.colorcontrol.fragments.ScreenColorFragment;
 import com.smartpack.colorcontrol.utils.PagerAdapter;
 import com.smartpack.colorcontrol.utils.Prefs;
-import com.smartpack.colorcontrol.utils.Utils;
 import com.smartpack.colorcontrol.utils.root.RootUtils;
 
 /*
@@ -38,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        // Initialize Ap Theme
         if (Prefs.getBoolean("dark_theme", true, this)) {
             AppCompatDelegate.setDefaultNightMode(
                     AppCompatDelegate.MODE_NIGHT_YES);
@@ -57,11 +55,6 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        if (!Utils.checkWriteStoragePermission(this)) {
-            ActivityCompat.requestPermissions(this, new String[]{
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
-        }
-
         PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager());
         adapter.AddFragment(new ScreenColorFragment(), getString(R.string.screen_color));
         adapter.AddFragment(new KlapseFragment(), getString(R.string.klapse));
@@ -73,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
         // Initialize Google Ads
-        MobileAds.initialize(getApplicationContext(), "ca-app-pub-7791710838910455~2525317068");
+        if (Prefs.getBoolean("google_ads", false, this)) {
+            MobileAds.initialize(this, "ca-app-pub-7791710838910455~2525317068");
+        }
     }
 }

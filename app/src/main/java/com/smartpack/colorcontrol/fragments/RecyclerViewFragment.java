@@ -4,7 +4,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.app.Activity;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -39,7 +38,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.appcompat.widget.Toolbar;
 
-import com.smartpack.colorcontrol.MainActivity;
 import com.smartpack.colorcontrol.R;
 import com.smartpack.colorcontrol.utils.Prefs;
 import com.smartpack.colorcontrol.utils.Utils;
@@ -114,7 +112,7 @@ public abstract class RecyclerViewFragment extends BaseFragment {
         mRecyclerView = mRootView.findViewById(R.id.recyclerview);
 
         // Initialize Google Ads
-        if (Prefs.getBoolean("google_ads", true, getActivity())) {
+        if (Prefs.getBoolean("google_ads", false, getActivity())) {
             AdView mAdView = mRootView.findViewById(R.id.adView);
             AdRequest adRequest = new AdRequest.Builder().build();
             mAdView.loadAd(adRequest);
@@ -712,14 +710,6 @@ public abstract class RecyclerViewFragment extends BaseFragment {
 
     protected FloatingActionButton getBottomFab() {
         return mBottomFab;
-    }
-
-    @Override
-    public boolean onBackPressed() {
-        Intent intent = new Intent(getActivity(), MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-        return true;
     }
 
     @Override
