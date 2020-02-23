@@ -199,6 +199,7 @@ public class ProfileFragment extends RecyclerViewFragment {
                                                                 mProgressDialog.dismiss();
                                                             } catch (IllegalArgumentException ignored) {
                                                             }
+                                                            Utils.getInstance().showInterstitialAd(requireActivity());
                                                             if (s != null && !s.isEmpty()) {
                                                                 new Dialog(getActivity())
                                                                         .setMessage(s)
@@ -230,8 +231,10 @@ public class ProfileFragment extends RecyclerViewFragment {
                                         shareScript.putExtra(Intent.EXTRA_STREAM, uriFile);
                                         shareScript.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                                         startActivity(Intent.createChooser(shareScript, getString(R.string.share_with)));
+                                        Utils.getInstance().showInterstitialAd(requireActivity());
                                         break;
                                     case 3:
+                                        Utils.getInstance().showInterstitialAd(requireActivity());
                                         new Dialog(getActivity())
                                                 .setMessage(getString(R.string.sure_question, profiles.getName().replace(".sh", "")))
                                                 .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
@@ -311,6 +314,7 @@ public class ProfileFragment extends RecyclerViewFragment {
                 Utils.toast(getString(R.string.profile_exists, file.getName()), getActivity());
                 return;
             }
+            Utils.getInstance().showInterstitialAd(requireActivity());
             Dialog selectQuestion = new Dialog(getActivity());
             selectQuestion.setMessage(getString(R.string.select_question, fileName));
             selectQuestion.setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {

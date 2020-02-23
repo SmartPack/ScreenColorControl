@@ -13,10 +13,8 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.viewpager.widget.ViewPager;
 
-import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.tabs.TabLayout;
 import com.smartpack.colorcontrol.fragments.AboutFragment;
 import com.smartpack.colorcontrol.fragments.KlapseFragment;
@@ -24,7 +22,7 @@ import com.smartpack.colorcontrol.fragments.OtherSettingsFragment;
 import com.smartpack.colorcontrol.fragments.ProfileFragment;
 import com.smartpack.colorcontrol.fragments.ScreenColorFragment;
 import com.smartpack.colorcontrol.utils.PagerAdapter;
-import com.smartpack.colorcontrol.utils.Prefs;
+import com.smartpack.colorcontrol.utils.Utils;
 import com.smartpack.colorcontrol.utils.root.RootUtils;
 
 /*
@@ -35,14 +33,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        // Initialize Ap Theme
-        if (Prefs.getBoolean("dark_theme", true, this)) {
-            AppCompatDelegate.setDefaultNightMode(
-                    AppCompatDelegate.MODE_NIGHT_YES);
-        } else {
-            AppCompatDelegate.setDefaultNightMode(
-                    AppCompatDelegate.MODE_NIGHT_NO);
-        }
+        // Initialize App Theme & Google Ads
+        Utils.initializeAppTheme(this);
+        Utils.getInstance().initializeGoogleAds(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -64,10 +57,5 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
-
-        // Initialize Google Ads
-        if (Prefs.getBoolean("google_ads", false, this)) {
-            MobileAds.initialize(this, "ca-app-pub-7791710838910455~2525317068");
-        }
     }
 }

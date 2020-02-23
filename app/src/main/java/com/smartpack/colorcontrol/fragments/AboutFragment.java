@@ -70,6 +70,7 @@ public class AboutFragment extends RecyclerViewFragment {
         changelogs.setOnItemClickListener(new RecyclerViewItem.OnItemClickListener() {
             @Override
             public void onClick(RecyclerViewItem item) {
+                Utils.getInstance().showInterstitialAd(requireActivity());
                 Utils.launchUrl("https://github.com/SmartPack/ScreenColorControl/raw/master/change-logs.md", requireActivity());
             }
         });
@@ -79,7 +80,7 @@ public class AboutFragment extends RecyclerViewFragment {
         SwitchView allow_ads = new SwitchView();
         allow_ads.setDrawable(getResources().getDrawable(R.drawable.ic_ads));
         allow_ads.setSummary(getString(R.string.allow_ads));
-        allow_ads.setChecked(Prefs.getBoolean("google_ads", false, getActivity()));
+        allow_ads.setChecked(Prefs.getBoolean("google_ads", true, getActivity()));
         allow_ads.addOnSwitchListener(new SwitchView.OnSwitchListener() {
             @Override
             public void onChanged(SwitchView switchview, boolean isChecked) {
@@ -143,6 +144,7 @@ public class AboutFragment extends RecyclerViewFragment {
                         Utils.toast(R.string.no_internet, getActivity());
                         return;
                     }
+                    Utils.getInstance().showInterstitialAd(requireActivity());
                     UpdateCheck.updateCheck(getActivity());
                 }
             });
@@ -213,6 +215,7 @@ public class AboutFragment extends RecyclerViewFragment {
         grarak.setOnItemClickListener(new RecyclerViewItem.OnItemClickListener() {
             @Override
             public void onClick(RecyclerViewItem item) {
+                Utils.getInstance().showInterstitialAd(requireActivity());
                 Utils.launchUrl("https://github.com/Grarak", getActivity());
             }
         });
@@ -226,6 +229,7 @@ public class AboutFragment extends RecyclerViewFragment {
         toxinpiper.setOnItemClickListener(new RecyclerViewItem.OnItemClickListener() {
             @Override
             public void onClick(RecyclerViewItem item) {
+                Utils.getInstance().showInterstitialAd(requireActivity());
                 Utils.launchUrl("https://t.me/toxinpiper", getActivity());
             }
         });
@@ -239,6 +243,7 @@ public class AboutFragment extends RecyclerViewFragment {
         burst.setOnItemClickListener(new RecyclerViewItem.OnItemClickListener() {
             @Override
             public void onClick(RecyclerViewItem item) {
+                Utils.getInstance().showInterstitialAd(requireActivity());
                 Utils.launchUrl("https://burst.shopify.com/photos/child-picking-dandelions-in-field?q=child+picking", getActivity());
             }
         });
