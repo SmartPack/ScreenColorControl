@@ -522,4 +522,12 @@ public class KlapseFragment extends RecyclerViewFragment {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mLoader != null) {
+            mLoader.cancel(true);
+        }
+    }
+
 }

@@ -309,11 +309,11 @@ public class ScreenColorFragment extends RecyclerViewFragment {
         }
 
         // Initialize manual Update Check, if play store not found
-        if (!UpdateCheck.isPlayStoreInstalled(getActivity())) {
-            if (!Utils.checkWriteStoragePermission(getActivity())) {
+        if (!UpdateCheck.isPlayStoreInstalled(requireActivity())) {
+            if (!Utils.checkWriteStoragePermission(requireActivity())) {
                 return;
             }
-            if (!Utils.isNetworkAvailable(getContext())) {
+            if (!Utils.isNetworkAvailable(requireActivity())) {
                 return;
             }
             UpdateCheck.autoUpdateCheck(getActivity());

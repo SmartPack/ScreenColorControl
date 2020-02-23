@@ -24,9 +24,7 @@ import android.view.MenuItem;
 
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
-import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.smartpack.colorcontrol.BuildConfig;
 import com.smartpack.colorcontrol.R;
@@ -62,9 +60,7 @@ public class ProfileFragment extends RecyclerViewFragment {
 
     @Override
     protected Drawable getTopFabDrawable() {
-        Drawable drawable = DrawableCompat.wrap(ContextCompat.getDrawable(getActivity(), R.drawable.ic_add));
-        DrawableCompat.setTint(drawable, getResources().getColor(R.color.colorOnPrimary));
-        return drawable;
+        return getResources().getDrawable(R.drawable.ic_add);
     }
 
     @Override
@@ -86,7 +82,7 @@ public class ProfileFragment extends RecyclerViewFragment {
 
     @Override
     public int getSpanCount() {
-        int span = Utils.isTablet(getActivity()) ? Utils.getOrientation(getActivity()) ==
+        int span = Utils.isTablet(requireActivity()) ? Utils.getOrientation(getActivity()) ==
                 Configuration.ORIENTATION_LANDSCAPE ? 4 : 3 : Utils.getOrientation(getActivity()) ==
                 Configuration.ORIENTATION_LANDSCAPE ? 3 : 2;
         if (itemsSize() != 0 && span > itemsSize()) {
@@ -97,10 +93,10 @@ public class ProfileFragment extends RecyclerViewFragment {
 
     @Override
     protected void addItems(List<RecyclerViewItem> items) {
-        if (Utils.checkWriteStoragePermission(getActivity())) {
+        if (Utils.checkWriteStoragePermission(requireActivity())) {
             reload();
         } else {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{
+            ActivityCompat.requestPermissions(requireActivity(), new String[]{
                     Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
         }
     }
@@ -166,7 +162,7 @@ public class ProfileFragment extends RecyclerViewFragment {
                             public boolean onMenuItemClick(MenuItem item) {
                                 switch (item.getItemId()) {
                                     case 0:
-                                        new Dialog(getActivity())
+                                        new Dialog(requireActivity())
                                                 .setMessage(getString(R.string.apply_question, profiles.getName().replace(".sh", "")))
                                                 .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                                                 })
@@ -221,7 +217,7 @@ public class ProfileFragment extends RecyclerViewFragment {
                                         startActivityForResult(intent, 0);
                                         break;
                                     case 2:
-                                        Uri uriFile = FileProvider.getUriForFile(getActivity(),
+                                        Uri uriFile = FileProvider.getUriForFile(requireActivity(),
                                                 BuildConfig.APPLICATION_ID + ".provider", new File(profiles.toString()));
                                         Intent shareScript = new Intent(Intent.ACTION_SEND);
                                         shareScript.setType("application/sh");
@@ -235,7 +231,7 @@ public class ProfileFragment extends RecyclerViewFragment {
                                         break;
                                     case 3:
                                         Utils.getInstance().showInterstitialAd(requireActivity());
-                                        new Dialog(getActivity())
+                                        new Dialog(requireActivity())
                                                 .setMessage(getString(R.string.sure_question, profiles.getName().replace(".sh", "")))
                                                 .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                                                 })
@@ -257,7 +253,7 @@ public class ProfileFragment extends RecyclerViewFragment {
                 descriptionView.setOnItemClickListener(new RecyclerViewItem.OnItemClickListener() {
                     @Override
                     public void onClick(RecyclerViewItem item) {
-                        new Dialog(getActivity())
+                        new Dialog(requireActivity())
                                 .setTitle(profiles.getName().replace(".sh", ""))
                                 .setMessage(Profile.readProfile(profiles.toString()))
                                 .setPositiveButton(getString(R.string.cancel), (dialogInterface, i) -> {
@@ -294,7 +290,7 @@ public class ProfileFragment extends RecyclerViewFragment {
                 fileName = fileName.replace("%2F", "/");
             }
             if (Utils.isDocumentsUI(uri)) {
-                Cursor cursor = getActivity().getContentResolver().query(uri, null, null, null, null);
+                Cursor cursor = requireActivity().getContentResolver().query(uri, null, null, null, null);
                 if (cursor != null && cursor.moveToFirst()) {
                     mPath = Environment.getExternalStorageDirectory().toString() + "/Download/" +
                             cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
@@ -315,7 +311,7 @@ public class ProfileFragment extends RecyclerViewFragment {
                 return;
             }
             Utils.getInstance().showInterstitialAd(requireActivity());
-            Dialog selectQuestion = new Dialog(getActivity());
+            Dialog selectQuestion = new Dialog(requireActivity());
             selectQuestion.setMessage(getString(R.string.select_question, fileName));
             selectQuestion.setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
             });
@@ -331,8 +327,8 @@ public class ProfileFragment extends RecyclerViewFragment {
     protected void onTopFabClick() {
         super.onTopFabClick();
 
-        if (!Utils.checkWriteStoragePermission(getActivity())) {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{
+        if (!Utils.checkWriteStoragePermission(requireActivity())) {
+            ActivityCompat.requestPermissions(requireActivity(), new String[]{
                     Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
             Utils.toast(R.string.permission_denied_write_storage, getActivity());
             return;
@@ -344,7 +340,7 @@ public class ProfileFragment extends RecyclerViewFragment {
             return;
         }
 
-        mOptionsDialog = new Dialog(getActivity()).setItems(getResources().getStringArray(
+        mOptionsDialog = new Dialog(requireActivity()).setItems(getResources().getStringArray(
                 R.array.profile_options), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -451,6 +447,14 @@ public class ProfileFragment extends RecyclerViewFragment {
             public void onDismiss(DialogInterface dialogInterface) {
             }
         }).show();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mLoader != null) {
+            mLoader.cancel(true);
+        }
     }
 
 }
