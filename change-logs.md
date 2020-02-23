@@ -1,5 +1,9 @@
 # Change-logs
 
+## 9. February 23, 2020
+*Release-tag: 1.9*<br>
+Main: Improved App UI. Main: Improved coding quality and cleaned un-resourced resources. build: gradle: Updated dependencies. Misc: Ads: Replaced Banner with a event based Interstitial Ad. Miscellaneous changes.
+
 ## 8. February 21, 2020
 *Release-tag: 1.8*<br>
 Main: Disabled Ads by default. Misc: Clean un-used resources. Miscellaneous changes.

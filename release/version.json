@@ -1,5 +1,5 @@
 {
-  "changelog": "Change-logs\n - Main: Disabled Ads by default.\n - Miscellaneous changes.",
-  "versionName": "1.8",
-  "versionCode": 8
+  "changelog": "Change-logs\n - Main: Improved App UI.\n - Main: Improved coding quality and cleaned un-resourced resources.\n - build: gradle: Updated dependencies.\n - Misc: Ads: Replaced Banner with a event based Interstitial Ad.\n - Miscellaneous changes.",
+  "versionName": "1.9",
+  "versionCode": 9
 }
