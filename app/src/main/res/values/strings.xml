@@ -67,6 +67,7 @@
     <string name="playstore">PlayStore</string>
     <string name="playstore_summary">Visit Screen Color Control page on PlayStore</string>
     <string name="plus" translatable="false">+</string>
+    <string name="press_back">Press back again to exit</string>
     <string name="profiles">Profiles</string>
     <string name="profile_summary">In this section, you can create, import, view and easily apply Screen Color profiles within few clicks.</string>
     <string name="profile_exists">A profile named %s is already exists! Aborting.</string>

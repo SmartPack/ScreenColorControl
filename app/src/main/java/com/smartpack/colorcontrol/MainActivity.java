@@ -9,6 +9,7 @@
 package com.smartpack.colorcontrol;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
 
@@ -32,6 +33,9 @@ import com.smartpack.colorcontrol.utils.root.RootUtils;
  */
 
 public class MainActivity extends AppCompatActivity {
+
+    private boolean mExit;
+    private Handler mHandler = new Handler();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,6 +69,26 @@ public class MainActivity extends AppCompatActivity {
 
     public void androidRooting(View view) {
         Utils.launchUrl("https://www.google.com/search?site=&source=hp&q=android+rooting+magisk", this);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!RootUtils.rootAccess()) {
+            super.onBackPressed();
+        }
+        if (mExit) {
+            mExit = false;
+            super.onBackPressed();
+        } else {
+            Utils.toast(R.string.press_back, this);
+            mExit = true;
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mExit = false;
+                }
+            }, 2000);
+        }
     }
 
 }
