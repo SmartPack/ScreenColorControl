@@ -8,14 +8,9 @@
 
 package com.smartpack.colorcontrol.fragments;
 
-import android.view.View;
-import android.widget.CheckBox;
-
 import com.smartpack.colorcontrol.R;
 import com.smartpack.colorcontrol.utils.DRMColor;
 import com.smartpack.colorcontrol.utils.Klapse;
-import com.smartpack.colorcontrol.utils.Prefs;
-import com.smartpack.colorcontrol.utils.Profile;
 import com.smartpack.colorcontrol.utils.ScreenColor;
 import com.smartpack.colorcontrol.utils.UpdateCheck;
 import com.smartpack.colorcontrol.utils.Utils;
@@ -37,8 +32,6 @@ import java.util.Objects;
  */
 
 public class ScreenColorFragment extends RecyclerViewFragment {
-
-    private boolean mWelcomeDialog = true;
 
     private ScreenColor mScreenColor;
 
@@ -268,33 +261,14 @@ public class ScreenColorFragment extends RecyclerViewFragment {
         }
     }
 
-    /*
-     * Taken and used almost as such from https://github.com/morogoku/MTweaks-KernelAdiutorMOD/
-     * Ref: https://github.com/morogoku/MTweaks-KernelAdiutorMOD/blob/dd5a4c3242d5e1697d55c4cc6412a9b76c8b8e2e/app/src/main/java/com/moro/mtweaks/fragments/kernel/BoefflaWakelockFragment.java#L133
-     */
-    private void WelcomeDialog() {
-        View checkBoxView = View.inflate(getActivity(), R.layout.rv_checkbox, null);
-        CheckBox checkBox = checkBoxView.findViewById(R.id.checkbox);
-        checkBox.setChecked(true);
-        checkBox.setText(getString(R.string.always_show));
-        checkBox.setOnCheckedChangeListener((buttonView, isChecked)
-                -> mWelcomeDialog = isChecked);
-
+    private void noSupport() {
         Dialog alert = new Dialog(Objects.requireNonNull(getActivity()));
         alert.setIcon(R.mipmap.ic_launcher);
         alert.setTitle(getString(R.string.app_name));
-        if (!Klapse.supported() && !ScreenColor.getInstance().supported()
-                && !DRMColor.supported()) {
-            alert.setMessage(getString(R.string.no_support, "KCAL/K-lapse"));
-        } else {
-            alert.setMessage(getString(R.string.welcome_message, Profile.ProfileFile().toString()));
-        }
+        alert.setMessage(getString(R.string.no_support, "KCAL/K-lapse"));
         alert.setCancelable(false);
-        alert.setView(checkBoxView);
-        alert.setNeutralButton(getString(R.string.cancel), (dialog, id) -> {
+        alert.setPositiveButton(getString(R.string.got_it), (dialog, id) -> {
         });
-        alert.setPositiveButton(getString(R.string.got_it), (dialog, id)
-                -> Prefs.saveBoolean("welcomeMessage", mWelcomeDialog, getActivity()));
 
         alert.show();
     }
@@ -303,9 +277,9 @@ public class ScreenColorFragment extends RecyclerViewFragment {
     public void onStart(){
         super.onStart();
 
-        boolean showDialog = Prefs.getBoolean("welcomeMessage", true, getActivity());
-        if (showDialog) {
-            WelcomeDialog();
+        if (!Klapse.supported() && !ScreenColor.getInstance().supported()
+                && !DRMColor.supported()) {
+            noSupport();
         }
 
         // Initialize manual Update Check, if play store not found

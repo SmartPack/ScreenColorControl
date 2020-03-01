@@ -5,7 +5,6 @@
     <string name="about_me" translatable="false">Screen Color Control is an app made to offer advanced control over the screen colour of smart devices having KCAL/K-lapse support.</string>
     <string name="allow_ads">Allow Ads</string>
     <string name="allow_ads_message">Thank you very much for supporting the developer by allowing Ads!\n\nHowever, please be noted that allowing Ads sometimes results weired behaviour. If you encounter any such issues, feel free to disable it.</string>
-    <string name="always_show">Always Show</string>
     <string name="apply">Apply</string>
     <string name="apply_question">Apply %s?</string>
     <string name="applying_profile">Applying %s!</string>
@@ -103,7 +102,6 @@
     <string name="update_available_summary">%s\n\n**Important: Please download and manually update the app!**</string>
     <string name="uptodate_message">Congrats! You are up-to-date.</string>
     <string name="version">Version</string>
-    <string name="welcome_message">Welcome to Screen Color Control.\n\nThis app is made to offer advanced control over the screen colour of smart devices having KCAL/K-lapse support. The profile section of this app helps you to create color control profiles, which are basically very well formatted shell scripts saved in \'%s\'. You can later re-apply the above mentioned profiles with in few clicks, or manually share them with your friends and colleges using any social networking app. The app also offers an option to import proper profiles from \'SD card\'.</string>
     <string name="wrong_extension">Please select a file with %s extension.</string>
     <string name="wrong_profile">%s is not a proper Color Control profile! Aborting.</string>
     <string name="yes">Yes</string>
