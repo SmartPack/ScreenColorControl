@@ -1,5 +1,5 @@
 {
-  "changelog": "Change-logs\n - Main: Improved App UI.\n - Main: Improved coding quality and cleaned un-resourced resources.\n - build: gradle: Updated dependencies.\n - Misc: Ads: Replaced Banner with a event based Interstitial Ad.\n - Miscellaneous changes.",
-  "versionName": "1.9",
-  "versionCode": 9
+  "changelog": "Change-logs\n - Main: Replaced welcome dialogue with an unsupported dialogue on specific cases.\n - gradle: Updated build tools.\n - Main: Exit app only after pressing back button twice (prevent accidental closing).\n - Misc: Improved no-root message.\n - Miscellaneous changes.",
+  "versionName": "1.10",
+  "versionCode": 10
 }

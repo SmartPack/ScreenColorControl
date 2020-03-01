@@ -1,5 +1,9 @@
 # Change-logs
 
+## 10. March 01, 2020
+*Release-tag: 1.10*<br>
+Main: Replaced welcome dialogue with an unsupported dialogue on specific cases. gradle: Updated build tools. Main: Exit app only after pressing back button twice (prevent accidental closing). Misc: Improved no-root message. Miscellaneous changes.
+
 ## 9. February 23, 2020
 *Release-tag: 1.9*<br>
 Main: Improved App UI. Main: Improved coding quality and cleaned un-resourced resources. build: gradle: Updated dependencies. Misc: Ads: Replaced Banner with a event based Interstitial Ad. Miscellaneous changes.
