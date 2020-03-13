@@ -190,7 +190,7 @@ public class AboutFragment extends RecyclerViewFragment {
                     });
                 }
                 donate_to_me.setPositiveButton(getString(R.string.paypal_donation), (dialog1, id1) -> {
-                    Utils.launchUrl("https://www.paypal.me/sunilpaulmathew", getActivity());
+                    Utils.launchUrl("https://www.paypal.me/menacherry", getActivity());
                 });
                 donate_to_me.show();
             }
@@ -219,6 +219,20 @@ public class AboutFragment extends RecyclerViewFragment {
         });
 
         items.add(grarak);
+
+        DescriptionView smgkhoarn = new DescriptionView();
+        smgkhoarn.setDrawable(getResources().getDrawable(R.drawable.ic_smgkhoarn));
+        smgkhoarn.setTitle("SmgKhOaRn");
+        smgkhoarn.setSummary("Korean Translation");
+        smgkhoarn.setOnItemClickListener(new RecyclerViewItem.OnItemClickListener() {
+            @Override
+            public void onClick(RecyclerViewItem item) {
+                Utils.getInstance().showInterstitialAd(requireActivity());
+                Utils.launchUrl("https://github.com/SmgKhOaRn", getActivity());
+            }
+        });
+
+        items.add(smgkhoarn);
 
         DescriptionView toxinpiper = new DescriptionView();
         toxinpiper.setDrawable(getResources().getDrawable(R.mipmap.ic_launcher));
