@@ -24,9 +24,16 @@ import com.smartpack.colorcontrol.fragments.KlapseFragment;
 import com.smartpack.colorcontrol.fragments.OtherSettingsFragment;
 import com.smartpack.colorcontrol.fragments.ProfileFragment;
 import com.smartpack.colorcontrol.fragments.ScreenColorFragment;
+import com.smartpack.colorcontrol.utils.DRMColor;
+import com.smartpack.colorcontrol.utils.Klapse;
 import com.smartpack.colorcontrol.utils.PagerAdapter;
+import com.smartpack.colorcontrol.utils.ScreenColor;
+import com.smartpack.colorcontrol.utils.UpdateCheck;
 import com.smartpack.colorcontrol.utils.Utils;
 import com.smartpack.colorcontrol.utils.root.RootUtils;
+import com.smartpack.colorcontrol.views.dialog.Dialog;
+
+import java.util.Objects;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on January 01, 2020
@@ -69,6 +76,42 @@ public class MainActivity extends AppCompatActivity {
 
     public void androidRooting(View view) {
         Utils.launchUrl("https://www.google.com/search?site=&source=hp&q=android+rooting+magisk", this);
+    }
+
+    private void noSupport() {
+        Dialog alert = new Dialog(Objects.requireNonNull(this));
+        alert.setIcon(R.mipmap.ic_launcher);
+        alert.setTitle(getString(R.string.app_name));
+        alert.setMessage(getString(R.string.no_support, "KCAL/K-lapse"));
+        alert.setCancelable(false);
+        alert.setPositiveButton(getString(R.string.got_it), (dialog, id) -> {
+        });
+
+        alert.show();
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+
+        if (!RootUtils.rootAccess()) {
+            return;
+        }
+        if (!Klapse.supported() && !ScreenColor.getInstance().supported()
+                && !DRMColor.supported()) {
+            noSupport();
+        }
+
+        // Initialize manual Update Check, if play store not found
+        if (!UpdateCheck.isPlayStoreInstalled(this)) {
+            if (!Utils.checkWriteStoragePermission(this)) {
+                return;
+            }
+            if (!Utils.isNetworkAvailable(this)) {
+                return;
+            }
+            UpdateCheck.autoUpdateCheck(this);
+        }
     }
 
     @Override

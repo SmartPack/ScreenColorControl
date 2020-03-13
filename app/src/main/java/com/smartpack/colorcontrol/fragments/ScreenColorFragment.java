@@ -12,9 +12,7 @@ import com.smartpack.colorcontrol.R;
 import com.smartpack.colorcontrol.utils.DRMColor;
 import com.smartpack.colorcontrol.utils.Klapse;
 import com.smartpack.colorcontrol.utils.ScreenColor;
-import com.smartpack.colorcontrol.utils.UpdateCheck;
 import com.smartpack.colorcontrol.utils.Utils;
-import com.smartpack.colorcontrol.views.dialog.Dialog;
 import com.smartpack.colorcontrol.views.recyclerview.CardView;
 import com.smartpack.colorcontrol.views.recyclerview.DescriptionView;
 import com.smartpack.colorcontrol.views.recyclerview.ImageView;
@@ -25,7 +23,6 @@ import com.smartpack.colorcontrol.views.recyclerview.SwitchView;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on January 01, 2020
@@ -85,18 +82,16 @@ public class ScreenColorFragment extends RecyclerViewFragment {
                 colorViews[i].setOnSeekBarListener(new SeekBarView.OnSeekBarListener() {
                     @Override
                     public void onMove(SeekBarView seekBarView, int position, String value) {
-                        if (mMinColor != null && position < mMinColor.getProgress()) {
+                        if (position < mMinColor.getProgress()) {
                             mMinColor.setProgress(position);
                         }
                     }
 
                     @Override
                     public void onStop(SeekBarView seekBarView, int position, String value) {
-                        if (mMinColor != null) {
-                            int current = Utils.strToInt(mScreenColor.getLimits().get(position));
-                            if (mScreenColor.getMinColor() > current) {
-                                mScreenColor.setMinColor(current);
-                            }
+                        int current = Utils.strToInt(mScreenColor.getLimits().get(position));
+                        if (mScreenColor.getMinColor() > current) {
+                            mScreenColor.setMinColor(current);
                         }
 
                         // TODO: Avoid hardcoding index
@@ -261,37 +256,4 @@ public class ScreenColorFragment extends RecyclerViewFragment {
         }
     }
 
-    private void noSupport() {
-        Dialog alert = new Dialog(Objects.requireNonNull(getActivity()));
-        alert.setIcon(R.mipmap.ic_launcher);
-        alert.setTitle(getString(R.string.app_name));
-        alert.setMessage(getString(R.string.no_support, "KCAL/K-lapse"));
-        alert.setCancelable(false);
-        alert.setPositiveButton(getString(R.string.got_it), (dialog, id) -> {
-        });
-
-        alert.show();
-    }
-
-    @Override
-    public void onStart(){
-        super.onStart();
-
-        if (!Klapse.supported() && !ScreenColor.getInstance().supported()
-                && !DRMColor.supported()) {
-            noSupport();
-        }
-
-        // Initialize manual Update Check, if play store not found
-        if (!UpdateCheck.isPlayStoreInstalled(requireActivity())) {
-            if (!Utils.checkWriteStoragePermission(requireActivity())) {
-                return;
-            }
-            if (!Utils.isNetworkAvailable(requireActivity())) {
-                return;
-            }
-            UpdateCheck.autoUpdateCheck(getActivity());
-        }
-    }
-    
 }
