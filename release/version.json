@@ -1,5 +1,5 @@
 {
-  "changelog": "Change-logs\n - Main: Replaced welcome dialogue with an unsupported dialogue on specific cases.\n - gradle: Updated build tools.\n - Main: Exit app only after pressing back button twice (prevent accidental closing).\n - Misc: Improved no-root message.\n - Miscellaneous changes.",
-  "versionName": "1.10",
-  "versionCode": 10
+  "changelog": "Change-logs\n - Main: Added Korean translations (Credits: @SmgKhOaRn).\n - About: Link to app source page.\n - gradle: Updated build tools & dependencies.\n - Main: Exit app only after pressing back button twice (prevent accidental closing).\n - Misc: Improved no-root message.\n - Miscellaneous changes.",
+  "versionName": "2.0",
+  "versionCode": 11
 }

@@ -1,5 +1,9 @@
 # Change-logs
 
+## 11. March 13, 2020
+*Release-tag: 2.0*<br>
+Main: Added Korean translations (Credits: @SmgKhOaRn). About: Link to app source page. gradle: Updated build tools & dependencies. Miscellaneous changes.
+
 ## 10. March 01, 2020
 *Release-tag: 1.10*<br>
 Main: Replaced welcome dialogue with an unsupported dialogue on specific cases. gradle: Updated build tools. Main: Exit app only after pressing back button twice (prevent accidental closing). Misc: Improved no-root message. Miscellaneous changes.
