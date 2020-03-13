@@ -150,6 +150,19 @@ public class AboutFragment extends RecyclerViewFragment {
             items.add(updateCheck);
         }
 
+        DescriptionView sourcecode = new DescriptionView();
+        sourcecode.setDrawable(getResources().getDrawable(R.drawable.ic_source));
+        sourcecode.setTitle(getString(R.string.source_code));
+        sourcecode.setSummary(getString(R.string.source_code_summary));
+        sourcecode.setOnItemClickListener(new RecyclerViewItem.OnItemClickListener() {
+            @Override
+            public void onClick(RecyclerViewItem item) {
+                Utils.launchUrl("https://github.com/SmartPack/ScreenColorControl", requireActivity());
+            }
+        });
+
+        items.add(sourcecode);
+
         DescriptionView share = new DescriptionView();
         share.setDrawable(getResources().getDrawable(R.drawable.ic_share));
         share.setTitle(getString(R.string.share_app));
