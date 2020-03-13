@@ -89,7 +89,7 @@
     <string name="share_app_message">Get Screen Color Control %s from PlayStore: https://play.google.com/store/apps/details?id=com.smartpack.colorcontrol</string>
     <string name="share">Share</string>
     <string name="share_by">%s/shared by Screen Color Control</string>
-    <string name="share_message">To apply this script, simply download the file and import into Screen Color Control -> Profiles.\n\nGet Screen Color Control from\nPlayStore: https://play.google.com/store/apps/details?id=com.smartpack.colorcontrol\nGitHub: https://github.com/SmartPack/ScreenColorControl</string>
+    <string name="share_message">To apply this script, simply download the file and import into Screen Color Control -> Profiles.\n\nGet Screen Color Control from\nPlayStore: https://play.google.com/store/apps/details?id=com.smartpack.colorcontrol\nGitHub: https://github.com/SmartPack/ScreenColorControl/blob/master/release/com.smartpack.colorcontrol.apk?raw=true</string>
     <string name="share_with">Share with</string>
     <string name="source_code">Source Code</string>
     <string name="source_code_summary">View source code at GitHub</string>
