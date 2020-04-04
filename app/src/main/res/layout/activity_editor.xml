@@ -20,9 +20,8 @@
             android:background="@null"
             android:cursorVisible="true"
             android:gravity="top|start"
+            android:padding="10dp"
             android:inputType="textMultiLine|textImeMultiLine|textNoSuggestions"
             android:textSize="15sp" />
-
     </ScrollView>
-
 </LinearLayout>
