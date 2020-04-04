@@ -35,7 +35,6 @@ import com.smartpack.colorcontrol.utils.Profile;
 import com.smartpack.colorcontrol.utils.ScreenColor;
 import com.smartpack.colorcontrol.utils.Utils;
 import com.smartpack.colorcontrol.utils.ViewUtils;
-import com.smartpack.colorcontrol.utils.root.RootUtils;
 import com.smartpack.colorcontrol.views.dialog.Dialog;
 import com.smartpack.colorcontrol.views.recyclerview.DescriptionView;
 import com.smartpack.colorcontrol.views.recyclerview.RecyclerViewItem;
@@ -394,28 +393,26 @@ public class ProfileFragment extends RecyclerViewFragment {
                                     }
                                     Profile.ProfileFile().mkdirs ();
                                 }
-                                RootUtils.runCommand ("echo '#!/system/bin/sh\n\n# Created by Screen Color Control' > "
-                                        + Profile.ProfileFile().toString() + "/" + path);
+                                Utils.create("#!/system/bin/sh\n\n# Created by Screen Color Control", Profile.ProfileFile().toString() + "/" + path);
                                 if (ScreenColor.getInstance().supported()) {
-                                    RootUtils.runCommand("echo '\n# Screen Color" + "' >> " + Profile.ProfileFile().toString() + "/" + path);
-                                    for (int i = 0; i < ScreenColor.getInstance().size(); i++) {
-                                        ScreenColor.getInstance().exportColorSettings(path, i);
+                                    Utils.append("\n# Screen Color", Profile.ProfileFile().toString() + "/" + path);
+                                    for (int i = 0; i < ScreenColor.size(); i++) {
+                                        ScreenColor.exportColorSettings(path, i);
                                     }
                                 }
                                 if (DRMColor.supported()) {
-                                    RootUtils.runCommand("echo '\n# KCAL" + "' >> " + Profile.ProfileFile().toString() + "/" + path);
+                                    Utils.append("\n# KCAL", Profile.ProfileFile().toString() + "/" + path);
                                     for (int i = 0; i < DRMColor.size(); i++) {
                                         DRMColor.exportColorSettings(path, i);
                                     }
                                 }
                                 if (Klapse.supported()) {
-                                    RootUtils.runCommand("echo '\n# K-lapse" + "' >> " + Profile.ProfileFile().toString() + "/" + path);
+                                    Utils.append("\n# K-lapse", Profile.ProfileFile().toString() + "/" + path);
                                     for (int i = 0; i < Klapse.size(); i++) {
                                         Klapse.exportKlapseSettings(path, i);
                                     }
                                 }
-                                RootUtils.runCommand ("echo '" +
-                                        "\n# The END\necho \"Profile applied successfully...\" | tee /dev/kmsg" + "' >> " + Profile.ProfileFile().toString() + "/" + path);
+                                Utils.append("\n# The END\necho \"Profile applied successfully...\" | tee /dev/kmsg", Profile.ProfileFile().toString() + "/" + path);
                                 reload();
                                 return null;
                             }

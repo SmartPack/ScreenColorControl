@@ -8,8 +8,6 @@
 
 package com.smartpack.colorcontrol.utils;
 
-import com.smartpack.colorcontrol.utils.root.RootUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -354,7 +352,7 @@ public class ScreenColor {
         }
         if (Utils.existFile(COLOR_PROFILE[position])) {
             String command = "echo " + value + " > " + COLOR_PROFILE[position];
-            RootUtils.runCommand ("echo '" + command + "' >> " + profileFolder + "/" + name);
+            Utils.append(command, profileFolder + "/" + name);
         }
     }
 

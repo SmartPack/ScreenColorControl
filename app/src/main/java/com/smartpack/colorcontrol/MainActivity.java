@@ -102,6 +102,11 @@ public class MainActivity extends AppCompatActivity {
         if (!Klapse.supported() && !ScreenColor.getInstance().supported()
                 && !DRMColor.supported()) {
             noSupport();
+            return;
+        }
+
+        if (!Utils.isDownloadBinaries()) {
+            return;
         }
 
         // Initialize manual Update Check, if play store not found

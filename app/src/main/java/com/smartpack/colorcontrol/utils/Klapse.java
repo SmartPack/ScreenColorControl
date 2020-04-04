@@ -8,8 +8,6 @@
 
 package com.smartpack.colorcontrol.utils;
 
-import com.smartpack.colorcontrol.utils.root.RootUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -335,7 +333,7 @@ public class Klapse {
         }
         if (Utils.existFile(KLAPSE_PROFILE[position])) {
             String command = "echo " + value + " > " + KLAPSE_PROFILE[position];
-            RootUtils.runCommand ("echo '" + command + "' >> " + profileFolder + "/" + name);
+            Utils.append(command, profileFolder + "/" + name);
         }
     }
 

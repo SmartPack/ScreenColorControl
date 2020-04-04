@@ -8,8 +8,6 @@
 
 package com.smartpack.colorcontrol.utils;
 
-import com.smartpack.colorcontrol.utils.root.RootUtils;
-
 /**
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on January 01, 2020
  */
@@ -150,7 +148,7 @@ public class DRMColor {
         }
         if (Utils.existFile(COLOR_PROFILE[position])) {
             String command = "echo " + value + " > " + COLOR_PROFILE[position];
-            RootUtils.runCommand ("echo '" + command + "' >> " + profileFolder + "/" + name);
+            Utils.append(command, profileFolder + "/" + name);
         }
     }
 
