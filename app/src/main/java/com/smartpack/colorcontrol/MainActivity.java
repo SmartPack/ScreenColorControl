@@ -123,12 +123,7 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 Utils.toast(R.string.press_back, this);
                 mExit = true;
-                mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mExit = false;
-                    }
-                }, 2000);
+                mHandler.postDelayed(() -> mExit = false, 2000);
             }
         } else {
             super.onBackPressed();

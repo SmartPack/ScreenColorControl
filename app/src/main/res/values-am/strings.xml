@@ -19,7 +19,6 @@
     <string name="create">ፍጠር</string>
     <string name="credits">ምስጋና</string>
     <string name="dark_theme">ጠይም ገፅታ</string>
-    <string name="dark_theme_message">%s ገፅታ መተግበሪያዉን ደግመዉ ሲከፍቱ ይተገበራል!</string>
     <string name="daytime_rgb">የቀንጊዜ ቀለሞች</string>
     <string name="delete">ሰርዝ</string>
     <string name="dimming">በመደብዘዝ ላይ</string>
@@ -84,7 +83,7 @@
     <string name="select_question">%s ይመረጥ?</string>
     <string name="share_app">መተግበሪያዉን አጋራ</string>
     <string name="share_app_summary">ስክሪን ቀለም መቆጣጠሪያን ለሚወዱት ሰዉ ያጋሩ</string>
-    <string name="share_app_message">የስክሪን ቀለም መቆጣጠሪያን %s ያግኙ ከ ፕሌይስቶር: https://play.google.com/store/apps/details?id=com.smartpack.colorcontrol</string>
+    <string name="share_app_message">የስክሪን ቀለም መቆጣጠሪያን v%s ያግኙ ከ ፕሌይስቶር: https://play.google.com/store/apps/details?id=com.smartpack.colorcontrol</string>
     <string name="share">አጋራ</string>
     <string name="share_by">%s/በስክሪን ቀለም መቆጣጠሪያ ተጋርቷል</string>
     <string name="share_message">ይህን ስክሪፕት ለመተግበር ከፈለጉ በቀላሉ ፋይሉን በማዉረድ ወደ ስክሪን ቀለም መቆጣጠሪያ መሄድ ከዚያም ወደ -> "ነባር-ማህደር" ይሂዱ።\n</string>

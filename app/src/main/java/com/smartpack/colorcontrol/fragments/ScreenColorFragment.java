@@ -13,12 +13,12 @@ import com.smartpack.colorcontrol.utils.DRMColor;
 import com.smartpack.colorcontrol.utils.Klapse;
 import com.smartpack.colorcontrol.utils.ScreenColor;
 import com.smartpack.colorcontrol.utils.Utils;
-import com.smartpack.colorcontrol.views.recyclerview.CardView;
 import com.smartpack.colorcontrol.views.recyclerview.DescriptionView;
 import com.smartpack.colorcontrol.views.recyclerview.ImageView;
 import com.smartpack.colorcontrol.views.recyclerview.RecyclerViewItem;
 import com.smartpack.colorcontrol.views.recyclerview.SeekBarView;
 import com.smartpack.colorcontrol.views.recyclerview.SwitchView;
+import com.smartpack.colorcontrol.views.recyclerview.TitleView;
 
 import java.util.Calendar;
 import java.util.List;
@@ -56,14 +56,15 @@ public class ScreenColorFragment extends RecyclerViewFragment {
     }
 
     private void ColorInit(List<RecyclerViewItem> items) {
-        CardView kcalCard = new CardView(getActivity());
-        kcalCard.setTitle(getString(R.string.screen_color));
+        TitleView kcalTitle = new TitleView();
+        kcalTitle.setText(getString(R.string.screen_color));
+        items.add(kcalTitle);
 
         ImageView color = new ImageView();
         color.setDrawable(getResources().getDrawable(R.drawable.ic_calibration));
         color.setLayoutParams(750, 520);
 
-        kcalCard.addItem(color);
+        items.add(color);
 
         int localTimeHr = Calendar.getInstance(Locale.getDefault()).get(Calendar.HOUR_OF_DAY);
         int localTimeMin = Calendar.getInstance(Locale.getDefault()).get(Calendar.MINUTE);
@@ -114,7 +115,7 @@ public class ScreenColorFragment extends RecyclerViewFragment {
                     }
                 });
 
-                kcalCard.addItem(colorViews[i]);
+                items.add(colorViews[i]);
             }
         } else if (DRMColor.haskcalRed() || DRMColor.haskcalGreen() || DRMColor.haskcalBlue()) {
             if (DRMColor.haskcalRed()) {
@@ -141,7 +142,7 @@ public class ScreenColorFragment extends RecyclerViewFragment {
                     }
                 });
 
-                kcalCard.addItem(kcal);
+                items.add(kcal);
             }
 
             if (DRMColor.haskcalGreen()) {
@@ -168,7 +169,7 @@ public class ScreenColorFragment extends RecyclerViewFragment {
                     }
                 });
 
-                kcalCard.addItem(kcal);
+                items.add(kcal);
             }
 
             if (DRMColor.haskcalBlue()) {
@@ -195,7 +196,7 @@ public class ScreenColorFragment extends RecyclerViewFragment {
                     }
                 });
 
-                kcalCard.addItem(kcal);
+                items.add(kcal);
             }
         }
 
@@ -212,7 +213,7 @@ public class ScreenColorFragment extends RecyclerViewFragment {
                         -> mScreenColor.enableGrayscaleMode(isChecked));
             }
 
-            kcalCard.addItem(grayscaleMode);
+            items.add(grayscaleMode);
         }
 
         if (mScreenColor.hasScreenHBM()) {
@@ -222,7 +223,7 @@ public class ScreenColorFragment extends RecyclerViewFragment {
             screenHBM.addOnSwitchListener((switchView, isChecked)
                     -> mScreenColor.enableScreenHBM(isChecked));
 
-            kcalCard.addItem(screenHBM);
+            items.add(screenHBM);
         }
 
         if (mScreenColor.hasInvertScreen() || DRMColor.hasInvertScreen()) {
@@ -238,7 +239,7 @@ public class ScreenColorFragment extends RecyclerViewFragment {
                         -> mScreenColor.enableInvertScreen(isChecked));
             }
 
-            kcalCard.addItem(invertScreen);
+            items.add(invertScreen);
         }
 
         if (mScreenColor.hasSRGB()) {
@@ -248,11 +249,7 @@ public class ScreenColorFragment extends RecyclerViewFragment {
             sRGB.addOnSwitchListener((switchView, isChecked)
                     -> mScreenColor.enableSRGB(isChecked));
 
-            kcalCard.addItem(sRGB);
-        }
-
-        if (kcalCard.size() > 0) {
-            items.add(kcalCard);
+            items.add(sRGB);
         }
     }
 

@@ -53,22 +53,16 @@ public class SeekBarView extends RecyclerViewItem {
         mValue = view.findViewById(R.id.value);
         mSeekBar = view.findViewById(R.id.seekbar);
 
-        view.findViewById(R.id.button_minus).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mSeekBar.setProgress(mSeekBar.getProgress() - 1);
-                if (mOnSeekBarListener != null && mProgress < mItems.size() && mProgress >= 0) {
-                    mOnSeekBarListener.onStop(SeekBarView.this, mProgress, mItems.get(mProgress));
-                }
+        view.findViewById(R.id.button_minus).setOnClickListener(v -> {
+            mSeekBar.setProgress(mSeekBar.getProgress() - 1);
+            if (mOnSeekBarListener != null && mProgress < mItems.size() && mProgress >= 0) {
+                mOnSeekBarListener.onStop(SeekBarView.this, mProgress, mItems.get(mProgress));
             }
         });
-        view.findViewById(R.id.button_plus).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mSeekBar.setProgress(mSeekBar.getProgress() + 1);
-                if (mOnSeekBarListener != null && mProgress < mItems.size() && mProgress >= 0) {
-                    mOnSeekBarListener.onStop(SeekBarView.this, mProgress, mItems.get(mProgress));
-                }
+        view.findViewById(R.id.button_plus).setOnClickListener(v -> {
+            mSeekBar.setProgress(mSeekBar.getProgress() + 1);
+            if (mOnSeekBarListener != null && mProgress < mItems.size() && mProgress >= 0) {
+                mOnSeekBarListener.onStop(SeekBarView.this, mProgress, mItems.get(mProgress));
             }
         });
 
@@ -198,4 +192,5 @@ public class SeekBarView extends RecyclerViewItem {
             }
         }
     }
+
 }

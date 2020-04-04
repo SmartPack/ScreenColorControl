@@ -56,4 +56,5 @@ public class ImageView extends RecyclerViewItem {
             }
         }
     }
+
 }

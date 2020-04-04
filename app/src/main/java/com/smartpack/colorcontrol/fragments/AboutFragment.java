@@ -11,6 +11,7 @@ package com.smartpack.colorcontrol.fragments;
 import android.content.Intent;
 
 import com.smartpack.colorcontrol.BuildConfig;
+import com.smartpack.colorcontrol.MainActivity;
 import com.smartpack.colorcontrol.R;
 import com.smartpack.colorcontrol.utils.Prefs;
 import com.smartpack.colorcontrol.utils.UpdateCheck;
@@ -83,12 +84,14 @@ public class AboutFragment extends RecyclerViewFragment {
                 new Dialog(requireActivity())
                         .setMessage(R.string.disable_ads_message)
                         .setPositiveButton(R.string.ok, (dialog, id) -> {
+                            restartApp();
                         })
                         .show();
             } else {
                 new Dialog(requireActivity())
                         .setMessage(R.string.allow_ads_message)
                         .setPositiveButton(R.string.ok, (dialog, id) -> {
+                            restartApp();
                         })
                         .show();
             }
@@ -102,8 +105,7 @@ public class AboutFragment extends RecyclerViewFragment {
         dark_theme.setChecked(Prefs.getBoolean("dark_theme", true, getActivity()));
         dark_theme.addOnSwitchListener((switchview, isChecked) -> {
             Prefs.saveBoolean("dark_theme", isChecked, getActivity());
-            Utils.toast(getString(R.string.dark_theme_message, Prefs.getBoolean("dark_theme", true,
-                    getActivity()) ? "Dark" : "Light"), getActivity());
+            restartApp();
         });
 
         items.add(dark_theme);
@@ -245,6 +247,12 @@ public class AboutFragment extends RecyclerViewFragment {
         });
 
         items.add(burst);
+    }
+
+    private void restartApp() {
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
 }

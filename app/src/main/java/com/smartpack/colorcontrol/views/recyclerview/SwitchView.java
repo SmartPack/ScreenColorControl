@@ -2,7 +2,6 @@ package com.smartpack.colorcontrol.views.recyclerview;
 
 import android.graphics.drawable.Drawable;
 import android.view.View;
-import android.widget.CompoundButton;
 
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
@@ -49,22 +48,14 @@ public class SwitchView extends RecyclerViewItem {
 
         super.onCreateView(view);
 
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mSwitcher.setChecked(!mChecked);
-            }
-        });
-        mSwitcher.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                mChecked = isChecked;
-                List<OnSwitchListener> applied = new ArrayList<>();
-                for (OnSwitchListener onSwitchListener : mOnSwitchListeners) {
-                    if (applied.indexOf(onSwitchListener) == -1) {
-                        onSwitchListener.onChanged(SwitchView.this, isChecked);
-                        applied.add(onSwitchListener);
-                    }
+        view.setOnClickListener(v -> mSwitcher.setChecked(!mChecked));
+        mSwitcher.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            mChecked = isChecked;
+            List<OnSwitchListener> applied = new ArrayList<>();
+            for (OnSwitchListener onSwitchListener : mOnSwitchListeners) {
+                if (applied.indexOf(onSwitchListener) == -1) {
+                    onSwitchListener.onChanged(SwitchView.this, isChecked);
+                    applied.add(onSwitchListener);
                 }
             }
         });
@@ -94,16 +85,8 @@ public class SwitchView extends RecyclerViewItem {
         return mTitleText;
     }
 
-    public boolean isChecked() {
-        return mChecked;
-    }
-
     public void addOnSwitchListener(OnSwitchListener onSwitchListener) {
         mOnSwitchListeners.add(onSwitchListener);
-    }
-
-    public void clearOnSwitchListener() {
-        mOnSwitchListeners.clear();
     }
 
     @Override
@@ -128,4 +111,5 @@ public class SwitchView extends RecyclerViewItem {
             mSwitcher.setChecked(mChecked);
         }
     }
+
 }

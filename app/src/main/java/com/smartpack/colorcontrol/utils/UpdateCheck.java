@@ -81,7 +81,7 @@ public class UpdateCheck {
         return new File(LATEST_VERSION).lastModified();
     }
 
-    public static boolean hasVersionInfo() {
+    private static boolean hasVersionInfo() {
         return Utils.existFile(LATEST_VERSION);
     }
 

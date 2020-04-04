@@ -43,6 +43,7 @@ import java.io.InputStream;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Objects;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on January 01, 2020
@@ -102,11 +103,11 @@ public class Utils {
     }
 
     public static boolean isTv(Context context) {
-        return ((UiModeManager) context.getSystemService(Context.UI_MODE_SERVICE))
+        return ((UiModeManager) Objects.requireNonNull(context.getSystemService(Context.UI_MODE_SERVICE)))
                 .getCurrentModeType() == Configuration.UI_MODE_TYPE_TELEVISION;
     }
 
-    public static String getInternalDataStorage() {
+    static String getInternalDataStorage() {
         return Environment.getExternalStorageDirectory().toString() + "/ColorControl";
     }
 
@@ -203,15 +204,15 @@ public class Utils {
                 Configuration.ORIENTATION_PORTRAIT : activity.getResources().getConfiguration().orientation;
     }
 
-    public static String readFile(String file) {
+    static String readFile(String file) {
         return readFile(file, true);
     }
 
-    public static String readFile(String file, boolean root) {
+    private static String readFile(String file, boolean root) {
         return readFile(file, root ? RootUtils.getSU() : null);
     }
 
-    public static String readFile(String file, RootUtils.SU su) {
+    private static String readFile(String file, RootUtils.SU su) {
         if (su != null) {
             return new RootFile(file, su).readFile();
         }
@@ -238,7 +239,7 @@ public class Utils {
         return null;
     }
 
-    public static Long strToLong(String text) {
+    static Long strToLong(String text) {
         try {
             return Long.parseLong(text);
         } catch (NumberFormatException ignored) {
@@ -254,11 +255,11 @@ public class Utils {
         }
     }
 
-    public static void applyValue(String value, String path) {
+    static void applyValue(String value, String path) {
         RootUtils.runCommand("echo '" + value + "' > '" + path + "'");
     }
 
-    public static void downloadFile(String path, String url) {
+    static void downloadFile(String path, String url) {
         RootUtils.runCommand("curl -L -o " + path + " " + url);
     }
 
@@ -270,16 +271,17 @@ public class Utils {
         return existFile(file, true);
     }
 
-    public static boolean existFile(String file, boolean root) {
+    private static boolean existFile(String file, boolean root) {
         return existFile(file, root ? RootUtils.getSU() : null);
     }
 
-    public static boolean existFile(String file, RootUtils.SU su) {
+    private static boolean existFile(String file, RootUtils.SU su) {
         return su == null ? new File(file).exists() : new RootFile(file, su).exists();
     }
 
     public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        assert cm != null;
         return (cm.getActiveNetworkInfo() != null) && cm.getActiveNetworkInfo().isConnectedOrConnecting();
     }
 
@@ -289,10 +291,6 @@ public class Utils {
         } else {
             return Html.fromHtml(text);
         }
-    }
-
-    public static String errorLog() {
-        return Utils.getInternalDataStorage() + "/file_path_error_log";
     }
 
     public static String getPath(File file) {

@@ -18,7 +18,7 @@ import com.smartpack.colorcontrol.utils.Utils;
 
 public class DescriptionFragment extends BaseFragment {
 
-    public static DescriptionFragment newInstance(CharSequence title, CharSequence summary) {
+    static DescriptionFragment newInstance(CharSequence title, CharSequence summary) {
         Bundle args = new Bundle();
         DescriptionFragment fragment = new DescriptionFragment();
         args.putCharSequence("title", title);
@@ -39,10 +39,10 @@ public class DescriptionFragment extends BaseFragment {
                              @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_description, container, false);
 
-        mTitleView = (TextView) rootView.findViewById(R.id.title);
-        mSummaryView = (TextView) rootView.findViewById(R.id.summary);
+        mTitleView = rootView.findViewById(R.id.title);
+        mSummaryView = rootView.findViewById(R.id.summary);
 
-        if (Utils.isTv(getActivity())) {
+        if (Utils.isTv(requireActivity())) {
             mSummaryView.setFocusable(true);
         } else {
             mTitleView.setTextIsSelectable(true);
@@ -52,6 +52,7 @@ public class DescriptionFragment extends BaseFragment {
         mSummaryView.setSelected(true);
         mSummaryView.setMovementMethod(LinkMovementMethod.getInstance());
 
+        assert getArguments() != null;
         mTitle = getArguments().getCharSequence("title");
         mSummary = getArguments().getCharSequence("summary");
 
@@ -84,4 +85,5 @@ public class DescriptionFragment extends BaseFragment {
             }
         }
     }
+
 }

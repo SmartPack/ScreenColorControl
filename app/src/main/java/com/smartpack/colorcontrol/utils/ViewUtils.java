@@ -26,6 +26,8 @@ import androidx.fragment.app.FragmentTransaction;
 import com.smartpack.colorcontrol.R;
 import com.smartpack.colorcontrol.views.dialog.Dialog;
 
+import java.util.Objects;
+
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on January 01, 2020
  * Based on the original implementation on Kernel Adiutor by
@@ -109,7 +111,7 @@ public class ViewUtils {
         }
         if (onDialogEditTextListener != null) {
             dialog.setPositiveButton(context.getString(R.string.ok), (dialog1, which)
-                    -> onDialogEditTextListener.onClick(editText.getText().toString()))
+                    -> onDialogEditTextListener.onClick(Objects.requireNonNull(editText.getText()).toString()))
                     .setOnDismissListener(dialog1 -> {
                         if (negativeListener != null) {
                             negativeListener.onClick(dialog1, 0);

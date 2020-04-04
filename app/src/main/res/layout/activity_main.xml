@@ -32,8 +32,7 @@
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:background="?attr/colorSecondary" >
+        android:gravity="center" >
 
         <com.google.android.material.tabs.TabLayout
             android:layout_width="match_parent"
@@ -42,7 +41,7 @@
             android:layout_gravity="center"
             app:tabMode="scrollable"
             android:textAlignment="center"
-            android:background="@color/colorPrimary"
+            android:background="@color/black"
             app:tabTextColor="@color/colorOnPrimary"
             app:tabSelectedTextColor="?attr/colorSecondary"
             android:id="@+id/tabLayoutID" />

@@ -46,4 +46,5 @@ public class TitleView extends RecyclerViewItem {
     protected boolean cardCompatible() {
         return false;
     }
+
 }

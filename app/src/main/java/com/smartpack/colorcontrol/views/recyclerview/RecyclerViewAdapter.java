@@ -47,7 +47,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     @NonNull
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         RecyclerViewItem item = mItems.get(viewType);
         View view;
@@ -62,6 +62,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             view = LayoutInflater.from(parent.getContext())
                     .inflate(item.getLayoutRes(), parent, false);
         }
+        assert view != null;
         ViewGroup viewGroup = (ViewGroup) view.getParent();
         if (viewGroup != null) {
             viewGroup.removeView(view);

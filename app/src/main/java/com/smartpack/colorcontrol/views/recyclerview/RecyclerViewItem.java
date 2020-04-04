@@ -46,7 +46,7 @@ public abstract class RecyclerViewItem {
         mOnViewChangedListener = onViewChangeListener;
     }
 
-    protected OnItemClickListener getOnItemClickListener() {
+    OnItemClickListener getOnItemClickListener() {
         return mOnItemClickListener;
     }
 
@@ -60,7 +60,7 @@ public abstract class RecyclerViewItem {
         }
     }
 
-    public void setFullSpan(boolean fullspan) {
+    void setFullSpan(boolean fullspan) {
         mFullspan = fullspan;
         fullSpan(fullspan);
     }

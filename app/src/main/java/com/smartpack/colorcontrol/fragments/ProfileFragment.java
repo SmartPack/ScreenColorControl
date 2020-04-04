@@ -9,8 +9,8 @@
 package com.smartpack.colorcontrol.fragments;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
@@ -37,13 +37,13 @@ import com.smartpack.colorcontrol.utils.Utils;
 import com.smartpack.colorcontrol.utils.ViewUtils;
 import com.smartpack.colorcontrol.utils.root.RootUtils;
 import com.smartpack.colorcontrol.views.dialog.Dialog;
-import com.smartpack.colorcontrol.views.recyclerview.CardView;
 import com.smartpack.colorcontrol.views.recyclerview.DescriptionView;
 import com.smartpack.colorcontrol.views.recyclerview.RecyclerViewItem;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on January 01, 2020
@@ -104,6 +104,7 @@ public class ProfileFragment extends RecyclerViewFragment {
     private void reload() {
         if (mLoader == null) {
             getHandler().postDelayed(new Runnable() {
+                @SuppressLint("StaticFieldLeak")
                 @Override
                 public void run() {
                     clearItems();
@@ -147,17 +148,27 @@ public class ProfileFragment extends RecyclerViewFragment {
             File profiles = new File(Profile.ProfileFile() + "/" + profileItems);
             if (Profile.ProfileFile().length() > 0 && Utils.getExtension(profiles.toString()).equals("sh")
                     && Profile.isColorConrolProfile(profiles.toString())) {
-                CardView cardView = new CardView(getActivity());
-                cardView.setOnMenuListener(new CardView.OnMenuListener() {
+                DescriptionView descriptionView = new DescriptionView();
+                descriptionView.setDrawable(getResources().getDrawable(R.drawable.ic_color));
+                descriptionView.setMenuIcon(getResources().getDrawable(R.drawable.ic_dots));
+                descriptionView.setSummary(profiles.getName().replace(".sh", ""));
+                descriptionView.setOnItemClickListener(item -> new Dialog(requireActivity())
+                        .setTitle(profiles.getName().replace(".sh", ""))
+                        .setMessage(Profile.readProfile(profiles.toString()))
+                        .setPositiveButton(getString(R.string.cancel), (dialogInterface, i) -> {
+                        })
+                        .show());
+
+                descriptionView.setOnMenuListener(new DescriptionView.OnMenuListener() {
                     @Override
-                    public void onMenuReady(CardView cardView, PopupMenu popupMenu) {
+                    public void onMenuReady(DescriptionView descriptionView1, PopupMenu popupMenu) {
                         Menu menu = popupMenu.getMenu();
                         menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.apply));
                         menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.edit));
                         menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.share));
                         menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.delete));
-
                         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                            @SuppressLint("StaticFieldLeak")
                             @Override
                             public boolean onMenuItemClick(MenuItem item) {
                                 switch (item.getItemId()) {
@@ -197,7 +208,7 @@ public class ProfileFragment extends RecyclerViewFragment {
                                                             }
                                                             Utils.getInstance().showInterstitialAd(requireActivity());
                                                             if (s != null && !s.isEmpty()) {
-                                                                new Dialog(getActivity())
+                                                                new Dialog(requireActivity())
                                                                         .setMessage(s)
                                                                         .setCancelable(false)
                                                                         .setPositiveButton(getString(R.string.cancel), (dialog, id) -> {
@@ -247,23 +258,8 @@ public class ProfileFragment extends RecyclerViewFragment {
                         });
                     }
                 });
-                DescriptionView descriptionView = new DescriptionView();
-                descriptionView.setDrawable(getResources().getDrawable(R.drawable.ic_color));
-                descriptionView.setSummary(profiles.getName().replace(".sh", ""));
-                descriptionView.setOnItemClickListener(new RecyclerViewItem.OnItemClickListener() {
-                    @Override
-                    public void onClick(RecyclerViewItem item) {
-                        new Dialog(requireActivity())
-                                .setTitle(profiles.getName().replace(".sh", ""))
-                                .setMessage(Profile.readProfile(profiles.toString()))
-                                .setPositiveButton(getString(R.string.cancel), (dialogInterface, i) -> {
-                                })
-                                .show();
-                    }
-                });
 
-                cardView.addItem(descriptionView);
-                items.add(cardView);
+                items.add(descriptionView);
             }
         }
     }
@@ -274,11 +270,12 @@ public class ProfileFragment extends RecyclerViewFragment {
 
         if (data == null) return;
         if (requestCode == 0) {
-            Profile.createProfile(mEditProfile, data.getCharSequenceExtra(EditorActivity.TEXT_INTENT).toString());
+            Profile.createProfile(mEditProfile, Objects.requireNonNull(data.getCharSequenceExtra(EditorActivity.TEXT_INTENT)).toString());
             reload();
         } else if (requestCode == 1) {
             Uri uri = data.getData();
-            File file = new File(uri.getPath());
+            assert uri != null;
+            File file = new File(Objects.requireNonNull(uri.getPath()));
             String fileName = file.getName();
             if (fileName.contains("primary")) {
                 fileName = fileName.replace("primary:", "");
@@ -290,7 +287,7 @@ public class ProfileFragment extends RecyclerViewFragment {
                 fileName = fileName.replace("%2F", "/");
             }
             if (Utils.isDocumentsUI(uri)) {
-                Cursor cursor = requireActivity().getContentResolver().query(uri, null, null, null, null);
+                @SuppressLint("Recycle") Cursor cursor = requireActivity().getContentResolver().query(uri, null, null, null, null);
                 if (cursor != null && cursor.moveToFirst()) {
                     mPath = Environment.getExternalStorageDirectory().toString() + "/Download/" +
                             cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
@@ -341,36 +338,26 @@ public class ProfileFragment extends RecyclerViewFragment {
         }
 
         mOptionsDialog = new Dialog(requireActivity()).setItems(getResources().getStringArray(
-                R.array.profile_options), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                switch (i) {
-                    case 0:
-                        showCreateDialog();
-                        break;
-                    case 1:
-                        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                        intent.setType("*/*");
-                        startActivityForResult(intent, 1);
-                        break;
-                }
-            }
-        }).setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialogInterface) {
-                mOptionsDialog = null;
-            }
-        });
+                R.array.profile_options), (dialogInterface, i) -> {
+                    switch (i) {
+                        case 0:
+                            showCreateDialog();
+                            break;
+                        case 1:
+                            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                            intent.setType("*/*");
+                            startActivityForResult(intent, 1);
+                            break;
+                    }
+                }).setOnDismissListener(dialogInterface -> mOptionsDialog = null);
         mOptionsDialog.show();
     }
 
     private void showCreateDialog() {
         ViewUtils.dialogEditText("",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                    }
+                (dialogInterface, i) -> {
                 }, new ViewUtils.OnDialogEditTextListener() {
+                    @SuppressLint("StaticFieldLeak")
                     @Override
                     public void onClick(String text) {
                         if (text.isEmpty()) {
@@ -442,11 +429,8 @@ public class ProfileFragment extends RecyclerViewFragment {
                             }
                         }.execute();
                     }
-                }, getActivity()).setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialogInterface) {
-            }
-        }).show();
+                }, getActivity()).setOnDismissListener(dialogInterface -> {
+                }).show();
     }
 
     @Override

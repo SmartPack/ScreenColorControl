@@ -11,11 +11,10 @@ package com.smartpack.colorcontrol.fragments;
 import com.smartpack.colorcontrol.R;
 import com.smartpack.colorcontrol.utils.DRMColor;
 import com.smartpack.colorcontrol.utils.ScreenColor;
-import com.smartpack.colorcontrol.views.recyclerview.CardView;
 import com.smartpack.colorcontrol.views.recyclerview.DescriptionView;
 import com.smartpack.colorcontrol.views.recyclerview.RecyclerViewItem;
 import com.smartpack.colorcontrol.views.recyclerview.SeekBarView;
-import com.smartpack.colorcontrol.views.recyclerview.SwitchView;
+import com.smartpack.colorcontrol.views.recyclerview.TitleView;
 
 import java.util.List;
 
@@ -56,8 +55,9 @@ public class OtherSettingsFragment extends RecyclerViewFragment {
     }
 
     private void otherItemsInit(List<RecyclerViewItem> items) {
-        CardView otherSettingsCard = new CardView(getActivity());
-        otherSettingsCard.setTitle(getString(R.string.other_settings));
+        TitleView otherSettings = new TitleView();
+        otherSettings.setText(getString(R.string.other_settings));
+        items.add(otherSettings);
 
         if (mScreenColor.hasScreenHue() || DRMColor.hasScreenHue()) {
             SeekBarView screenHue = new SeekBarView();
@@ -154,10 +154,6 @@ public class OtherSettingsFragment extends RecyclerViewFragment {
             });
 
             items.add(saturationIntensity);
-        }
-
-        if (otherSettingsCard.size() > 0) {
-            items.add(otherSettingsCard);
         }
     }
 

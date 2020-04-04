@@ -8,21 +8,21 @@
 
 package com.smartpack.colorcontrol.fragments;
 
+import android.annotation.SuppressLint;
 import android.app.TimePickerDialog;
 import android.os.AsyncTask;
 import android.text.InputType;
-import android.widget.TimePicker;
 
 import com.smartpack.colorcontrol.R;
 import com.smartpack.colorcontrol.utils.Klapse;
 import com.smartpack.colorcontrol.utils.Utils;
-import com.smartpack.colorcontrol.views.recyclerview.CardView;
 import com.smartpack.colorcontrol.views.recyclerview.DescriptionView;
 import com.smartpack.colorcontrol.views.recyclerview.GenericSelectView;
 import com.smartpack.colorcontrol.views.recyclerview.RecyclerViewItem;
 import com.smartpack.colorcontrol.views.recyclerview.SeekBarView;
 import com.smartpack.colorcontrol.views.recyclerview.SelectView;
 import com.smartpack.colorcontrol.views.recyclerview.SwitchView;
+import com.smartpack.colorcontrol.views.recyclerview.TitleView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +56,7 @@ public class KlapseFragment extends RecyclerViewFragment {
     private void reload() {
         if (mLoader == null) {
             getHandler().postDelayed(new Runnable() {
+                @SuppressLint("StaticFieldLeak")
                 @Override
                 public void run() {
                     clearItems();
@@ -99,8 +100,9 @@ public class KlapseFragment extends RecyclerViewFragment {
     }
 
     private void klapseInit(List<RecyclerViewItem> items) {
-        CardView klapseCard = new CardView(getActivity());
-        klapseCard.setTitle(Klapse.hasklapseVersion() ? getString(R.string.klapse) + " v" + Klapse.getklapseVersion() : getString(R.string.klapse));
+        TitleView klapse = new TitleView();
+        klapse.setText(Klapse.hasklapseVersion() ? getString(R.string.klapse) + " v" + Klapse.getklapseVersion() : getString(R.string.klapse));
+        items.add(klapse);
 
         int nightR = Klapse.getklapseRed();
         int nightG = Klapse.getklapseGreen();
@@ -111,18 +113,15 @@ public class KlapseFragment extends RecyclerViewFragment {
             enable.setSummary(getString(R.string.klapse_enable));
             enable.setItems(Klapse.enable());
             enable.setItem(Klapse.getklapseEnable());
-            enable.setOnItemSelected(new SelectView.OnItemSelected() {
-                @Override
-                public void onItemSelected(SelectView selectView, int position, String item) {
-                    Klapse.setklapseEnable(position);
-                    Klapse.setklapseRed((nightR));
-                    Klapse.setklapseGreen((nightG));
-                    Klapse.setklapseBlue((nightB));
-                    reload();
-                }
+            enable.setOnItemSelected((selectView, position, item) -> {
+                Klapse.setklapseEnable(position);
+                Klapse.setklapseRed((nightR));
+                Klapse.setklapseGreen((nightG));
+                Klapse.setklapseBlue((nightB));
+                reload();
             });
 
-            klapseCard.addItem(enable);
+            items.add(enable);
         }
 
         if (Klapse.getklapseEnable() == 1 && Klapse.hasklapseStart()) {
@@ -133,25 +132,19 @@ public class KlapseFragment extends RecyclerViewFragment {
             DescriptionView klapseStart = new DescriptionView();
             klapseStart.setTitle(getString(R.string.night_mode_schedule));
             klapseStart.setSummary(getString(R.string.start_time) + ": " + Klapse.getklapseStart());
-            klapseStart.setOnItemClickListener(new RecyclerViewItem.OnItemClickListener() {
-                @Override
-                public void onClick(RecyclerViewItem item) {
-                    TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(),
-                            new TimePickerDialog.OnTimeSetListener() {
-                                @Override
-                                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                                    Klapse.setklapseStart((hourOfDay * 60) + minute);
-                                    getHandler().postDelayed(() -> {
-                                                klapseStart.setSummary(getString(R.string.start_time) + ": " + Klapse.getklapseStart());
-                                            },
-                                            500);
-                                }
-                            }, startHr, startMin, false);
-                    timePickerDialog.show();
-                }
+            klapseStart.setOnItemClickListener(item -> {
+                TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(),
+                        (view, hourOfDay, minute) -> {
+                            Klapse.setklapseStart((hourOfDay * 60) + minute);
+                            getHandler().postDelayed(() -> {
+                                        klapseStart.setSummary(getString(R.string.start_time) + ": " + Klapse.getklapseStart());
+                                    },
+                                    500);
+                        }, startHr, startMin, false);
+                timePickerDialog.show();
             });
 
-            klapseCard.addItem(klapseStart);
+            items.add(klapseStart);
         }
 
         if (Klapse.getklapseEnable() == 1 && Klapse.hasklapseStop()) {
@@ -161,25 +154,19 @@ public class KlapseFragment extends RecyclerViewFragment {
 
             DescriptionView klapseStop = new DescriptionView();
             klapseStop.setSummary(getString(R.string.end_time) + ": " + Klapse.getklapseStop());
-            klapseStop.setOnItemClickListener(new RecyclerViewItem.OnItemClickListener() {
-                @Override
-                public void onClick(RecyclerViewItem item) {
-                    TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(),
-                            new TimePickerDialog.OnTimeSetListener() {
-                                @Override
-                                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                                    Klapse.setklapseStop((hourOfDay * 60) + minute);
-                                    getHandler().postDelayed(() -> {
-                                                klapseStop.setSummary(getString(R.string.end_time) + ": " + Klapse.getklapseStop());
-                                            },
-                                            500);
-                                }
-                            }, EndHr, EndMin, false);
-                    timePickerDialog.show();
-                }
+            klapseStop.setOnItemClickListener(item -> {
+                TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(),
+                        (view, hourOfDay, minute) -> {
+                            Klapse.setklapseStop((hourOfDay * 60) + minute);
+                            getHandler().postDelayed(() -> {
+                                        klapseStop.setSummary(getString(R.string.end_time) + ": " + Klapse.getklapseStop());
+                                    },
+                                    500);
+                        }, EndHr, EndMin, false);
+                timePickerDialog.show();
             });
 
-            klapseCard.addItem(klapseStop);
+            items.add(klapseStop);
         }
 
         if (Klapse.getklapseEnable() == 1 && Klapse.hasklapseRed()) {
@@ -199,7 +186,7 @@ public class KlapseFragment extends RecyclerViewFragment {
                 }
             });
 
-            klapseCard.addItem(targetRed);
+            items.add(targetRed);
         }
 
         if (Klapse.getklapseEnable() == 1 && Klapse.hasklapseGreen()) {
@@ -218,7 +205,7 @@ public class KlapseFragment extends RecyclerViewFragment {
                 }
             });
 
-            klapseCard.addItem(targetGreen);
+            items.add(targetGreen);
         }
 
         if (Klapse.getklapseEnable() == 1 && Klapse.hasklapseBlue()) {
@@ -237,7 +224,7 @@ public class KlapseFragment extends RecyclerViewFragment {
                 }
             });
 
-            klapseCard.addItem(targetBlue);
+            items.add(targetBlue);
         }
 
         if (Klapse.getklapseEnable() == 1 && Klapse.hasScalingRate()) {
@@ -246,15 +233,12 @@ public class KlapseFragment extends RecyclerViewFragment {
             scalingRate.setSummary(getString(R.string.scaling_rate_summary));
             scalingRate.setValue(Klapse.getScalingRate());
             scalingRate.setInputType(InputType.TYPE_CLASS_NUMBER);
-            scalingRate.setOnGenericValueListener(new GenericSelectView.OnGenericValueListener() {
-                @Override
-                public void onGenericValueSelected(GenericSelectView genericSelectView, String value) {
-                    Klapse.setScalingRate(value);
-                    genericSelectView.setValue(value);
-                }
+            scalingRate.setOnGenericValueListener((genericSelectView, value) -> {
+                Klapse.setScalingRate(value);
+                genericSelectView.setValue(value);
             });
 
-            klapseCard.addItem(scalingRate);
+            items.add(scalingRate);
         }
 
         if (Klapse.getklapseEnable() == 1 && Klapse.hasFadeBackMinutes()) {
@@ -263,15 +247,12 @@ public class KlapseFragment extends RecyclerViewFragment {
             fadebackMinutes.setSummary(getString(R.string.fadeback_time_summary));
             fadebackMinutes.setValue(Klapse.getFadeBackMinutes());
             fadebackMinutes.setInputType(InputType.TYPE_CLASS_NUMBER);
-            fadebackMinutes.setOnGenericValueListener(new GenericSelectView.OnGenericValueListener() {
-                @Override
-                public void onGenericValueSelected(GenericSelectView genericSelectView, String value) {
-                    Klapse.setFadeBackMinutes(value);
-                    genericSelectView.setValue(value);
-                }
+            fadebackMinutes.setOnGenericValueListener((genericSelectView, value) -> {
+                Klapse.setFadeBackMinutes(value);
+                genericSelectView.setValue(value);
             });
 
-            klapseCard.addItem(fadebackMinutes);
+            items.add(fadebackMinutes);
         }
 
         if (Klapse.getklapseEnable() == 1 && Klapse.hasDayTimeRed()) {
@@ -291,7 +272,7 @@ public class KlapseFragment extends RecyclerViewFragment {
                 }
             });
 
-            klapseCard.addItem(dayTimeRed);
+            items.add(dayTimeRed);
         }
 
         if (Klapse.getklapseEnable() == 1 && Klapse.hasDayTimeGreen()) {
@@ -310,7 +291,7 @@ public class KlapseFragment extends RecyclerViewFragment {
                 }
             });
 
-            klapseCard.addItem(dayTimeGreen);
+            items.add(dayTimeGreen);
         }
 
         if (Klapse.getklapseEnable() == 1 && Klapse.hasDayTimeBlue()) {
@@ -329,7 +310,7 @@ public class KlapseFragment extends RecyclerViewFragment {
                 }
             });
 
-            klapseCard.addItem(dayTimeBlue);
+            items.add(dayTimeBlue);
         }
 
         if (Klapse.hasPulseFreq()) {
@@ -338,15 +319,12 @@ public class KlapseFragment extends RecyclerViewFragment {
             pulseFreq.setSummary(getString(R.string.pulse_freq_summary));
             pulseFreq.setValue(Klapse.getPulseFreq());
             pulseFreq.setInputType(InputType.TYPE_CLASS_NUMBER);
-            pulseFreq.setOnGenericValueListener(new GenericSelectView.OnGenericValueListener() {
-                @Override
-                public void onGenericValueSelected(GenericSelectView genericSelectView, String value) {
-                    Klapse.setPulseFreq(value);
-                    genericSelectView.setValue(value);
-                }
+            pulseFreq.setOnGenericValueListener((genericSelectView, value) -> {
+                Klapse.setPulseFreq(value);
+                genericSelectView.setValue(value);
             });
 
-            klapseCard.addItem(pulseFreq);
+            items.add(pulseFreq);
         }
 
         if (Klapse.hasFlowFreq()) {
@@ -355,15 +333,12 @@ public class KlapseFragment extends RecyclerViewFragment {
             flowFreq.setSummary(getString(R.string.flow_freq_summary));
             flowFreq.setValue(Klapse.getFlowFreq());
             flowFreq.setInputType(InputType.TYPE_CLASS_NUMBER);
-            flowFreq.setOnGenericValueListener(new GenericSelectView.OnGenericValueListener() {
-                @Override
-                public void onGenericValueSelected(GenericSelectView genericSelectView, String value) {
-                    Klapse.setFlowFreq(value);
-                    genericSelectView.setValue(value);
-                }
+            flowFreq.setOnGenericValueListener((genericSelectView, value) -> {
+                Klapse.setFlowFreq(value);
+                genericSelectView.setValue(value);
             });
 
-            klapseCard.addItem(flowFreq);
+            items.add(flowFreq);
         }
 
         if (Klapse.getklapseEnable() == 2 && Klapse.hasBLRangeLower()) {
@@ -372,15 +347,12 @@ public class KlapseFragment extends RecyclerViewFragment {
             backlightRange.setSummary("Min");
             backlightRange.setValue(Klapse.getBLRangeLower());
             backlightRange.setInputType(InputType.TYPE_CLASS_NUMBER);
-            backlightRange.setOnGenericValueListener(new GenericSelectView.OnGenericValueListener() {
-                @Override
-                public void onGenericValueSelected(GenericSelectView genericSelectView, String value) {
-                    Klapse.setBLRangeLower(value);
-                    genericSelectView.setValue(value);
-                }
+            backlightRange.setOnGenericValueListener((genericSelectView, value) -> {
+                Klapse.setBLRangeLower(value);
+                genericSelectView.setValue(value);
             });
 
-            klapseCard.addItem(backlightRange);
+            items.add(backlightRange);
         }
 
         if (Klapse.getklapseEnable() == 2 && Klapse.hasBLRangeUpper()) {
@@ -388,23 +360,17 @@ public class KlapseFragment extends RecyclerViewFragment {
             backlightRange.setSummary("Max");
             backlightRange.setValue(Klapse.getBLRangeUpper());
             backlightRange.setInputType(InputType.TYPE_CLASS_NUMBER);
-            backlightRange.setOnGenericValueListener(new GenericSelectView.OnGenericValueListener() {
-                @Override
-                public void onGenericValueSelected(GenericSelectView genericSelectView, String value) {
-                    Klapse.setBLRangeUpper(value);
-                    genericSelectView.setValue(value);
-                }
+            backlightRange.setOnGenericValueListener((genericSelectView, value) -> {
+                Klapse.setBLRangeUpper(value);
+                genericSelectView.setValue(value);
             });
 
-            klapseCard.addItem(backlightRange);
+            items.add(backlightRange);
         }
 
-        if (klapseCard.size() > 0) {
-            items.add(klapseCard);
-        }
-
-        CardView dimmerCard = new CardView(getActivity());
-        dimmerCard.setTitle(getString(R.string.dimming));
+        TitleView dimmer = new TitleView();
+        dimmer.setText(getString(R.string.dimming));
+        items.add(dimmer);
 
         if (Klapse.hasDimmerFactor()) {
             SeekBarView Dimmer = new SeekBarView();
@@ -424,7 +390,7 @@ public class KlapseFragment extends RecyclerViewFragment {
                 }
             });
 
-            dimmerCard.addItem(Dimmer);
+            items.add(Dimmer);
         }
 
         DescriptionView brightFactStart = new DescriptionView();
@@ -437,88 +403,51 @@ public class KlapseFragment extends RecyclerViewFragment {
             autoBrightness.setChecked(Klapse.isAutoBrightnessFactorEnabled());
             autoBrightness.addOnSwitchListener((switchView, isChecked) -> {
                 Klapse.enableAutoBrightnessFactor(isChecked);
-                getHandler().postDelayed(() -> {
-                    // Show or hide other Brightness options on the basis of the status of this switch
-                    if (Klapse.isAutoBrightnessFactorEnabled()) {
-                        brightFactStart.setSummary(getString(R.string.start_time) + ": " + Klapse.getBrightFactStart());
-                        dimmerCard.addItem(brightFactStart);
-                        brightFactStop.setSummary(getString(R.string.end_time) + ": " + Klapse.getBrightFactStop());
-                        dimmerCard.addItem(brightFactStop);
-                    } else {
-                        dimmerCard.removeItem(brightFactStart);
-                        dimmerCard.removeItem(brightFactStop);
-                    }
-                }, 100);
+                reload();
             });
 
-            dimmerCard.addItem(autoBrightness);
+            items.add(autoBrightness);
         }
 
-        if (Klapse.hasDimmerStart()) {
+        if (Klapse.isAutoBrightnessFactorEnabled() && Klapse.hasDimmerStart()) {
             int startTime = Utils.strToInt(Klapse.getBrightFactStartRaw());
             int startHr = startTime / 60;
             int startMin = startTime - (startHr * 60);
 
             brightFactStart.setTitle(getString(R.string.auto_dimming_schedule));
             brightFactStart.setSummary(getString(R.string.start_time) + ": " + Klapse.getBrightFactStart());
-            brightFactStart.setOnItemClickListener(new RecyclerViewItem.OnItemClickListener() {
-                @Override
-                public void onClick(RecyclerViewItem item) {
-                    TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(),
-                            new TimePickerDialog.OnTimeSetListener() {
-                                @Override
-                                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                                    Klapse.setBrightFactStart((hourOfDay * 60) + minute);
-                                    getHandler().postDelayed(() -> {
-                                                brightFactStart.setSummary(getString(R.string.start_time) + ": " + Klapse.getBrightFactStart());
-                                            },
-                                            500);
-                                }
-                            }, startHr, startMin, false);
-                    timePickerDialog.show();
-                }
+            brightFactStart.setOnItemClickListener(item -> {
+                TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(),
+                        (view, hourOfDay, minute) -> {
+                            Klapse.setBrightFactStart((hourOfDay * 60) + minute);
+                            getHandler().postDelayed(() -> {
+                                        brightFactStart.setSummary(getString(R.string.start_time) + ": " + Klapse.getBrightFactStart());
+                                    },
+                                    500);
+                        }, startHr, startMin, false);
+                timePickerDialog.show();
             });
-
-            if (Klapse.isAutoBrightnessFactorEnabled()) {
-                dimmerCard.addItem(brightFactStart);
-            } else {
-                dimmerCard.removeItem(brightFactStart);
-            }
+            items.add(brightFactStart);
         }
 
-        if (Klapse.hasDimmerStop()) {
+        if (Klapse.isAutoBrightnessFactorEnabled() && Klapse.hasDimmerStop()) {
             int EndTime = Utils.strToInt(Klapse.getBrightFactStopRaw());
             int EndHr = EndTime / 60;
             int EndMin = EndTime - (EndHr * 60);
 
             brightFactStop.setSummary(getString(R.string.end_time) + ": " + Klapse.getBrightFactStop());
-            brightFactStop.setOnItemClickListener(new RecyclerViewItem.OnItemClickListener() {
-                @Override
-                public void onClick(RecyclerViewItem item) {
-                    TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(),
-                            new TimePickerDialog.OnTimeSetListener() {
-                                @Override
-                                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                                    Klapse.setBrightFactStop((hourOfDay * 60) + minute);
-                                    getHandler().postDelayed(() -> {
-                                                brightFactStop.setSummary(getString(R.string.end_time) + ": " + Klapse.getBrightFactStop());
-                                            },
-                                            500);
-                                }
-                            }, EndHr, EndMin, false);
-                    timePickerDialog.show();
-                }
+            brightFactStop.setOnItemClickListener(item -> {
+                TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(),
+                        (view, hourOfDay, minute) -> {
+                            Klapse.setBrightFactStop((hourOfDay * 60) + minute);
+                            getHandler().postDelayed(() -> {
+                                        brightFactStop.setSummary(getString(R.string.end_time) + ": " + Klapse.getBrightFactStop());
+                                    },
+                                    500);
+                        }, EndHr, EndMin, false);
+                timePickerDialog.show();
             });
-
-            if (Klapse.isAutoBrightnessFactorEnabled()) {
-                dimmerCard.addItem(brightFactStop);
-            } else {
-                dimmerCard.removeItem(brightFactStop);
-            }
-
-            if (dimmerCard.size() > 0) {
-                items.add(dimmerCard);
-            }
+            items.add(brightFactStop);
         }
     }
 

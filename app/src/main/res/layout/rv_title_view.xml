@@ -7,6 +7,5 @@
     android:focusable="false"
     android:textIsSelectable="true"
     android:textSize="18sp"
-    android:paddingStart="10dp"
-    android:paddingEnd="10dp"
+    android:padding="10dp"
     android:textColor="?attr/colorSecondary" />
