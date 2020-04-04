@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_SUPERUSER" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="cyanogenmod.permission.PUBLISH_CUSTOM_TILE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
@@ -29,6 +30,17 @@
             </intent-filter>
         </activity>
         <activity android:name=".utils.EditorActivity" />
+
+        <service
+            android:name=".utils.KLapseTile"
+            android:enabled="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/klapse"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE"/>
+            </intent-filter>
+        </service>
 
         <provider
             android:name="androidx.core.content.FileProvider"
