@@ -1,5 +1,9 @@
 # Change-logs
 
+## 12. April 04, 2020
+*Release-tag: 2.1*<br>
+Main: Overall UI & code quality improvements. Main: Added K-lapse quick tile. Profiles: Improved profile creation and editor layout. About: Added language switch. Main: Added Amharic translations (Credits: @Mikesew1320). gradle: Updated build tools & dependencies. Miscellaneous changes.
+
 ## 11. March 13, 2020
 *Release-tag: 2.0*<br>
 Main: Added Korean translations (Credits: @SmgKhOaRn). About: Link to app source page. gradle: Updated build tools & dependencies. Miscellaneous changes.

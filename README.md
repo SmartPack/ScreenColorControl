@@ -9,7 +9,7 @@
 
 ## Requirements
 1. ROOT Access
-2. BusyBox
+2. KCAL/K-lapse support in kernel-level
 
 ## Features
 Screen Color Control is a simple and very basic app, even without a settings menu, which can do the following things
