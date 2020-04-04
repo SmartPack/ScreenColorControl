@@ -9,6 +9,7 @@
 package com.smartpack.colorcontrol.fragments;
 
 import android.content.Intent;
+import android.view.Menu;
 
 import com.smartpack.colorcontrol.BuildConfig;
 import com.smartpack.colorcontrol.MainActivity;
@@ -143,22 +144,6 @@ public class AboutFragment extends RecyclerViewFragment {
 
         items.add(sourcecode);
 
-        DescriptionView share = new DescriptionView();
-        share.setDrawable(getResources().getDrawable(R.drawable.ic_share));
-        share.setTitle(getString(R.string.share_app));
-        share.setSummary(getString(R.string.share_app_summary));
-        share.setOnItemClickListener(item -> {
-            Intent shareapp = new Intent()
-                    .setAction(Intent.ACTION_SEND)
-                    .putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name))
-                    .putExtra(Intent.EXTRA_TEXT, getString(R.string.share_app_message, BuildConfig.VERSION_NAME))
-                    .setType("text/plain");
-            Intent shareIntent = Intent.createChooser(shareapp, null);
-            startActivity(shareIntent);
-        });
-
-        items.add(share);
-
         DescriptionView donatetome = new DescriptionView();
         donatetome.setDrawable(getResources().getDrawable(R.drawable.ic_donate));
         donatetome.setTitle(getString(R.string.donate_me));
@@ -184,6 +169,76 @@ public class AboutFragment extends RecyclerViewFragment {
         });
 
         items.add(donatetome);
+        DescriptionView share = new DescriptionView();
+        share.setDrawable(getResources().getDrawable(R.drawable.ic_share));
+        share.setTitle(getString(R.string.share_app));
+        share.setSummary(getString(R.string.share_app_summary));
+        share.setOnItemClickListener(item -> {
+            Intent shareapp = new Intent()
+                    .setAction(Intent.ACTION_SEND)
+                    .putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name))
+                    .putExtra(Intent.EXTRA_TEXT, getString(R.string.share_app_message, BuildConfig.VERSION_NAME))
+                    .setType("text/plain");
+            Intent shareIntent = Intent.createChooser(shareapp, null);
+            startActivity(shareIntent);
+        });
+
+        items.add(share);
+
+        DescriptionView language = new DescriptionView();
+        language.setDrawable(getResources().getDrawable(R.drawable.ic_language));
+        language.setTitle(getString(R.string.language, Utils.getLanguage(getActivity())));
+        language.setMenuIcon(getResources().getDrawable(R.drawable.ic_dots));
+        language.setOnMenuListener((script, popupMenu) -> {
+            Menu menu = popupMenu.getMenu();
+            menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.language_default)).setCheckable(true)
+                    .setChecked(Utils.languageDefault(getActivity()));
+            menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.language_en)).setCheckable(true)
+                    .setChecked(Prefs.getBoolean("use_en", false, getActivity()));
+            menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.language_ko)).setCheckable(true)
+                    .setChecked(Prefs.getBoolean("use_ko", false, getActivity()));
+            menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.language_am)).setCheckable(true)
+                    .setChecked(Prefs.getBoolean("use_am", false, getActivity()));
+            popupMenu.setOnMenuItemClickListener(item -> {
+                switch (item.getItemId()) {
+                    case 0:
+                        if (!Utils.languageDefault(getActivity())) {
+                            Prefs.saveBoolean("use_en", false, getActivity());
+                            Prefs.saveBoolean("use_ko", false, getActivity());
+                            Prefs.saveBoolean("use_am", false, getActivity());
+                            restartApp();
+                        }
+                        break;
+                    case 1:
+                        if (!Prefs.getBoolean("use_en", false, getActivity())) {
+                            Prefs.saveBoolean("use_en", true, getActivity());
+                            Prefs.saveBoolean("use_ko", false, getActivity());
+                            Prefs.saveBoolean("use_am", false, getActivity());
+                            restartApp();
+                        }
+                        break;
+                    case 2:
+                        if (!Prefs.getBoolean("use_ko", false, getActivity())) {
+                            Prefs.saveBoolean("use_en", false, getActivity());
+                            Prefs.saveBoolean("use_ko", true, getActivity());
+                            Prefs.saveBoolean("use_am", false, getActivity());
+                            restartApp();
+                        }
+                        break;
+                    case 3:
+                        if (!Prefs.getBoolean("use_am", false, getActivity())) {
+                            Prefs.saveBoolean("use_en", false, getActivity());
+                            Prefs.saveBoolean("use_ko", false, getActivity());
+                            Prefs.saveBoolean("use_am", true, getActivity());
+                            restartApp();
+                        }
+                        break;
+                }
+                return false;
+            });
+        });
+
+        items.add(language);
     }
 
     private void creditsInit(List<RecyclerViewItem> items) {

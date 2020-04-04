@@ -15,11 +15,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.text.Html;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -43,6 +45,7 @@ import java.io.InputStream;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Locale;
 import java.util.Objects;
 
 /*
@@ -338,6 +341,33 @@ public class Utils {
      */
     public static String getExtension(String string) {
         return android.webkit.MimeTypeMap.getFileExtensionFromUrl(string);
+    }
+
+    public static boolean languageDefault(Context context) {
+        return !Prefs.getBoolean("use_en", false, context)
+                && !Prefs.getBoolean("use_ko", false, context)
+                && !Prefs.getBoolean("use_am", false, context);
+    }
+
+    public static String getLanguage(Context context) {
+        if (Prefs.getBoolean("use_en", false, context)) {
+            return "en_US";
+        } else if (Prefs.getBoolean("use_ko", false, context)) {
+            return "ko";
+        } else if (Prefs.getBoolean("use_am", false, context)) {
+            return "am";
+        } else {
+            return java.util.Locale.getDefault().getLanguage();
+        }
+    }
+
+    public static void setLanguage(Context context) {
+        Locale myLocale = new Locale(getLanguage(context));
+        Resources res = context.getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
     }
 
 }

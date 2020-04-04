@@ -45,7 +45,11 @@
     <string name="klapse">ከ-ጠፍ</string>
     <string name="klapse_summary">ከርነልን መሰረት ያደረገ ጠፍ("ከ-ጠፍ") ማለት ቀጥተኛ የሆነ የአርጂቢ መለኪያ ሞጁል ሲሆን የሚያገለግለውም ጊዜ ወይም የብርሀን መጠን ላይ ተመርኩዞ የስልክዎን ስክሪን አርጂቢ ለመቀየር ነው። (&lt;a href="https://github.com/tanish2k09/KLapse-Livedisplay">Read More&lt;a>).</string>
     <string name="klapse_enable">የሚፈልጉትን ከ-ጠፍ ስልት ይምረጡ</string>
-    <string name="time_mode_warning">በ ከ-ጠፍ የጊዜ ሰሌዳ መቼቶች የተነሳ የተደረጉት ለውጦች ሙሉ በሙሉ የሚፈለገውን ውጤት ለማሳየት የተወሰነ ጊዜ ሊወስድ ይችላል። ውጤቱን በቶሎ ማየት ከፈለጉ እባክዎን ከ-ጠፍን ያጥፉና እንደገና ይሞክሩ።</string>
+    <string name="language">ቋንቋ (%s)</string>
+    <string name="language_am">አማርኛ</string>
+    <string name="language_default">ነባር</string>
+    <string name="language_en">እንግሊዘኛ</string>
+    <string name="language_ko">ኮርያኛ</string>
     <string name="more">ተጨማሪ</string>
     <string name="name_empty">ግዴታ ስም ሊኖረው ይገባል! በማቋረጥ ላይ</string>
     <string name="night_mode_rgb">የጨለማ ጊዜ ቀለም</string>
@@ -93,6 +97,7 @@
     <string name="srgb">ኤስአርጂቢ</string>
     <string name="start_time">ጀምር</string>
     <string name="sure_question">%s ላጥፋ?</string>
+    <string name="time_mode_warning">በ ከ-ጠፍ የጊዜ ሰሌዳ መቼቶች የተነሳ የተደረጉት ለውጦች ሙሉ በሙሉ የሚፈለገውን ውጤት ለማሳየት የተወሰነ ጊዜ ሊወስድ ይችላል። ውጤቱን በቶሎ ማየት ከፈለጉ እባክዎን ከ-ጠፍን ያጥፉና እንደገና ይሞክሩ።</string>
     <string name="unknown">የማይታወቅ</string>
     <string name="update_check">አዲስ የመተግበሪያ እትም ከወጣ አረጋግጥ</string>
     <string name="update_check_failed">ስለ አዲሱ እትም መረጃ ማግኘት አልተቻለም!</string>
