@@ -1,5 +1,9 @@
 # Change-logs
 
+## 13. April 17, 2020
+*Release-tag: 2.2*<br>
+Fixed profile not saving on Android 10. Updated Korean translations (Credits: @SmgKhOaRn). Updated gradle build tools. Miscellaneous changes.
+
 ## 12. April 04, 2020
 *Release-tag: 2.1*<br>
 Main: Overall UI & code quality improvements. Main: Added K-lapse quick tile. Profiles: Improved profile creation and editor layout. About: Added language switch. Main: Added Amharic translations (Credits: @Mikesew1320). gradle: Updated build tools & dependencies. Miscellaneous changes.

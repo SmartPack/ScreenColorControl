@@ -1,6 +1,6 @@
 {
-  "changelog": "Change-logs\n - Overall UI & code quality improvements.\n - Added K-lapse quick tile.\n - Improved profile creation and editor layout.\n - Added language switch.\n - Added Amharic translations (Credits: @Mikesew1320).\n - gradle: Updated build tools & dependencies.\n - Miscellaneous changes.",
-  "versionName": "2.1",
-  "versionCode": 12,
+  "changelog": "Change-logs\n - Fixed profile not saving on Android 10.\n - Updated Korean translations (Credits: @SmgKhOaRn).\n - Updated gradle build tools.\n - Miscellaneous changes.",
+  "versionName": "2.2",
+  "versionCode": 13,
   "inherit": true
 }
