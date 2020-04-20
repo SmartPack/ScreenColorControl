@@ -43,6 +43,7 @@
     <string name="klapse_summary">커널 기반 Lapse ("K-lapse") 는 시간이나 밝기를 기반으로 RGB을 변화시키는 RGB 스케일링 모듈입니다 (&lt;a href="https://github.com/tanish2k09/KLapse-Livedisplay">자세히 알아보기&lt;a>).</string>
     <string name="klapse_enable">선호하는 K-lapse 모드를 선택하세요.</string>
     <string name="language">언어 (%s)</string>
+    <string name="language_el">그리스어</string>
     <string name="language_en">영어</string>
     <string name="language_default">시스템 언어</string>
     <string name="language_ko">한국어</string>

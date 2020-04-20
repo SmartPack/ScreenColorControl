@@ -23,6 +23,7 @@ import com.smartpack.colorcontrol.views.recyclerview.RecyclerViewItem;
 import com.smartpack.colorcontrol.views.recyclerview.SwitchView;
 import com.smartpack.colorcontrol.views.recyclerview.TitleView;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 
 /*
@@ -30,6 +31,17 @@ import java.util.List;
  */
 
 public class AboutFragment extends RecyclerViewFragment {
+
+    private static final LinkedHashMap<String, String> sCredits = new LinkedHashMap<>();
+
+    static {
+        sCredits.put("Kernel Adiutor,Willi Ye", "https://github.com/Grarak");
+        sCredits.put("Korean Translations,SmgKhOaRn", "https://github.com/SmgKhOaRn");
+        sCredits.put("Amharic Translations,Mikesew1320", "https://github.com/Mikesew1320");
+        sCredits.put("Greek Translations,tsiflimagas", "https://github.com/tsiflimagas");
+        sCredits.put("Screen Color Image,Burst", "https://burst.shopify.com/photos/child-picking-dandelions-in-field?q=child+picking");
+        sCredits.put("App Icon,Toxinpiper", "https://t.me/toxinpiper");
+    }
 
     @Override
     protected void init() {
@@ -199,6 +211,8 @@ public class AboutFragment extends RecyclerViewFragment {
                     .setChecked(Prefs.getBoolean("use_ko", false, getActivity()));
             menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.language_am)).setCheckable(true)
                     .setChecked(Prefs.getBoolean("use_am", false, getActivity()));
+            menu.add(Menu.NONE, 4, Menu.NONE, getString(R.string.language_el)).setCheckable(true)
+                    .setChecked(Prefs.getBoolean("use_el", false, getActivity()));
             popupMenu.setOnMenuItemClickListener(item -> {
                 switch (item.getItemId()) {
                     case 0:
@@ -206,6 +220,7 @@ public class AboutFragment extends RecyclerViewFragment {
                             Prefs.saveBoolean("use_en", false, getActivity());
                             Prefs.saveBoolean("use_ko", false, getActivity());
                             Prefs.saveBoolean("use_am", false, getActivity());
+                            Prefs.saveBoolean("use_el", false, getActivity());
                             restartApp();
                         }
                         break;
@@ -214,6 +229,7 @@ public class AboutFragment extends RecyclerViewFragment {
                             Prefs.saveBoolean("use_en", true, getActivity());
                             Prefs.saveBoolean("use_ko", false, getActivity());
                             Prefs.saveBoolean("use_am", false, getActivity());
+                            Prefs.saveBoolean("use_el", false, getActivity());
                             restartApp();
                         }
                         break;
@@ -222,6 +238,7 @@ public class AboutFragment extends RecyclerViewFragment {
                             Prefs.saveBoolean("use_en", false, getActivity());
                             Prefs.saveBoolean("use_ko", true, getActivity());
                             Prefs.saveBoolean("use_am", false, getActivity());
+                            Prefs.saveBoolean("use_el", false, getActivity());
                             restartApp();
                         }
                         break;
@@ -230,6 +247,16 @@ public class AboutFragment extends RecyclerViewFragment {
                             Prefs.saveBoolean("use_en", false, getActivity());
                             Prefs.saveBoolean("use_ko", false, getActivity());
                             Prefs.saveBoolean("use_am", true, getActivity());
+                            Prefs.saveBoolean("use_el", false, getActivity());
+                            restartApp();
+                        }
+                        break;
+                    case 4:
+                        if (!Prefs.getBoolean("use_el", false, getActivity())) {
+                            Prefs.saveBoolean("use_en", false, getActivity());
+                            Prefs.saveBoolean("use_ko", false, getActivity());
+                            Prefs.saveBoolean("use_am", false, getActivity());
+                            Prefs.saveBoolean("use_el", true, getActivity());
                             restartApp();
                         }
                         break;
@@ -248,60 +275,38 @@ public class AboutFragment extends RecyclerViewFragment {
 
         items.add(credits);
 
-        DescriptionView grarak = new DescriptionView();
-        grarak.setDrawable(getResources().getDrawable(R.drawable.ic_grarak));
-        grarak.setTitle("Willi Ye");
-        grarak.setSummary("Kernel Adiutor");
-        grarak.setOnItemClickListener(item -> {
-            Utils.getInstance().showInterstitialAd(requireActivity());
-            Utils.launchUrl("https://github.com/Grarak", getActivity());
-        });
+        for (final String lib : sCredits.keySet()) {
+            String title = lib.split(",")[1];
+            String summary = lib.split(",")[0];
+            DescriptionView descriptionView = new DescriptionView();
+            switch (title) {
+                case "Willi Ye":
+                    descriptionView.setDrawable(getResources().getDrawable(R.drawable.ic_grarak));
+                    break;
+                case "SmgKhOaRn":
+                    descriptionView.setDrawable(getResources().getDrawable(R.drawable.ic_smgkhoarn));
+                    break;
+                case "Mikesew1320":
+                    descriptionView.setDrawable(getResources().getDrawable(R.drawable.ic_mikesew));
+                    break;
+                case "tsiflimagas":
+                    descriptionView.setDrawable(getResources().getDrawable(R.drawable.ic_tsiflimagas));
+                    break;
+                case "Burst":
+                    descriptionView.setDrawable(getResources().getDrawable(R.drawable.ic_burst));
+                    break;
+                case "Toxinpiper":
+                    descriptionView.setDrawable(getResources().getDrawable(R.mipmap.ic_launcher));
+                    break;
+            }
+            descriptionView.setTitle(title);
+            descriptionView.setSummary(summary);
+            descriptionView.setOnItemClickListener(item ->
+                    Utils.launchUrl(sCredits.get(lib), getActivity())
+            );
 
-        items.add(grarak);
-
-        DescriptionView smgkhoarn = new DescriptionView();
-        smgkhoarn.setDrawable(getResources().getDrawable(R.drawable.ic_smgkhoarn));
-        smgkhoarn.setTitle("SmgKhOaRn");
-        smgkhoarn.setSummary("Korean Translation");
-        smgkhoarn.setOnItemClickListener(item -> {
-            Utils.getInstance().showInterstitialAd(requireActivity());
-            Utils.launchUrl("https://github.com/SmgKhOaRn", getActivity());
-        });
-
-        items.add(smgkhoarn);
-
-        DescriptionView mikesew = new DescriptionView();
-        mikesew.setDrawable(getResources().getDrawable(R.drawable.ic_mikesew));
-        mikesew.setTitle("Mikesew1320");
-        mikesew.setSummary("Amharic Translation");
-        mikesew.setOnItemClickListener(item -> {
-            Utils.getInstance().showInterstitialAd(requireActivity());
-            Utils.launchUrl("https://github.com/Mikesew1320", getActivity());
-        });
-
-        items.add(mikesew);
-
-        DescriptionView toxinpiper = new DescriptionView();
-        toxinpiper.setDrawable(getResources().getDrawable(R.mipmap.ic_launcher));
-        toxinpiper.setTitle("Toxinpiper");
-        toxinpiper.setSummary("App Icon");
-        toxinpiper.setOnItemClickListener(item -> {
-            Utils.getInstance().showInterstitialAd(requireActivity());
-            Utils.launchUrl("https://t.me/toxinpiper", getActivity());
-        });
-
-        items.add(toxinpiper);
-
-        DescriptionView burst = new DescriptionView();
-        burst.setDrawable(getResources().getDrawable(R.drawable.ic_burst));
-        burst.setTitle("Burst");
-        burst.setSummary("Screen Color Image");
-        burst.setOnItemClickListener(item -> {
-            Utils.getInstance().showInterstitialAd(requireActivity());
-            Utils.launchUrl("https://burst.shopify.com/photos/child-picking-dandelions-in-field?q=child+picking", getActivity());
-        });
-
-        items.add(burst);
+            items.add(descriptionView);
+        }
     }
 
     private void restartApp() {

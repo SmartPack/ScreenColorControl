@@ -48,6 +48,7 @@
     <string name="language">Language (%s)</string>
     <string name="language_default">Default</string>
     <string name="language_am">Amharic</string>
+    <string name="language_el">Greek</string>
     <string name="language_en">English</string>
     <string name="language_ko">Korean</string>
     <string name="minus" translatable="false">-</string>

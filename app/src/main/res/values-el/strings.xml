@@ -48,6 +48,7 @@
     <string name="language">Γλώσσα (%s)</string>
     <string name="language_default">Προεπιλογή</string>
     <string name="language_am">Amharic</string>
+    <string name="language_el">Ελληνικά</string>
     <string name="language_en">Αγγλικά</string>
     <string name="language_ko">Κορεατικά</string>
     <string name="more">Περισσότερα</string>
