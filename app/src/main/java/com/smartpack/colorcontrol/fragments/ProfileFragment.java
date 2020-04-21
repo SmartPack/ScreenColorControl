@@ -151,116 +151,117 @@ public class ProfileFragment extends RecyclerViewFragment {
                 descriptionView.setDrawable(getResources().getDrawable(R.drawable.ic_color));
                 descriptionView.setMenuIcon(getResources().getDrawable(R.drawable.ic_dots));
                 descriptionView.setSummary(profiles.getName().replace(".sh", ""));
-                descriptionView.setOnItemClickListener(item -> new Dialog(requireActivity())
-                        .setTitle(profiles.getName().replace(".sh", ""))
-                        .setMessage(Profile.readProfile(profiles.toString()))
-                        .setPositiveButton(getString(R.string.cancel), (dialogInterface, i) -> {
-                        })
-                        .show());
-
-                descriptionView.setOnMenuListener(new DescriptionView.OnMenuListener() {
-                    @Override
-                    public void onMenuReady(DescriptionView descriptionView1, PopupMenu popupMenu) {
-                        Menu menu = popupMenu.getMenu();
-                        menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.apply));
-                        menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.edit));
-                        menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.share));
-                        menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.delete));
-                        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                            @SuppressLint("StaticFieldLeak")
-                            @Override
-                            public boolean onMenuItemClick(MenuItem item) {
-                                switch (item.getItemId()) {
-                                    case 0:
-                                        new Dialog(requireActivity())
-                                                .setMessage(getString(R.string.apply_question, profiles.getName().replace(".sh", "")))
-                                                .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
-                                                })
-                                                .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> {
-                                                    if (!Profile.isColorConrolProfile(profiles.toString())) {
-                                                        Utils.toast(getString(R.string.wrong_profile, profiles.getName().replace(".sh", "")), getActivity());
-                                                        return;
-                                                    }
-                                                    new AsyncTask<Void, Void, String>() {
-                                                        private ProgressDialog mProgressDialog;
-                                                        @Override
-                                                        protected void onPreExecute() {
-                                                            super.onPreExecute();
-
-                                                            mProgressDialog = new ProgressDialog(getActivity());
-                                                            mProgressDialog.setMessage(getString(R.string.applying_profile, profiles.getName().replace(".sh", "") + "..."));
-                                                            mProgressDialog.setCancelable(false);
-                                                            mProgressDialog.show();
-                                                        }
-
-                                                        @Override
-                                                        protected String doInBackground(Void... voids) {
-                                                            return Profile.applyProfile(profiles.toString());
-                                                        }
-
-                                                        @Override
-                                                        protected void onPostExecute(String s) {
-                                                            super.onPostExecute(s);
-                                                            try {
-                                                                mProgressDialog.dismiss();
-                                                            } catch (IllegalArgumentException ignored) {
-                                                            }
-                                                            Utils.getInstance().showInterstitialAd(requireActivity());
-                                                            if (s != null && !s.isEmpty()) {
-                                                                new Dialog(requireActivity())
-                                                                        .setMessage(s)
-                                                                        .setCancelable(false)
-                                                                        .setPositiveButton(getString(R.string.cancel), (dialog, id) -> {
-                                                                        })
-                                                                        .show();
-                                                            }
-                                                        }
-                                                    }.execute();
-                                                })
-                                                .show();
-                                        break;
-                                    case 1:
-                                        mEditProfile = profiles.toString();
-                                        Intent intent = new Intent(getActivity(), EditorActivity.class);
-                                        intent.putExtra(EditorActivity.TITLE_INTENT, profiles);
-                                        intent.putExtra(EditorActivity.TEXT_INTENT, Profile.readProfile(profiles.toString()));
-                                        startActivityForResult(intent, 0);
-                                        break;
-                                    case 2:
-                                        Uri uriFile = FileProvider.getUriForFile(requireActivity(),
-                                                BuildConfig.APPLICATION_ID + ".provider", new File(profiles.toString()));
-                                        Intent shareScript = new Intent(Intent.ACTION_SEND);
-                                        shareScript.setType("application/sh");
-                                        shareScript.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_by, profiles.getName()));
-                                        shareScript.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_message) +
-                                                (getString(R.string.share_app_message, BuildConfig.VERSION_NAME)));
-                                        shareScript.putExtra(Intent.EXTRA_STREAM, uriFile);
-                                        shareScript.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                                        startActivity(Intent.createChooser(shareScript, getString(R.string.share_with)));
-                                        Utils.getInstance().showInterstitialAd(requireActivity());
-                                        break;
-                                    case 3:
-                                        Utils.getInstance().showInterstitialAd(requireActivity());
-                                        new Dialog(requireActivity())
-                                                .setMessage(getString(R.string.sure_question, profiles.getName().replace(".sh", "")))
-                                                .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
-                                                })
-                                                .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> {
-                                                    Profile.deleteProfile(profiles.toString());
-                                                    reload();
-                                                })
-                                                .show();
-                                        break;
-                                }
-                                return false;
-                            }
-                        });
-                    }
+                descriptionView.setOnItemClickListener(item -> applyProfile(profiles));
+                descriptionView.setOnMenuListener((descriptionView1, popupMenu) -> {
+                    Menu menu = popupMenu.getMenu();
+                    menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.apply));
+                    menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.details));
+                    menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.edit));
+                    menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.share));
+                    menu.add(Menu.NONE, 4, Menu.NONE, getString(R.string.delete));
+                    popupMenu.setOnMenuItemClickListener(item -> {
+                        switch (item.getItemId()) {
+                            case 0:
+                                applyProfile(profiles);
+                                break;
+                            case 1:
+                                new Dialog(requireActivity())
+                                        .setTitle(profiles.getName().replace(".sh", ""))
+                                        .setMessage(Profile.readProfile(profiles.toString()))
+                                        .setPositiveButton(getString(R.string.cancel), (dialogInterface, i) -> {
+                                        })
+                                        .show();
+                                break;
+                            case 2:
+                                mEditProfile = profiles.toString();
+                                Intent intent = new Intent(getActivity(), EditorActivity.class);
+                                intent.putExtra(EditorActivity.TITLE_INTENT, profiles);
+                                intent.putExtra(EditorActivity.TEXT_INTENT, Profile.readProfile(profiles.toString()));
+                                startActivityForResult(intent, 0);
+                                break;
+                            case 3:
+                                Uri uriFile = FileProvider.getUriForFile(requireActivity(),
+                                        BuildConfig.APPLICATION_ID + ".provider", new File(profiles.toString()));
+                                Intent shareScript = new Intent(Intent.ACTION_SEND);
+                                shareScript.setType("application/sh");
+                                shareScript.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_by, profiles.getName()));
+                                shareScript.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_message) +
+                                        (getString(R.string.share_app_message, BuildConfig.VERSION_NAME)));
+                                shareScript.putExtra(Intent.EXTRA_STREAM, uriFile);
+                                shareScript.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                                startActivity(Intent.createChooser(shareScript, getString(R.string.share_with)));
+                                Utils.getInstance().showInterstitialAd(requireActivity());
+                                break;
+                            case 4:
+                                Utils.getInstance().showInterstitialAd(requireActivity());
+                                new Dialog(requireActivity())
+                                        .setMessage(getString(R.string.sure_question, profiles.getName().replace(".sh", "")))
+                                        .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
+                                        })
+                                        .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> {
+                                            Profile.deleteProfile(profiles.toString());
+                                            reload();
+                                        })
+                                        .show();
+                                break;
+                        }
+                        return false;
+                    });
                 });
 
                 items.add(descriptionView);
             }
         }
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private void applyProfile(File file) {
+        new Dialog(requireActivity())
+                .setMessage(getString(R.string.apply_question, file.getName().replace(".sh", "")))
+                .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
+                })
+                .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> {
+                    if (!Profile.isColorConrolProfile(file.toString())) {
+                        Utils.toast(getString(R.string.wrong_profile, file.getName().replace(".sh", "")), getActivity());
+                        return;
+                    }
+                    new AsyncTask<Void, Void, String>() {
+                        private ProgressDialog mProgressDialog;
+                        @Override
+                        protected void onPreExecute() {
+                            super.onPreExecute();
+
+                            mProgressDialog = new ProgressDialog(getActivity());
+                            mProgressDialog.setMessage(getString(R.string.applying_profile, file.getName().replace(".sh", "") + "..."));
+                            mProgressDialog.setCancelable(false);
+                            mProgressDialog.show();
+                        }
+
+                        @Override
+                        protected String doInBackground(Void... voids) {
+                            return Profile.applyProfile(file.toString());
+                        }
+
+                        @Override
+                        protected void onPostExecute(String s) {
+                            super.onPostExecute(s);
+                            try {
+                                mProgressDialog.dismiss();
+                            } catch (IllegalArgumentException ignored) {
+                            }
+                            Utils.getInstance().showInterstitialAd(requireActivity());
+                            if (s != null && !s.isEmpty()) {
+                                new Dialog(requireActivity())
+                                        .setMessage(s)
+                                        .setCancelable(false)
+                                        .setPositiveButton(getString(R.string.cancel), (dialog, id) -> {
+                                        })
+                                        .show();
+                            }
+                        }
+                    }.execute();
+                })
+                .show();
     }
 
     @Override

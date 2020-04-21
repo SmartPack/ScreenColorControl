@@ -21,6 +21,7 @@
     <string name="dark_theme">Dark Theme</string>
     <string name="daytime_rgb">Daytime Colors</string>
     <string name="delete">Delete</string>
+    <string name="details">Details</string>
     <string name="dimming">Dimming</string>
     <string name="dimming_summary">100: Accurate brightness; 50: 50% of current intensity.</string>
     <string name="disable_ads_message">Congrats! Ads will be disabled soon!\n\nHowever, please be noted that the revenue obtained from these Ads are really helpful for the developer to continue his android development projects more active. If it doesn\'t hurt you much, please consider allowing the Ads to support the development.</string>
