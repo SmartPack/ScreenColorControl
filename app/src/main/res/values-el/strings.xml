@@ -80,6 +80,7 @@
     <string name="saturation_intensity">Ένταση κορεσμού</string>
     <string name="scaling_rate">Ρυθμός Κλιμάκωσης (Λεπτά)</string>
     <string name="scaling_rate_summary">Ελέγχει πόσο σύντομα το RGB φτάνει από την Ημέρα έως τη Λειτουργία Νύχτας εντός του χρονικού εύρους έναρξης και λήξης.</string>
+    <string name="screen">Οθόνη</string>
     <string name="screen_color">Χρώμα οθόνης</string>
     <string name="screen_color_summary">Ελέγξτε το χρώμα της οθόνης της έξυπνης συσκευής σας με τη βοήθεια του KCAL προηγούμενου περιβάλλοντος ελέγχου χρώματος.</string>
     <string name="screen_hue">Απόχρωση Οθόνης</string>

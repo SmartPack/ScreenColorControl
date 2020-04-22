@@ -16,9 +16,9 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
-import androidx.viewpager.widget.ViewPager;
+import androidx.fragment.app.Fragment;
 
-import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.smartpack.colorcontrol.fragments.AboutFragment;
 import com.smartpack.colorcontrol.fragments.KlapseFragment;
 import com.smartpack.colorcontrol.fragments.OtherSettingsFragment;
@@ -26,7 +26,6 @@ import com.smartpack.colorcontrol.fragments.ProfileFragment;
 import com.smartpack.colorcontrol.fragments.ScreenColorFragment;
 import com.smartpack.colorcontrol.utils.DRMColor;
 import com.smartpack.colorcontrol.utils.Klapse;
-import com.smartpack.colorcontrol.utils.PagerAdapter;
 import com.smartpack.colorcontrol.utils.ScreenColor;
 import com.smartpack.colorcontrol.utils.UpdateCheck;
 import com.smartpack.colorcontrol.utils.Utils;
@@ -56,8 +55,6 @@ public class MainActivity extends AppCompatActivity {
 
         AppCompatImageView unsupported = findViewById(R.id.no_root_Image);
         TextView textView = findViewById(R.id.no_root_Text);
-        TabLayout tabLayout = findViewById(R.id.tabLayoutID);
-        ViewPager viewPager = findViewById(R.id.viewPagerID);
 
         if (!RootUtils.rootAccess()) {
             textView.setText(getString(R.string.no_root));
@@ -65,16 +62,43 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager());
-        adapter.AddFragment(new ScreenColorFragment(), getString(R.string.screen_color));
-        adapter.AddFragment(new KlapseFragment(), getString(R.string.klapse));
-        adapter.AddFragment(new OtherSettingsFragment(), getString(R.string.others));
-        adapter.AddFragment(new ProfileFragment(), getString(R.string.profiles));
-        adapter.AddFragment(new AboutFragment(), getString(R.string.about));
+        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+        bottomNav.setOnNavigationItemSelectedListener(navListener);
 
-        viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager);
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new ScreenColorFragment()).commit();
+        }
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener
+            = menuItem -> {
+        Fragment selectedFragment = null;
+
+        switch (menuItem.getItemId()) {
+            case R.id.nav_screen:
+                selectedFragment = new ScreenColorFragment();
+                break;
+            case R.id.nav_klapse:
+                selectedFragment = new KlapseFragment();
+                break;
+            case R.id.nav_others:
+                selectedFragment = new OtherSettingsFragment();
+                break;
+            case R.id.nav_profiles:
+                selectedFragment = new ProfileFragment();
+                break;
+            case R.id.nav_about:
+                selectedFragment = new AboutFragment();
+                break;
+        }
+
+        assert selectedFragment != null;
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                selectedFragment).commit();
+
+        return true;
+    };
 
     public void androidRooting(View view) {
         Utils.launchUrl("https://www.google.com/search?site=&source=hp&q=android+rooting+magisk", this);

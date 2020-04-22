@@ -83,6 +83,7 @@
     <string name="saturation_intensity">Saturation Intensity</string>
     <string name="scaling_rate">Scaling Rate (Minute)</string>
     <string name="scaling_rate_summary">Controls how soon the RGB reaches from Daytime to Night Mode inside of start and stop hour range.</string>
+    <string name="screen">Screen</string>
     <string name="screen_color">Screen Color</string>
     <string name="screen_color_summary">Control the color of your smart device screen with the help of KCAL advanced color control interface.</string>
     <string name="screen_hue">Screen Hue</string>

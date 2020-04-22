@@ -35,7 +35,7 @@
         <service
             android:name=".utils.KLapseTile"
             android:enabled="true"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@drawable/ic_klapse"
             android:label="@string/klapse"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
@@ -53,5 +53,4 @@
                 android:resource="@xml/provider_paths"/>
         </provider>
     </application>
-
 </manifest>

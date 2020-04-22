@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_screen"
+        android:icon="@drawable/ic_screen"
+        android:title="@string/screen" />
+    <item
+        android:id="@+id/nav_klapse"
+        android:icon="@drawable/ic_klapse"
+        android:title="@string/klapse" />
+    <item
+        android:id="@+id/nav_others"
+        android:icon="@drawable/ic_others"
+        android:title="@string/others" />
+    <item
+        android:id="@+id/nav_profiles"
+        android:icon="@drawable/ic_profile"
+        android:title="@string/profiles" />
+    <item
+        android:id="@+id/nav_about"
+        android:icon="@drawable/ic_info"
+        android:title="@string/about" />
+</menu>

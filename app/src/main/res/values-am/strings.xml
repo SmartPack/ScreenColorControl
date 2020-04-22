@@ -79,6 +79,7 @@
     <string name="saturation_intensity">የድምቀት ጥነጋ</string>
     <string name="scaling_rate">የመመዘኛ ፍጥነት (በደቂቃ)</string>
     <string name="scaling_rate_summary">አርጂቢ በምን ያህል ፍጥነት በመነሻ እና በመድረሻ ልዩነት ዉስጥ ከቀንጊዜ ወደ ማታጊዜ እንደሚደርስ ይቆጣጠራል።</string>
+    <string name="screen">ማሳያ</string>
     <string name="screen_color">የስክሪን ቀለም</string>
     <string name="screen_color_summary">የስማርት ስልክዎን የስክሪን ቀለም በ ኬካል የዳበረ የቀለም መቆጣጠሪያ በይነገፅ እርዳታ ይቆጣጠሩ።</string>
     <string name="screen_hue">የስክሪን ለይቀለም</string>

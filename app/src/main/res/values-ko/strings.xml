@@ -75,6 +75,7 @@
     <string name="saturation_intensity">채도 강도</string>
     <string name="scaling_rate">스케일링 비율 (단위: 분)</string>
     <string name="scaling_rate_summary">시작/끝 시간 범위에서 얼마나 곧 주간 시간에서 야간 시간까지 RGB가 도달하는지 설정합니다.</string>
+    <string name="screen">화면</string>
     <string name="screen_color">색 온도</string>
     <string name="screen_color_summary">KCAL 고급 색 설정 인터페이스을 사용하여 기기의 색 온도를 설정합니다.</string>
     <string name="screen_hue">색조</string>
