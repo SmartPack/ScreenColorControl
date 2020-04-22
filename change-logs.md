@@ -1,5 +1,9 @@
 # Change-logs
 
+## 14. April 22, 2020
+*Release-tag: 2.3*<br>
+Converted to Bottom Navigation View. Fixed refreshing pages after applying profiles and switching between pages. Revised and re-arrange profile options. Added Greek translations (Credits: @tsiflimagas). Miscellaneous changes.
+
 ## 13. April 17, 2020
 *Release-tag: 2.2*<br>
 Fixed profile not saving on Android 10. Updated Korean translations (Credits: @SmgKhOaRn). Updated gradle build tools. Miscellaneous changes.

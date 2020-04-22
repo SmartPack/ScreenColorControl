@@ -1,6 +1,6 @@
 {
-  "changelog": "Change-logs\n - Fixed profile not saving on Android 10.\n - Updated Korean translations (Credits: @SmgKhOaRn).\n - Updated gradle build tools.\n - Miscellaneous changes.",
-  "versionName": "2.2",
-  "versionCode": 13,
+  "changelog": "Change-logs\n - Converted to Bottom Navigation View.\n - Fixed refreshing pages after applying profiles and switching between pages.\n - Revised and re-arrange profile options.\n - Added Greek translations (Credits: @tsiflimagas).\n - Miscellaneous changes.",
+  "versionName": "2.3",
+  "versionCode": 14,
   "inherit": true
 }
