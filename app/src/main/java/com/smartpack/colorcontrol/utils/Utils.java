@@ -375,7 +375,8 @@ public class Utils {
         return !Prefs.getBoolean("use_en", false, context)
                 && !Prefs.getBoolean("use_ko", false, context)
                 && !Prefs.getBoolean("use_am", false, context)
-                && !Prefs.getBoolean("use_el", false, context);
+                && !Prefs.getBoolean("use_el", false, context)
+                && !Prefs.getBoolean("use_vi", false, context);
     }
 
     public static String getLanguage(Context context) {
@@ -387,6 +388,8 @@ public class Utils {
             return "am";
         } else if (Prefs.getBoolean("use_el", false, context)) {
             return "el";
+        } else if (Prefs.getBoolean("use_vi", false, context)) {
+            return "vi";
         } else {
             return java.util.Locale.getDefault().getLanguage();
         }

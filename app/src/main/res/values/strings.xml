@@ -52,6 +52,7 @@
     <string name="language_el">Greek</string>
     <string name="language_en">English</string>
     <string name="language_ko">Korean</string>
+    <string name="language_vi">Vietnamese</string>
     <string name="minus" translatable="false">-</string>
     <string name="more">More</string>
     <string name="name_empty">Name is empty! Aborting.</string>
