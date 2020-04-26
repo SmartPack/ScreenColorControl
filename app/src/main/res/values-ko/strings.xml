@@ -8,7 +8,7 @@
     <string name="apply_question">%s을(를) 적용하시겠어요?</string>
     <string name="applying_profile">%s을 적용하는 중!</string>
     <string name="auto_dimming">자동 디밍</string>
-    <string name="auto_dimming_summary">자동으로 설정한 시간에 따라 디밍 정도를 조절합니다.</string>
+    <string name="auto_dimming_summary">자동으로 설정한 시간에 따라 밝기를 조절합니다.</string>
     <string name="auto_dimming_schedule">자동 디밍 스케줄</string>
     <string name="backlight_range">백라이트 범위</string>
     <string name="blue">파랑</string>
@@ -21,7 +21,7 @@
     <string name="daytime_rgb">주간 색온도</string>
     <string name="delete">제거</string>
     <string name="dimming">디밍</string>
-    <string name="dimming_summary">100: 정확한 밝기; 50: 현제 밝기의 50% 입니다.</string>
+    <string name="dimming_summary">100: 정확한 밝기; 50: 현제 밝기의 50%</string>
     <string name="disable_ads_message">축하합니다! 광고는 곧 비활성화될 것입니다!\n\n그러나, 광고에서 나오는 수익은 개발자에게 있어 더 활발하게 프로젝트를 이어나갈 수 있게 합니다. 만약 크게 거슬리지 않는다면, 프로젝트를 지원하기 위해 광고를 활성화하는 것을 고려해보세요.</string>
     <string name="donate_me">저에게 기부하기</string>
     <string name="donate_me_message">\n만약 여러분이 제 작업을 좋아하신다면, 기부해주시는 건 어떤가요? 프로젝트 개발에 큰 도움이 됩니다. 물론 필수는 아니에요.\n</string>
@@ -29,7 +29,7 @@
     <string name="donate_me_summary">기부로 제 프로젝트에 도움을 주시고 싶으세요? 여기를 누르세요.</string>
     <string name="donate_nope">지금은 아니에요</string>
     <string name="edit">수정</string>
-    <string name="end_time">끝나는 시간</string>
+    <string name="end_time">끝 시간</string>
     <string name="fadeback_time">Fade-back 시간 (단위: 분)</string>
     <string name="fadeback_time_summary">RGB가 주간 색 온도로 되돌아가기 전에 시간을 설정합니다.</string>
     <string name="flow_freq_summary">1 RGB 프레임이 변한 후에 밀리 초를 설정합니다.</string>
@@ -49,7 +49,7 @@
     <string name="language_ko">한국어</string>
     <string name="language_am">에티오피아어</string>
     <string name="more">더보기</string>
-    <string name="name_empty">이름이 비었습니다! 취소.</string>
+    <string name="name_empty">이름이 비었습니다!</string>
     <string name="night_mode_rgb">야간 모드 색 온도</string>
     <string name="night_mode_schedule">야간 모드 스케줄</string>
     <string name="no_support">사용하시는 커널이 %s을(를) 지원하지 않는 것 같습니다. 그로 인하여, 이 기능은 지원되는 커스텀 커널을 설치하지 않는 이상 제대로 작동하지 않을 것입니다.</string>
@@ -67,13 +67,13 @@
     <string name="press_back">나가려면 뒤로가기를 다시 누르세요</string>
     <string name="profiles">프로필</string>
     <string name="profile_summary">이 페이지에서는 간단히 추가하고, 불러오고, 보고, 화면 색 프로필을 쉽게 적용할 수 있습니다.</string>
-    <string name="profile_exists">%s라는 이름을 가진 프로필이 이미 존재합니다! 취소.</string>
+    <string name="profile_exists">%s라는 이름을 가진 프로필이 이미 존재합니다!</string>
     <string name="pulse_freq_summary">klapse_pulse을 받은 후에 밀리 초를 설정합니다.</string>
     <string name="purchase_app">기부 앱</string>
     <string name="red">빨강</string>
     <string name="save">저장</string>
     <string name="saturation_intensity">채도 강도</string>
-    <string name="scaling_rate">스케일링 비율 (단위: 분)</string>
+    <string name="scaling_rate">스케일링 속도 (단위: 분)</string>
     <string name="scaling_rate_summary">시작/끝 시간 범위에서 얼마나 곧 주간 시간에서 야간 시간까지 RGB가 도달하는지 설정합니다.</string>
     <string name="screen">화면</string>
     <string name="screen_color">색 온도</string>
