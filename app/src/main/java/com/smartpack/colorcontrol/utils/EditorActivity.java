@@ -70,7 +70,7 @@ public class EditorActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         Drawable drawable = ContextCompat.getDrawable(this, R.drawable.ic_save);
         assert drawable != null;
-        DrawableCompat.setTint(drawable, Color.WHITE);
+        DrawableCompat.setTint(drawable, Color.BLACK);
         menu.add(0, Menu.FIRST, Menu.FIRST, getString(R.string.save)).setIcon(drawable)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         return super.onCreateOptionsMenu(menu);
@@ -93,12 +93,7 @@ public class EditorActivity extends AppCompatActivity {
         Toolbar toolbar = getToolBar();
         if (toolbar != null) {
             setSupportActionBar(toolbar);
-            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    finish();
-                }
-            });
+            toolbar.setNavigationOnClickListener(v -> finish());
             Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         }
     }

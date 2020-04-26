@@ -148,7 +148,7 @@ public class ProfileFragment extends RecyclerViewFragment {
             if (Profile.ProfileFile().length() > 0 && Utils.getExtension(profiles.toString()).equals("sh")
                     && Profile.isColorConrolProfile(profiles.toString())) {
                 DescriptionView descriptionView = new DescriptionView();
-                descriptionView.setDrawable(getResources().getDrawable(R.drawable.ic_color));
+                descriptionView.setDrawable(ViewUtils.getColoredIcon(R.drawable.ic_color, requireActivity()));
                 descriptionView.setMenuIcon(getResources().getDrawable(R.drawable.ic_dots));
                 descriptionView.setSummary(profiles.getName().replace(".sh", ""));
                 descriptionView.setOnItemClickListener(item -> applyProfile(profiles));

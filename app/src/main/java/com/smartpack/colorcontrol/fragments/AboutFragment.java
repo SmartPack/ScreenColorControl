@@ -17,6 +17,7 @@ import com.smartpack.colorcontrol.R;
 import com.smartpack.colorcontrol.utils.Prefs;
 import com.smartpack.colorcontrol.utils.UpdateCheck;
 import com.smartpack.colorcontrol.utils.Utils;
+import com.smartpack.colorcontrol.utils.ViewUtils;
 import com.smartpack.colorcontrol.views.dialog.Dialog;
 import com.smartpack.colorcontrol.views.recyclerview.DescriptionView;
 import com.smartpack.colorcontrol.views.recyclerview.RecyclerViewItem;
@@ -114,7 +115,7 @@ public class AboutFragment extends RecyclerViewFragment {
         items.add(allow_ads);
 
         SwitchView dark_theme = new SwitchView();
-        dark_theme.setDrawable(getResources().getDrawable(R.drawable.ic_color));
+        dark_theme.setDrawable(ViewUtils.getColoredIcon(R.drawable.ic_color, requireActivity()));
         dark_theme.setSummary(getString(R.string.dark_theme));
         dark_theme.setChecked(Prefs.getBoolean("dark_theme", true, getActivity()));
         dark_theme.addOnSwitchListener((switchview, isChecked) -> {
@@ -199,7 +200,7 @@ public class AboutFragment extends RecyclerViewFragment {
         items.add(share);
 
         DescriptionView language = new DescriptionView();
-        language.setDrawable(getResources().getDrawable(R.drawable.ic_language));
+        language.setDrawable(ViewUtils.getColoredIcon(R.drawable.ic_language, requireActivity()));
         language.setTitle(getString(R.string.language, Utils.getLanguage(getActivity())));
         language.setMenuIcon(getResources().getDrawable(R.drawable.ic_dots));
         language.setOnMenuListener((script, popupMenu) -> {

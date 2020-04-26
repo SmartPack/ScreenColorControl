@@ -29,6 +29,7 @@ import com.smartpack.colorcontrol.utils.Klapse;
 import com.smartpack.colorcontrol.utils.ScreenColor;
 import com.smartpack.colorcontrol.utils.UpdateCheck;
 import com.smartpack.colorcontrol.utils.Utils;
+import com.smartpack.colorcontrol.utils.ViewUtils;
 import com.smartpack.colorcontrol.utils.root.RootUtils;
 import com.smartpack.colorcontrol.views.dialog.Dialog;
 
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (!RootUtils.rootAccess()) {
             textView.setText(getString(R.string.no_root));
-            unsupported.setImageDrawable(getResources().getDrawable(R.drawable.ic_help));
+            unsupported.setImageDrawable(ViewUtils.getColoredIcon(R.drawable.ic_help, this));
             return;
         }
 
