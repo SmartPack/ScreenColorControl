@@ -1,6 +1,6 @@
 {
-  "changelog": "Change-logs\n - Converted to Bottom Navigation View.\n - Fixed refreshing pages after applying profiles and switching between pages.\n - Revised and re-arrange profile options.\n - Added Greek translations (Credits: @tsiflimagas).\n - Miscellaneous changes.",
-  "versionName": "2.3",
-  "versionCode": 14,
+  "changelog": "Change-logs\n - Migrated to libsu (Credits: @Lennoard).\n - Updated App UI & colors.\n - Added Vietnamese translations (Credits: @shinyheroX).\n - Updated Korean translations (Credits: @SmgKhOaRn).\n - Miscellaneous changes.",
+  "versionName": "2.4",
+  "versionCode": 15,
   "inherit": true
 }

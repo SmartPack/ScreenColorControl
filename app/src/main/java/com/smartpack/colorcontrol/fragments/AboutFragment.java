@@ -37,6 +37,8 @@ public class AboutFragment extends RecyclerViewFragment {
 
     static {
         sCredits.put("Kernel Adiutor,Willi Ye", "https://github.com/Grarak");
+        sCredits.put("libsu,topjohnwu", "https://github.com/topjohnwu");
+        sCredits.put("Code contributions,Lennoard", "https://github.com/Lennoard");
         sCredits.put("Korean Translations,SmgKhOaRn", "https://github.com/SmgKhOaRn");
         sCredits.put("Amharic Translations,Mikesew1320", "https://github.com/Mikesew1320");
         sCredits.put("Greek Translations,tsiflimagas", "https://github.com/tsiflimagas");
@@ -301,6 +303,12 @@ public class AboutFragment extends RecyclerViewFragment {
             switch (title) {
                 case "Willi Ye":
                     descriptionView.setDrawable(getResources().getDrawable(R.drawable.ic_grarak));
+                    break;
+                case "topjohnwu":
+                    descriptionView.setDrawable(getResources().getDrawable(R.drawable.ic_topjohnwu));
+                    break;
+                case "Lennoard":
+                    descriptionView.setDrawable(getResources().getDrawable(R.drawable.ic_lennoard));
                     break;
                 case "SmgKhOaRn":
                     descriptionView.setDrawable(getResources().getDrawable(R.drawable.ic_smgkhoarn));

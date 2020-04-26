@@ -1,5 +1,9 @@
 # Change-logs
 
+## 15. April 26, 2020
+*Release-tag: 2.4*<br>
+Migrated to libsu (Credits: @Lennoard). Updated App UI & colors. Added Vietnamese translations (Credits: @shinyheroX). Updated Korean translations (Credits: @SmgKhOaRn). Miscellaneous changes.
+
 ## 14. April 22, 2020
 *Release-tag: 2.3*<br>
 Converted to Bottom Navigation View. Fixed refreshing pages after applying profiles and switching between pages. Revised and re-arrange profile options. Added Greek translations (Credits: @tsiflimagas). Miscellaneous changes.
