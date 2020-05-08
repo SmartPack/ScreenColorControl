@@ -323,7 +323,7 @@ public class Klapse {
         return KLAPSE_PROFILE.length;
     }
 
-    public static void exportKlapseSettings(String name, int position) {
+    public static void exportKlapseSettings(int position) {
         String profileFolder = Utils.getInternalDataStorage () + "/";
         String value = Utils.readFile(KLAPSE_PROFILE[position]);
         if (value.startsWith("HBM mode = 1") || value.startsWith("mode = 1") || value.contains("Y")) {
@@ -333,7 +333,7 @@ public class Klapse {
         }
         if (Utils.existFile(KLAPSE_PROFILE[position])) {
             String command = "echo " + value + " > " + KLAPSE_PROFILE[position];
-            Utils.append(command, profileFolder + "/" + name);
+            Utils.mProfile.append(command).append("\n");
         }
     }
 

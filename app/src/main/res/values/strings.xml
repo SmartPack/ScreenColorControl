@@ -74,8 +74,9 @@
     <string name="plus" translatable="false">+</string>
     <string name="press_back">Press back again to exit</string>
     <string name="profiles">Profiles</string>
-    <string name="profile_summary">In this section, you can create, import, view and easily apply Screen Color profiles within few clicks.</string>
+    <string name="profile_applied">Profile applied successfully!</string>
     <string name="profile_exists">A profile named %s is already exists! Aborting.</string>
+    <string name="profile_summary">In this section, you can create, import, view and easily apply Screen Color profiles within few clicks.</string>
     <string name="pulse_freq">Pulse Frequency</string>
     <string name="pulse_freq_summary">The number of milliseconds after which klapse_pulse is called.</string>
     <string name="purchase_app">Donation App</string>

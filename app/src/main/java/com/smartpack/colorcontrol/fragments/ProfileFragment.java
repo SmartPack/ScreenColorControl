@@ -221,38 +221,38 @@ public class ProfileFragment extends RecyclerViewFragment {
                         Utils.snackbar(getRootView(), getString(R.string.wrong_profile, file.getName().replace(".sh", "")));
                         return;
                     }
-                    new AsyncTask<Void, Void, String>() {
+                    new AsyncTask<Void, Void, Void>() {
                         private ProgressDialog mProgressDialog;
                         @Override
                         protected void onPreExecute() {
                             super.onPreExecute();
-
                             mProgressDialog = new ProgressDialog(getActivity());
                             mProgressDialog.setMessage(getString(R.string.applying_profile, file.getName().replace(".sh", "") + "..."));
                             mProgressDialog.setCancelable(false);
                             mProgressDialog.show();
+                            Utils.mProfile = new StringBuilder();
                         }
 
                         @Override
-                        protected String doInBackground(Void... voids) {
-                            return Profile.applyProfile(file.toString());
+                        protected Void doInBackground(Void... voids) {
+                            Utils.mProfile.append(Profile.applyProfile(file.toString()));
+                            return null;
                         }
 
                         @Override
-                        protected void onPostExecute(String s) {
-                            super.onPostExecute(s);
+                        protected void onPostExecute(Void aVoid) {
+                            super.onPostExecute(aVoid);
                             try {
                                 mProgressDialog.dismiss();
                             } catch (IllegalArgumentException ignored) {
                             }
-                            if (s != null && !s.isEmpty()) {
-                                new Dialog(requireActivity())
-                                        .setMessage(s)
-                                        .setCancelable(false)
-                                        .setPositiveButton(getString(R.string.cancel), (dialog, id) -> {
-                                        })
-                                        .show();
-                            }
+                            new Dialog(requireActivity())
+                                    .setMessage(Utils.mProfile.toString().isEmpty() ? getString(R.string.profile_applied)
+                                            : Utils.mProfile.toString())
+                                    .setCancelable(false)
+                                    .setPositiveButton(getString(R.string.cancel), (dialog, id) -> {
+                                    })
+                                    .show();
                         }
                     }.execute();
                 })
@@ -388,26 +388,28 @@ public class ProfileFragment extends RecyclerViewFragment {
                                     }
                                     Profile.ProfileFile().mkdirs ();
                                 }
-                                Utils.create("#!/system/bin/sh\n\n# Created by Screen Color Control", Profile.ProfileFile().toString() + "/" + path);
+                                Utils.mProfile = new StringBuilder();
+                                Utils.mProfile.append("#!/system/bin/sh\n\n# Created by Screen Color Control\n");
                                 if (ScreenColor.getInstance().supported()) {
-                                    Utils.append("\n# Screen Color", Profile.ProfileFile().toString() + "/" + path);
+                                    Utils.mProfile.append("\n# Screen Color\n");
                                     for (int i = 0; i < ScreenColor.size(); i++) {
-                                        ScreenColor.exportColorSettings(path, i);
+                                        ScreenColor.exportColorSettings(i);
                                     }
                                 }
                                 if (DRMColor.supported()) {
-                                    Utils.append("\n# KCAL", Profile.ProfileFile().toString() + "/" + path);
+                                    Utils.mProfile.append("\n# KCAL\n");
                                     for (int i = 0; i < DRMColor.size(); i++) {
-                                        DRMColor.exportColorSettings(path, i);
+                                        DRMColor.exportColorSettings(i);
                                     }
                                 }
                                 if (Klapse.supported()) {
-                                    Utils.append("\n# K-lapse", Profile.ProfileFile().toString() + "/" + path);
+                                    Utils.mProfile.append("\n# K-lapse\n");
                                     for (int i = 0; i < Klapse.size(); i++) {
-                                        Klapse.exportKlapseSettings(path, i);
+                                        Klapse.exportKlapseSettings(i);
                                     }
                                 }
-                                Utils.append("\n# The END\necho \"Profile applied successfully...\" | tee /dev/kmsg", Profile.ProfileFile().toString() + "/" + path);
+                                Utils.mProfile.append("\n# The END");
+                                Utils.create(Utils.mProfile.toString(), Profile.ProfileFile().toString() + "/" + path);
                                 reload();
                                 return null;
                             }

@@ -62,6 +62,8 @@ public class Utils {
     private static final String TAG = Utils.class.getSimpleName();
     private static final String DONATION_PACKAGE = "com.smartpack.donate";
 
+    public static StringBuilder mProfile;
+
     public static boolean isDonated(Context context) {
         try {
             context.getPackageManager().getApplicationInfo(DONATION_PACKAGE, 0);
@@ -273,10 +275,6 @@ public class Utils {
 
     public static void create(String text, String path) {
         RootUtils.runCommand("echo '" + text + "' > " + path);
-    }
-
-    public static void append(String text, String path) {
-        RootUtils.runCommand("echo '" + text + "' >> " + path);
     }
 
     public static boolean existFile(String file) {

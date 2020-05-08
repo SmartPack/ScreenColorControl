@@ -342,7 +342,7 @@ public class ScreenColor {
         return COLOR_PROFILE.length;
     }
 
-    public static void exportColorSettings(String name, int position) {
+    public static void exportColorSettings(int position) {
         String profileFolder = Utils.getInternalDataStorage () + "/";
         String value = Utils.readFile(COLOR_PROFILE[position]);
         if (value.startsWith("HBM mode = 1") || value.startsWith("mode = 1") || value.contains("Y")) {
@@ -352,7 +352,7 @@ public class ScreenColor {
         }
         if (Utils.existFile(COLOR_PROFILE[position])) {
             String command = "echo " + value + " > " + COLOR_PROFILE[position];
-            Utils.append(command, profileFolder + "/" + name);
+            Utils.mProfile.append(command).append("\n");
         }
     }
 
