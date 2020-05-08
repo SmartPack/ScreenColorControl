@@ -91,7 +91,6 @@ public class AboutFragment extends RecyclerViewFragment {
         changelogs.setTitle(getString(R.string.change_logs));
         changelogs.setSummary(getString(R.string.change_logs_summary));
         changelogs.setOnItemClickListener(item -> {
-            Utils.getInstance().showInterstitialAd(requireActivity());
             Utils.launchUrl("https://github.com/SmartPack/ScreenColorControl/raw/master/change-logs.md", requireActivity());
         });
 
@@ -115,7 +114,6 @@ public class AboutFragment extends RecyclerViewFragment {
                     Utils.snackbar(getRootView(), getString(R.string.no_internet));
                     return;
                 }
-                Utils.getInstance().showInterstitialAd(requireActivity());
                 UpdateCheck.updateCheck(getActivity());
             });
 

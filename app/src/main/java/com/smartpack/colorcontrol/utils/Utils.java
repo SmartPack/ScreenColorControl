@@ -29,9 +29,7 @@ import android.widget.Toast;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatDelegate;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.gms.ads.MobileAds;
+import com.facebook.ads.AudienceNetworkAds;
 import com.google.android.material.snackbar.Snackbar;
 import com.smartpack.colorcontrol.R;
 import com.smartpack.colorcontrol.utils.root.RootFile;
@@ -73,8 +71,6 @@ public class Utils {
     private static final String TAG = Utils.class.getSimpleName();
     private static final String DONATION_PACKAGE = "com.smartpack.donate";
 
-    private InterstitialAd mInterstitialAd;
-
     public static boolean isDonated(Context context) {
         try {
             context.getPackageManager().getApplicationInfo(DONATION_PACKAGE, 0);
@@ -94,19 +90,9 @@ public class Utils {
         }
     }
 
-    public void initializeGoogleAds(Context context) {
-        if (Prefs.getBoolean("google_ads", true, context)) {
-            MobileAds.initialize(context, "ca-app-pub-7791710838910455~2525317068");
-            mInterstitialAd = new InterstitialAd(context);
-            mInterstitialAd.setAdUnitId("ca-app-pub-7791710838910455/8944854362");
-            mInterstitialAd.loadAd(new AdRequest.Builder().build());
-        }
-    }
-
-    public void showInterstitialAd(Context context) {
-        if (Prefs.getBoolean("google_ads", true, context) &&
-                mInterstitialAd.isLoaded()) {
-            mInterstitialAd.show();
+    public void initializeFaceBookAds(Context context) {
+        if (Prefs.getBoolean("allow_ads", true, context)) {
+            AudienceNetworkAds.initialize(context);
         }
     }
 
@@ -181,11 +167,11 @@ public class Utils {
                 >= Configuration.SCREENLAYOUT_SIZE_LARGE;
     }
 
-    public static void toast(String message, Context context) {
+    static void toast(String message, Context context) {
         toast(message, context, Toast.LENGTH_SHORT);
     }
 
-    public static void toast(@StringRes int id, Context context) {
+    private static void toast(@StringRes int id, Context context) {
         toast(context.getString(id), context);
     }
 
