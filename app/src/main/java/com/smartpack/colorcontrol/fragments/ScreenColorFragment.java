@@ -105,7 +105,7 @@ public class ScreenColorFragment extends RecyclerViewFragment {
                             Klapse.setklapseGreen(Utils.strToInt(limits.get(g)));
                             Klapse.setklapseBlue(Utils.strToInt(limits.get(b)));
                             if (localTime < (klapseStartTime + Utils.strToInt(Klapse.getScalingRate()))) {
-                                Utils.toast(getString(R.string.time_mode_warning), getActivity());
+                                Utils.snackbar(getRootView(), getString(R.string.time_mode_warning));
                             }
                         } else {
                             Klapse.setDayTimeRed(Utils.strToInt(limits.get(r)));
@@ -130,7 +130,7 @@ public class ScreenColorFragment extends RecyclerViewFragment {
                         if (Klapse.supported() && Klapse.getklapseEnable() == 1 && localTime >= klapseStartTime) {
                             Klapse.setklapseRed(position);
                             if (localTime < (klapseStartTime + Utils.strToInt(Klapse.getScalingRate()))) {
-                                Utils.toast(getString(R.string.time_mode_warning), getActivity());
+                                Utils.snackbar(getRootView(), getString(R.string.time_mode_warning));
                             }
                         } else {
                             Klapse.setDayTimeRed(position);
@@ -157,7 +157,7 @@ public class ScreenColorFragment extends RecyclerViewFragment {
                         if (Klapse.supported() && Klapse.getklapseEnable() == 1 && localTime >= klapseStartTime) {
                             Klapse.setklapseGreen(position);
                             if (localTime < (klapseStartTime + Utils.strToInt(Klapse.getScalingRate()))) {
-                                Utils.toast(getString(R.string.time_mode_warning), getActivity());
+                                Utils.snackbar(getRootView(), getString(R.string.time_mode_warning));
                             }
                         } else {
                             Klapse.setDayTimeGreen(position);
@@ -184,7 +184,7 @@ public class ScreenColorFragment extends RecyclerViewFragment {
                         if (Klapse.supported() && Klapse.getklapseEnable() == 1 && localTime >= klapseStartTime) {
                             Klapse.setklapseBlue(position);
                             if (localTime < (klapseStartTime + Utils.strToInt(Klapse.getScalingRate()))) {
-                                Utils.toast(getString(R.string.time_mode_warning), getActivity());
+                                Utils.snackbar(getRootView(), getString(R.string.time_mode_warning));
                             }
                         } else {
                             Klapse.setDayTimeBlue(position);

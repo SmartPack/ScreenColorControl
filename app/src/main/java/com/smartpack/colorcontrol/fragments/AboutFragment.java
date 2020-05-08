@@ -9,7 +9,16 @@
 package com.smartpack.colorcontrol.fragments;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.SubMenu;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.appcompat.widget.PopupMenu;
 
 import com.smartpack.colorcontrol.BuildConfig;
 import com.smartpack.colorcontrol.MainActivity;
@@ -17,11 +26,9 @@ import com.smartpack.colorcontrol.R;
 import com.smartpack.colorcontrol.utils.Prefs;
 import com.smartpack.colorcontrol.utils.UpdateCheck;
 import com.smartpack.colorcontrol.utils.Utils;
-import com.smartpack.colorcontrol.utils.ViewUtils;
 import com.smartpack.colorcontrol.views.dialog.Dialog;
 import com.smartpack.colorcontrol.views.recyclerview.DescriptionView;
 import com.smartpack.colorcontrol.views.recyclerview.RecyclerViewItem;
-import com.smartpack.colorcontrol.views.recyclerview.SwitchView;
 import com.smartpack.colorcontrol.views.recyclerview.TitleView;
 
 import java.util.LinkedHashMap;
@@ -51,8 +58,7 @@ public class AboutFragment extends RecyclerViewFragment {
     protected void init() {
         super.init();
 
-        addViewPagerFragment(DescriptionFragment.newInstance(getString(R.string.app_name),
-                getString(R.string.about_me)));
+        addViewPagerFragment(new InfoFragment());
     }
 
     @Override
@@ -91,42 +97,6 @@ public class AboutFragment extends RecyclerViewFragment {
 
         items.add(changelogs);
 
-        SwitchView allow_ads = new SwitchView();
-        allow_ads.setDrawable(getResources().getDrawable(R.drawable.ic_ads));
-        allow_ads.setSummary(getString(R.string.allow_ads));
-        allow_ads.setChecked(Prefs.getBoolean("google_ads", true, getActivity()));
-        allow_ads.addOnSwitchListener((switchview, isChecked) -> {
-            Prefs.saveBoolean("google_ads", isChecked, getActivity());
-            if (!isChecked) {
-                new Dialog(requireActivity())
-                        .setMessage(R.string.disable_ads_message)
-                        .setPositiveButton(R.string.ok, (dialog, id) -> {
-                            restartApp();
-                        })
-                        .show();
-            } else {
-                new Dialog(requireActivity())
-                        .setMessage(R.string.allow_ads_message)
-                        .setPositiveButton(R.string.ok, (dialog, id) -> {
-                            restartApp();
-                        })
-                        .show();
-            }
-        });
-
-        items.add(allow_ads);
-
-        SwitchView dark_theme = new SwitchView();
-        dark_theme.setDrawable(ViewUtils.getColoredIcon(R.drawable.ic_color, requireActivity()));
-        dark_theme.setSummary(getString(R.string.dark_theme));
-        dark_theme.setChecked(Prefs.getBoolean("dark_theme", true, getActivity()));
-        dark_theme.addOnSwitchListener((switchview, isChecked) -> {
-            Prefs.saveBoolean("dark_theme", isChecked, getActivity());
-            restartApp();
-        });
-
-        items.add(dark_theme);
-
         if (UpdateCheck.isPlayStoreInstalled(requireActivity())) {
             DescriptionView playstore = new DescriptionView();
             playstore.setDrawable(getResources().getDrawable(R.drawable.ic_playstore));
@@ -142,7 +112,7 @@ public class AboutFragment extends RecyclerViewFragment {
             updateCheck.setSummary(getString(R.string.update_check_summary));
             updateCheck.setOnItemClickListener(item -> {
                 if (!Utils.isNetworkAvailable(requireActivity())) {
-                    Utils.toast(R.string.no_internet, getActivity());
+                    Utils.snackbar(getRootView(), getString(R.string.no_internet));
                     return;
                 }
                 Utils.getInstance().showInterstitialAd(requireActivity());
@@ -200,93 +170,6 @@ public class AboutFragment extends RecyclerViewFragment {
         });
 
         items.add(share);
-
-        DescriptionView language = new DescriptionView();
-        language.setDrawable(ViewUtils.getColoredIcon(R.drawable.ic_language, requireActivity()));
-        language.setTitle(getString(R.string.language, Utils.getLanguage(getActivity())));
-        language.setMenuIcon(getResources().getDrawable(R.drawable.ic_dots));
-        language.setOnMenuListener((script, popupMenu) -> {
-            Menu menu = popupMenu.getMenu();
-            menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.language_default)).setCheckable(true)
-                    .setChecked(Utils.languageDefault(getActivity()));
-            menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.language_en)).setCheckable(true)
-                    .setChecked(Prefs.getBoolean("use_en", false, getActivity()));
-            menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.language_ko)).setCheckable(true)
-                    .setChecked(Prefs.getBoolean("use_ko", false, getActivity()));
-            menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.language_am)).setCheckable(true)
-                    .setChecked(Prefs.getBoolean("use_am", false, getActivity()));
-            menu.add(Menu.NONE, 4, Menu.NONE, getString(R.string.language_el)).setCheckable(true)
-                    .setChecked(Prefs.getBoolean("use_el", false, getActivity()));
-            menu.add(Menu.NONE, 5, Menu.NONE, getString(R.string.language_vi)).setCheckable(true)
-                    .setChecked(Prefs.getBoolean("use_vi", false, getActivity()));
-            popupMenu.setOnMenuItemClickListener(item -> {
-                switch (item.getItemId()) {
-                    case 0:
-                        if (!Utils.languageDefault(getActivity())) {
-                            Prefs.saveBoolean("use_en", false, getActivity());
-                            Prefs.saveBoolean("use_ko", false, getActivity());
-                            Prefs.saveBoolean("use_am", false, getActivity());
-                            Prefs.saveBoolean("use_el", false, getActivity());
-                            Prefs.saveBoolean("use_vi", false, getActivity());
-                            restartApp();
-                        }
-                        break;
-                    case 1:
-                        if (!Prefs.getBoolean("use_en", false, getActivity())) {
-                            Prefs.saveBoolean("use_en", true, getActivity());
-                            Prefs.saveBoolean("use_ko", false, getActivity());
-                            Prefs.saveBoolean("use_am", false, getActivity());
-                            Prefs.saveBoolean("use_el", false, getActivity());
-                            Prefs.saveBoolean("use_vi", false, getActivity());
-                            restartApp();
-                        }
-                        break;
-                    case 2:
-                        if (!Prefs.getBoolean("use_ko", false, getActivity())) {
-                            Prefs.saveBoolean("use_en", false, getActivity());
-                            Prefs.saveBoolean("use_ko", true, getActivity());
-                            Prefs.saveBoolean("use_am", false, getActivity());
-                            Prefs.saveBoolean("use_el", false, getActivity());
-                            Prefs.saveBoolean("use_vi", false, getActivity());
-                            restartApp();
-                        }
-                        break;
-                    case 3:
-                        if (!Prefs.getBoolean("use_am", false, getActivity())) {
-                            Prefs.saveBoolean("use_en", false, getActivity());
-                            Prefs.saveBoolean("use_ko", false, getActivity());
-                            Prefs.saveBoolean("use_am", true, getActivity());
-                            Prefs.saveBoolean("use_el", false, getActivity());
-                            Prefs.saveBoolean("use_vi", false, getActivity());
-                            restartApp();
-                        }
-                        break;
-                    case 4:
-                        if (!Prefs.getBoolean("use_el", false, getActivity())) {
-                            Prefs.saveBoolean("use_en", false, getActivity());
-                            Prefs.saveBoolean("use_ko", false, getActivity());
-                            Prefs.saveBoolean("use_am", false, getActivity());
-                            Prefs.saveBoolean("use_el", true, getActivity());
-                            Prefs.saveBoolean("use_vi", false, getActivity());
-                            restartApp();
-                        }
-                        break;
-                    case 5:
-                        if (!Prefs.getBoolean("use_vi", false, getActivity())) {
-                            Prefs.saveBoolean("use_en", false, getActivity());
-                            Prefs.saveBoolean("use_ko", false, getActivity());
-                            Prefs.saveBoolean("use_am", false, getActivity());
-                            Prefs.saveBoolean("use_el", false, getActivity());
-                            Prefs.saveBoolean("use_vi", true, getActivity());
-                            restartApp();
-                        }
-                        break;
-                }
-                return false;
-            });
-        });
-
-        items.add(language);
     }
 
     private void creditsInit(List<RecyclerViewItem> items) {
@@ -339,10 +222,140 @@ public class AboutFragment extends RecyclerViewFragment {
         }
     }
 
-    private void restartApp() {
-        Intent intent = new Intent(getActivity(), MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
+    public static class InfoFragment extends BaseFragment {
+        @Nullable
+        @Override
+        public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                                 @Nullable Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.fragment_about, container, false);
+            AppCompatImageButton settings = rootView.findViewById(R.id.settings_menu);
+            settings.setOnClickListener(v -> {
+                PopupMenu popupMenu = new PopupMenu(requireActivity(), settings);
+                Menu menu = popupMenu.getMenu();
+                menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.dark_theme)).setCheckable(true)
+                        .setChecked(Prefs.getBoolean("dark_theme", true, getActivity()));
+                menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.allow_ads)).setCheckable(true)
+                        .setChecked(Prefs.getBoolean("allow_ads", true, getActivity()));
+                SubMenu language = menu.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.language, Utils.getLanguage(getActivity())));
+                language.add(Menu.NONE, 3, Menu.NONE, getString(R.string.language_default)).setCheckable(true)
+                        .setChecked(Utils.languageDefault(getActivity()));
+                language.add(Menu.NONE, 4, Menu.NONE, getString(R.string.language_en)).setCheckable(true)
+                        .setChecked(Prefs.getBoolean("use_en", false, getActivity()));
+                language.add(Menu.NONE, 5, Menu.NONE, getString(R.string.language_ko)).setCheckable(true)
+                        .setChecked(Prefs.getBoolean("use_ko", false, getActivity()));
+                language.add(Menu.NONE, 6, Menu.NONE, getString(R.string.language_am)).setCheckable(true)
+                        .setChecked(Prefs.getBoolean("use_am", false, getActivity()));
+                language.add(Menu.NONE, 7, Menu.NONE, getString(R.string.language_el)).setCheckable(true)
+                        .setChecked(Prefs.getBoolean("use_el", false, getActivity()));
+                language.add(Menu.NONE, 8, Menu.NONE, getString(R.string.language_vi)).setCheckable(true)
+                        .setChecked(Prefs.getBoolean("use_vi", false, getActivity()));
+                popupMenu.setOnMenuItemClickListener(item -> {
+                    switch (item.getItemId()) {
+                        case 0:
+                            break;
+                        case 1:
+                            if (Prefs.getBoolean("dark_theme", true, getActivity())) {
+                                Prefs.saveBoolean("dark_theme", false, getActivity());
+                            } else {
+                                Prefs.saveBoolean("dark_theme", true, getActivity());
+                            }
+                            restartApp();
+                            break;
+                        case 2:
+                            if (Prefs.getBoolean("allow_ads", true, getActivity())) {
+                                Prefs.saveBoolean("allow_ads", false, getActivity());
+                                new Dialog(requireActivity())
+                                        .setMessage(R.string.disable_ads_message)
+                                        .setCancelable(false)
+                                        .setPositiveButton(R.string.ok, (dialog, id) -> {
+                                            restartApp();
+                                        })
+                                        .show();
+                            } else {
+                                Prefs.saveBoolean("allow_ads", true, getActivity());
+                                new Dialog(requireActivity())
+                                        .setMessage(R.string.allow_ads_message)
+                                        .setCancelable(false)
+                                        .setPositiveButton(R.string.ok, (dialog, id) -> {
+                                            restartApp();
+                                        })
+                                        .show();
+                            }
+                            break;
+                        case 3:
+                            if (!Utils.languageDefault(getActivity())) {
+                                Prefs.saveBoolean("use_en", false, getActivity());
+                                Prefs.saveBoolean("use_ko", false, getActivity());
+                                Prefs.saveBoolean("use_am", false, getActivity());
+                                Prefs.saveBoolean("use_el", false, getActivity());
+                                Prefs.saveBoolean("use_vi", false, getActivity());
+                                restartApp();
+                            }
+                            break;
+                        case 4:
+                            if (!Prefs.getBoolean("use_en", false, getActivity())) {
+                                Prefs.saveBoolean("use_en", true, getActivity());
+                                Prefs.saveBoolean("use_ko", false, getActivity());
+                                Prefs.saveBoolean("use_am", false, getActivity());
+                                Prefs.saveBoolean("use_el", false, getActivity());
+                                Prefs.saveBoolean("use_vi", false, getActivity());
+                                restartApp();
+                            }
+                            break;
+                        case 5:
+                            if (!Prefs.getBoolean("use_ko", false, getActivity())) {
+                                Prefs.saveBoolean("use_en", false, getActivity());
+                                Prefs.saveBoolean("use_ko", true, getActivity());
+                                Prefs.saveBoolean("use_am", false, getActivity());
+                                Prefs.saveBoolean("use_el", false, getActivity());
+                                Prefs.saveBoolean("use_vi", false, getActivity());
+                                restartApp();
+                            }
+                            break;
+                        case 6:
+                            if (!Prefs.getBoolean("use_am", false, getActivity())) {
+                                Prefs.saveBoolean("use_en", false, getActivity());
+                                Prefs.saveBoolean("use_ko", false, getActivity());
+                                Prefs.saveBoolean("use_am", true, getActivity());
+                                Prefs.saveBoolean("use_el", false, getActivity());
+                                Prefs.saveBoolean("use_vi", false, getActivity());
+                                restartApp();
+                            }
+                            break;
+                        case 7:
+                            if (!Prefs.getBoolean("use_el", false, getActivity())) {
+                                Prefs.saveBoolean("use_en", false, getActivity());
+                                Prefs.saveBoolean("use_ko", false, getActivity());
+                                Prefs.saveBoolean("use_am", false, getActivity());
+                                Prefs.saveBoolean("use_el", true, getActivity());
+                                Prefs.saveBoolean("use_vi", false, getActivity());
+                                restartApp();
+                            }
+                            break;
+                        case 8:
+                            if (!Prefs.getBoolean("use_vi", false, getActivity())) {
+                                Prefs.saveBoolean("use_en", false, getActivity());
+                                Prefs.saveBoolean("use_ko", false, getActivity());
+                                Prefs.saveBoolean("use_am", false, getActivity());
+                                Prefs.saveBoolean("use_el", false, getActivity());
+                                Prefs.saveBoolean("use_vi", true, getActivity());
+                                restartApp();
+                            }
+                            break;
+                    }
+                    return false;
+                });
+                popupMenu.show();
+            });
+
+            return rootView;
+        }
+
+        private void restartApp() {
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        }
     }
 
 }

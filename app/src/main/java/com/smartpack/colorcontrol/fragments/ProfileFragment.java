@@ -20,9 +20,7 @@ import android.os.AsyncTask;
 import android.os.Environment;
 import android.provider.OpenableColumns;
 import android.view.Menu;
-import android.view.MenuItem;
 
-import androidx.appcompat.widget.PopupMenu;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 
@@ -214,7 +212,7 @@ public class ProfileFragment extends RecyclerViewFragment {
         }
     }
 
-    @SuppressLint("StaticFieldLeak")
+    @SuppressLint({"StaticFieldLeak", "StringFormatInvalid"})
     private void applyProfile(File file) {
         new Dialog(requireActivity())
                 .setMessage(getString(R.string.apply_question, file.getName().replace(".sh", "")))
@@ -222,7 +220,7 @@ public class ProfileFragment extends RecyclerViewFragment {
                 })
                 .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> {
                     if (!Profile.isColorConrolProfile(file.toString())) {
-                        Utils.toast(getString(R.string.wrong_profile, file.getName().replace(".sh", "")), getActivity());
+                        Utils.snackbar(getRootView(), getString(R.string.wrong_profile, file.getName().replace(".sh", "")));
                         return;
                     }
                     new AsyncTask<Void, Void, String>() {
@@ -296,15 +294,15 @@ public class ProfileFragment extends RecyclerViewFragment {
                 mPath = Utils.getPath(file);
             }
             if (!Utils.getExtension(mPath).equals("sh")) {
-                Utils.toast(getString(R.string.wrong_extension, ".sh"), getActivity());
+                Utils.snackbar(getRootView(), getString(R.string.wrong_extension, ".sh"));
                 return;
             }
             if (!Profile.isColorConrolProfile(mPath)) {
-                Utils.toast(getString(R.string.wrong_profile, file.getName().replace(".sh", "")), getActivity());
+                Utils.snackbar(getRootView(), getString(R.string.wrong_profile, file.getName().replace(".sh", "")));
                 return;
             }
             if (Utils.existFile(Profile.profileExistsCheck(fileName))) {
-                Utils.toast(getString(R.string.profile_exists, file.getName()), getActivity());
+                Utils.snackbar(getRootView(), getString(R.string.profile_exists, file.getName()));
                 return;
             }
             Utils.getInstance().showInterstitialAd(requireActivity());
@@ -327,13 +325,13 @@ public class ProfileFragment extends RecyclerViewFragment {
         if (!Utils.checkWriteStoragePermission(requireActivity())) {
             ActivityCompat.requestPermissions(requireActivity(), new String[]{
                     Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
-            Utils.toast(R.string.permission_denied_write_storage, getActivity());
+            Utils.snackbar(getRootView(), getString(R.string.permission_denied_write_storage));
             return;
         }
 
         if (!Klapse.supported() && !ScreenColor.getInstance().supported()
                 && !DRMColor.supported()) {
-            Utils.toast(getString(R.string.no_support, "KCAL/K-lapse"), getActivity());
+            Utils.snackbar(getRootView(), getString(R.string.no_support, "KCAL/K-lapse"));
             return;
         }
 
@@ -361,7 +359,7 @@ public class ProfileFragment extends RecyclerViewFragment {
                     @Override
                     public void onClick(String text) {
                         if (text.isEmpty()) {
-                            Utils.toast(R.string.name_empty, getActivity());
+                            Utils.snackbar(getRootView(), getString(R.string.name_empty));
                             return;
                         }
                         if (!text.endsWith(".sh")) {
@@ -371,7 +369,7 @@ public class ProfileFragment extends RecyclerViewFragment {
                             text = text.replace(" ", "_");
                         }
                         if (Utils.existFile(Profile.ProfileFile().toString() + text)) {
-                            Utils.toast(getString(R.string.profile_exists, text), getActivity());
+                            Utils.snackbar(getRootView(), getString(R.string.profile_exists, text));
                             return;
                         }
                         final String path = text;

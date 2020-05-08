@@ -42,6 +42,7 @@ import java.util.Objects;
 public class MainActivity extends AppCompatActivity {
 
     private boolean mExit;
+    private BottomNavigationView mBottomNav;
     private Handler mHandler = new Handler();
 
     @Override
@@ -63,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
-        bottomNav.setOnNavigationItemSelectedListener(navListener);
+        mBottomNav = findViewById(R.id.bottom_navigation);
+        mBottomNav.setOnNavigationItemSelectedListener(navListener);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -153,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
                 mExit = false;
                 super.onBackPressed();
             } else {
-                Utils.toast(R.string.press_back, this);
+                Utils.snackbar(mBottomNav, getString(R.string.press_back));
                 mExit = true;
                 mHandler.postDelayed(() -> mExit = false, 2000);
             }
