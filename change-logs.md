@@ -1,5 +1,9 @@
 # Change-logs
 
+## 16. May 08, 2020
+*Release-tag: 2.5*<br>
+Improved Root handling. Removed interstitial ads from app. Moved menu icons into the top description page. Replace toast with snackbar. Profile: Update create & apply profiles. Miscellaneous changes.
+
 ## 15. April 26, 2020
 *Release-tag: 2.4*<br>
 Migrated to libsu (Credits: @Lennoard). Updated App UI & colors. Added Vietnamese translations (Credits: @shinyheroX). Updated Korean translations (Credits: @SmgKhOaRn). Miscellaneous changes.

@@ -1,11 +1,20 @@
 # Screen Color Control
 
+[![](https://img.shields.io/badge/Screen%20Color%20Control-v2.5-green)](https://play.google.com/store/apps/details?id=com.smartpack.colorcontrol)
+![](https://img.shields.io/github/contributors/smartpack/ScreenColorControl)
+![](https://img.shields.io/github/license/smartpack/ScreenColorControl)
+
+![](app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
+
 ### Screen Color Control is an app made to offer advanced control over the screen color of smart devices having KCAL/K-lapse support.
 
 ## Download
 [<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png"
      alt=""
      height="80">](https://play.google.com/store/apps/details?id=com.smartpack.colorcontrol)
+[<img src="https://i.ibb.co/q0mdc4Z/get-it-on-github.png"
+     alt=""
+     height="80">](https://github.com/SmartPack/ScreenColorControl/raw/master/release/com.smartpack.colorcontrol.apk)
 
 ## Requirements
 1. ROOT Access

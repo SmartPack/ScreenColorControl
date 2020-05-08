@@ -1,6 +1,6 @@
 {
-  "changelog": "Change-logs\n - Migrated to libsu (Credits: @Lennoard).\n - Updated App UI & colors.\n - Added Vietnamese translations (Credits: @shinyheroX).\n - Updated Korean translations (Credits: @SmgKhOaRn).\n - Miscellaneous changes.",
-  "versionName": "2.4",
-  "versionCode": 15,
+  "changelog": "Change-logs\n - Improved Root handling.\n - Removed interstitial ads from app.\n - Moved menu icons into the top description page.\n - Replaced toast with snackbar.\n - Updated create and apply profiles.\n - Miscellaneous changes.",
+  "versionName": "2.5",
+  "versionCode": 16,
   "inherit": true
 }
