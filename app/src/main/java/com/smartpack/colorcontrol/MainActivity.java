@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         // Initialize App Theme & FaceBook Ads
         Utils.initializeAppTheme(this);
-        Utils.getInstance().initializeFaceBookAds(this);
+        Utils.initializeFaceBookAds(this);
         super.onCreate(savedInstanceState);
         // Set App Language
         Utils.setLanguage(this);

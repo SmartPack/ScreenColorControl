@@ -59,15 +59,6 @@ import java.util.Objects;
 
 public class Utils {
 
-    private static Utils sInstance;
-
-    public static Utils getInstance() {
-        if (sInstance == null) {
-            sInstance = new Utils();
-        }
-        return sInstance;
-    }
-
     private static final String TAG = Utils.class.getSimpleName();
     private static final String DONATION_PACKAGE = "com.smartpack.donate";
 
@@ -90,7 +81,7 @@ public class Utils {
         }
     }
 
-    public void initializeFaceBookAds(Context context) {
+    public static void initializeFaceBookAds(Context context) {
         if (Prefs.getBoolean("allow_ads", true, context)) {
             AudienceNetworkAds.initialize(context);
         }

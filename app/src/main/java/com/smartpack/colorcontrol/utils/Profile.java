@@ -54,7 +54,7 @@ public class Profile {
     }
 
     public static String applyProfile(String file) {
-        return RootUtils.runCommand("sh " + file);
+        return RootUtils.runAndGetError("sh " + file);
     }
 
     public static String readProfile(String file) {
