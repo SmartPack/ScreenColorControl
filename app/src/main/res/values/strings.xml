@@ -63,6 +63,8 @@
     <string name="no_root">No Root Access</string>
     <string name="not_in_range">Not in range</string>
     <string name="ok">OK</string>
+    <string name="onboot">Applying Settings…</string>
+    <string name="onboot_summary">Applying On-Boot Settings (%s)!</string>
     <string name="options">Options</string>
     <string name="others">Others</string>
     <string name="other_settings">Other Settings</string>
@@ -92,6 +94,7 @@
     <string name="screen_value">Screen Value</string>
     <string name="screen_contrast">Screen Contrast</string>
     <string name="select_question">Select %s?</string>
+    <string name="set_on_boot">Set On Boot</string>
     <string name="share_app">Share App</string>
     <string name="share_app_summary">Share Screen Color Control with your friends</string>
     <string name="share_app_message">Get Screen Color Control v%s from\nPlayStore: https://play.google.com/store/apps/details?id=com.smartpack.colorcontrol\nGitHub: https://github.com/SmartPack/ScreenColorControl/raw/master/release/com.smartpack.colorcontrol.apk</string>

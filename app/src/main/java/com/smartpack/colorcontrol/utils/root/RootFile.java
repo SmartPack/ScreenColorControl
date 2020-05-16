@@ -70,6 +70,10 @@ public class RootFile {
         return !output.isEmpty() && output.equals("true");
     }
 
+    public void execute() {
+        RootUtils.runCommand("sh " + mFile);
+    }
+
     public String readFile() {
         return RootUtils.runAndGetOutput("cat '" + mFile + "'");
     }

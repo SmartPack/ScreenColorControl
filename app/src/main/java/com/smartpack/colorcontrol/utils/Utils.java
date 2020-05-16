@@ -89,6 +89,14 @@ public class Utils {
         }
     }
 
+    static void startService(Context context, Intent intent) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            context.startForegroundService(intent);
+        } else {
+            context.startService(intent);
+        }
+    }
+
     public static boolean isTv(Context context) {
         return ((UiModeManager) Objects.requireNonNull(context.getSystemService(Context.UI_MODE_SERVICE)))
                 .getCurrentModeType() == Configuration.UI_MODE_TYPE_TELEVISION;
@@ -273,8 +281,18 @@ public class Utils {
         }
     }
 
+    public static void copy(String source, String dest) {
+        RootUtils.runCommand("cp " + source + " " + dest);
+    }
+
     public static void create(String text, String path) {
         RootUtils.runCommand("echo '" + text + "' > " + path);
+    }
+
+    public static void delete(String path) {
+        if (existFile(path)) {
+            RootUtils.runCommand("rm -r " + path);
+        }
     }
 
     public static boolean existFile(String file) {

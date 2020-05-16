@@ -155,8 +155,11 @@ public class ProfileFragment extends RecyclerViewFragment {
                     menu.add(Menu.NONE, 0, Menu.NONE, getString(R.string.apply));
                     menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.details));
                     menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.edit));
-                    menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.share));
-                    menu.add(Menu.NONE, 4, Menu.NONE, getString(R.string.delete));
+                    menu.add(Menu.NONE, 3, Menu.NONE, getString(R.string.set_on_boot))
+                            .setCheckable(true).setChecked(Utils.existFile(requireActivity().getFilesDir()
+                            .toString() + "/" + profiles.getName()));
+                    menu.add(Menu.NONE, 4, Menu.NONE, getString(R.string.share));
+                    menu.add(Menu.NONE, 5, Menu.NONE, getString(R.string.delete));
                     popupMenu.setOnMenuItemClickListener(item -> {
                         switch (item.getItemId()) {
                             case 0:
@@ -178,6 +181,14 @@ public class ProfileFragment extends RecyclerViewFragment {
                                 startActivityForResult(intent, 0);
                                 break;
                             case 3:
+                                if (Utils.existFile(requireActivity().getFilesDir().toString() + "/" + profiles.getName())) {
+                                    Utils.delete(requireActivity().getFilesDir().toString() + "/" + profiles.getName());
+                                } else {
+                                    Utils.copy(profiles.toString(), requireActivity().getFilesDir().toString());
+                                }
+                                reload();
+                                break;
+                            case 4:
                                 Uri uriFile = FileProvider.getUriForFile(requireActivity(),
                                         BuildConfig.APPLICATION_ID + ".provider", new File(profiles.toString()));
                                 Intent shareScript = new Intent(Intent.ACTION_SEND);
@@ -189,7 +200,7 @@ public class ProfileFragment extends RecyclerViewFragment {
                                 shareScript.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                                 startActivity(Intent.createChooser(shareScript, getString(R.string.share_with)));
                                 break;
-                            case 4:
+                            case 5:
                                 new Dialog(requireActivity())
                                         .setMessage(getString(R.string.sure_question, profiles.getName().replace(".sh", "")))
                                         .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
