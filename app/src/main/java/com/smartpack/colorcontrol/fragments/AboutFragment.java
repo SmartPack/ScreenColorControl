@@ -31,8 +31,12 @@ import com.smartpack.colorcontrol.views.recyclerview.DescriptionView;
 import com.smartpack.colorcontrol.views.recyclerview.RecyclerViewItem;
 import com.smartpack.colorcontrol.views.recyclerview.TitleView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Objects;
 
 /*
  * Created by sunilpaulmathew <sunil.kde@gmail.com> on January 01, 2020
@@ -91,7 +95,21 @@ public class AboutFragment extends RecyclerViewFragment {
         changelogs.setTitle(getString(R.string.change_logs));
         changelogs.setSummary(getString(R.string.change_logs_summary));
         changelogs.setOnItemClickListener(item -> {
-            Utils.launchUrl("https://github.com/SmartPack/ScreenColorControl/raw/master/change-logs.md", requireActivity());
+            String change_log = null;
+            try {
+                change_log = new JSONObject(Objects.requireNonNull(Utils.readAssetFile(
+                        requireActivity(), "changelogs.json"))).getString("fullChanges");
+            } catch (JSONException ignored) {
+            }
+            Utils.mForegroundCard = requireActivity().findViewById(R.id.about_card);
+            Utils.mAppIcon = requireActivity().findViewById(R.id.app_image);
+            Utils.mAppName = requireActivity().findViewById(R.id.app_title);
+            Utils.mText = requireActivity().findViewById(R.id.scroll_text);
+            Utils.mText.setText(change_log);
+            Utils.mForegroundActive = true;
+            Utils.mAppIcon.setVisibility(View.VISIBLE);
+            Utils.mAppName.setVisibility(View.VISIBLE);
+            Utils.mForegroundCard.setVisibility(View.VISIBLE);
         });
 
         items.add(changelogs);
@@ -228,6 +246,7 @@ public class AboutFragment extends RecyclerViewFragment {
             View rootView = inflater.inflate(R.layout.fragment_about, container, false);
             AppCompatImageButton settings = rootView.findViewById(R.id.settings_menu);
             settings.setOnClickListener(v -> {
+                if (Utils.mForegroundActive) return;
                 PopupMenu popupMenu = new PopupMenu(requireActivity(), settings);
                 Menu menu = popupMenu.getMenu();
                 menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.dark_theme)).setCheckable(true)

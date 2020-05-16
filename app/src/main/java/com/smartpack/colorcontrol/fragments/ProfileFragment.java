@@ -20,6 +20,7 @@ import android.os.AsyncTask;
 import android.os.Environment;
 import android.provider.OpenableColumns;
 import android.view.Menu;
+import android.view.View;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
@@ -166,12 +167,16 @@ public class ProfileFragment extends RecyclerViewFragment {
                                 applyProfile(profiles);
                                 break;
                             case 1:
-                                new Dialog(requireActivity())
-                                        .setTitle(profiles.getName().replace(".sh", ""))
-                                        .setMessage(Profile.readProfile(profiles.toString()))
-                                        .setPositiveButton(getString(R.string.cancel), (dialogInterface, i) -> {
-                                        })
-                                        .show();
+                                Utils.mForegroundCard = requireActivity().findViewById(R.id.about_card);
+                                Utils.mBackButton = requireActivity().findViewById(R.id.back);
+                                Utils.mTitle = requireActivity().findViewById(R.id.card_title);
+                                Utils.mText = requireActivity().findViewById(R.id.scroll_text);
+                                Utils.mTitle.setText(profiles.getName());
+                                Utils.mText.setText(Profile.readProfile(profiles.toString()));
+                                Utils.mForegroundActive = true;
+                                Utils.mBackButton.setVisibility(View.VISIBLE);
+                                Utils.mTitle.setVisibility(View.VISIBLE);
+                                Utils.mForegroundCard.setVisibility(View.VISIBLE);
                                 break;
                             case 2:
                                 mEditProfile = profiles.toString();

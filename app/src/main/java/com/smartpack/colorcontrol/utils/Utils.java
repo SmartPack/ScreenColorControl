@@ -28,6 +28,10 @@ import android.widget.Toast;
 
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.cardview.widget.CardView;
 
 import com.facebook.ads.AudienceNetworkAds;
 import com.google.android.material.snackbar.Snackbar;
@@ -43,6 +47,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.math.BigInteger;
 import java.net.URL;
@@ -58,6 +63,14 @@ import java.util.Objects;
  */
 
 public class Utils {
+
+    public static AppCompatImageButton mBackButton;
+    public static AppCompatImageView mAppIcon;
+    public static AppCompatTextView mTitle;
+    public static AppCompatTextView mAppName;
+    public static AppCompatTextView mText;
+    public static boolean mForegroundActive = false;
+    public static CardView mForegroundCard;
 
     private static final String TAG = Utils.class.getSimpleName();
     private static final String DONATION_PACKAGE = "com.smartpack.donate";
@@ -362,6 +375,31 @@ public class Utils {
      */
     public static String getExtension(String string) {
         return android.webkit.MimeTypeMap.getFileExtensionFromUrl(string);
+    }
+
+    public static String readAssetFile(Context context, String file) {
+        InputStream input = null;
+        BufferedReader buf = null;
+        try {
+            StringBuilder s = new StringBuilder();
+            input = context.getAssets().open(file);
+            buf = new BufferedReader(new InputStreamReader(input));
+
+            String str;
+            while ((str = buf.readLine()) != null) {
+                s.append(str).append("\n");
+            }
+            return s.toString().trim();
+        } catch (IOException ignored) {
+        } finally {
+            try {
+                if (input != null) input.close();
+                if (buf != null) buf.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
     public static boolean languageDefault(Context context) {

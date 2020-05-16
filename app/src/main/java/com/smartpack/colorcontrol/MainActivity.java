@@ -75,6 +75,9 @@ public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener
             = menuItem -> {
+        if (Utils.mForegroundActive) {
+            closeForeGround(mBottomNav);
+        }
         Fragment selectedFragment = null;
 
         switch (menuItem.getItemId()) {
@@ -104,6 +107,20 @@ public class MainActivity extends AppCompatActivity {
 
     public void androidRooting(View view) {
         Utils.launchUrl("https://www.google.com/search?site=&source=hp&q=android+rooting+magisk", this);
+    }
+
+    public void closeForeGround(View view) {
+        Utils.mForegroundCard = findViewById(R.id.about_card);
+        Utils.mBackButton = findViewById(R.id.back);
+        Utils.mAppIcon = findViewById(R.id.app_image);
+        Utils.mAppName = findViewById(R.id.app_title);
+        Utils.mTitle = findViewById(R.id.card_title);
+        Utils.mAppIcon.setVisibility(View.GONE);
+        Utils.mAppName.setVisibility(View.GONE);
+        Utils.mBackButton.setVisibility(View.GONE);
+        Utils.mTitle .setVisibility(View.GONE);
+        Utils.mForegroundCard.setVisibility(View.GONE);
+        Utils.mForegroundActive = false;
     }
 
     private void noSupport() {
@@ -150,7 +167,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (RootUtils.rootAccess()) {
-            if (mExit) {
+            if (Utils.mForegroundActive) {
+                closeForeGround(mBottomNav);
+            } else if (mExit) {
                 mExit = false;
                 super.onBackPressed();
             } else {
