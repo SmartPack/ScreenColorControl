@@ -1,5 +1,9 @@
 # Change-logs
 
+## 17. May 16, 2020
+*Release-tag: 2.6*<br>
+Implemented On-Boot service. Added Brand New Change-logs and Profile details view. Miscellaneous changes.
+
 ## 16. May 08, 2020
 *Release-tag: 2.5*<br>
 Improved Root handling. Removed interstitial ads from app. Moved menu icons into the top description page. Replace toast with snackbar. Profile: Update create & apply profiles. Miscellaneous changes.
