@@ -1,6 +1,0 @@
-{
-  "changelog": "Change-logs\n - Improved Root handling.\n - Removed interstitial ads from app.\n - Moved menu icons into the top description page.\n - Replaced toast with snackbar.\n - Updated create and apply profiles.\n - Miscellaneous changes.",
-  "versionName": "2.5",
-  "versionCode": 16,
-  "inherit": true
-}

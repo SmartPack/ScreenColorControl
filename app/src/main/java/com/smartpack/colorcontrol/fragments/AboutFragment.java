@@ -98,7 +98,7 @@ public class AboutFragment extends RecyclerViewFragment {
             String change_log = null;
             try {
                 change_log = new JSONObject(Objects.requireNonNull(Utils.readAssetFile(
-                        requireActivity(), "changelogs.json"))).getString("fullChanges");
+                        requireActivity(), "release.json"))).getString("fullChanges");
             } catch (JSONException ignored) {
             }
             Utils.mForegroundCard = requireActivity().findViewById(R.id.about_card);

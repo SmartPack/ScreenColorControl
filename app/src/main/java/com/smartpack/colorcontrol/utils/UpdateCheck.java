@@ -28,7 +28,7 @@ public class UpdateCheck {
 
     private static final String PLAY_STORE = "com.android.vending";
     private static final String LATEST_VERSION = Utils.getInternalDataStorage() + "/version";
-    private static final String LATEST_VERSION_URL = "https://raw.githubusercontent.com/SmartPack/ScreenColorControl/master/release/version.json?raw=true";
+    private static final String LATEST_VERSION_URL = "https://raw.githubusercontent.com/SmartPack/ScreenColorControl/master/app/src/main/assets/release.json?raw=true";
     private static final String DOWNLOAD_PAGE_URL = "https://github.com/SmartPack/ScreenColorControl/tree/master/release";
 
 
