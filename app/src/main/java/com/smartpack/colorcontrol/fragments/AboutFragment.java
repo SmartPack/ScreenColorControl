@@ -24,6 +24,7 @@ import com.smartpack.colorcontrol.BuildConfig;
 import com.smartpack.colorcontrol.MainActivity;
 import com.smartpack.colorcontrol.R;
 import com.smartpack.colorcontrol.utils.Prefs;
+import com.smartpack.colorcontrol.utils.Profile;
 import com.smartpack.colorcontrol.utils.UpdateCheck;
 import com.smartpack.colorcontrol.utils.Utils;
 import com.smartpack.colorcontrol.views.dialog.Dialog;
@@ -102,6 +103,10 @@ public class AboutFragment extends RecyclerViewFragment {
             } catch (JSONException ignored) {
             }
             Utils.mForegroundCard = requireActivity().findViewById(R.id.about_card);
+            Utils.mBackButton = requireActivity().findViewById(R.id.back);
+            Utils.mTitle = requireActivity().findViewById(R.id.card_title);
+            Utils.mTitle.setText(getString(R.string.change_logs));
+            Utils.mTitle.setVisibility(View.VISIBLE);
             Utils.mAppIcon = requireActivity().findViewById(R.id.app_image);
             Utils.mAppName = requireActivity().findViewById(R.id.app_title);
             Utils.mText = requireActivity().findViewById(R.id.scroll_text);
@@ -109,6 +114,7 @@ public class AboutFragment extends RecyclerViewFragment {
             Utils.mForegroundActive = true;
             Utils.mAppIcon.setVisibility(View.VISIBLE);
             Utils.mAppName.setVisibility(View.VISIBLE);
+            Utils.mBackButton.setVisibility(View.VISIBLE);
             Utils.mForegroundCard.setVisibility(View.VISIBLE);
         });
 

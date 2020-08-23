@@ -2,7 +2,6 @@
 <androidx.cardview.widget.CardView android:id="@+id/about_card"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="50dp"
     android:layout_gravity="center"
     android:visibility="gone"
     android:padding="16dp"
@@ -103,18 +102,4 @@
             </ScrollView>
         </LinearLayout>
     </LinearLayout>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/cancel_button"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center_horizontal"
-        android:layout_gravity="bottom"
-        android:text="@string/cancel"
-        android:textStyle="bold"
-        android:background="@color/black"
-        android:onClick="closeForeGround"
-        android:textColor="?android:attr/colorAccent"
-        android:textSize="18sp"
-        android:padding="10dp" />
 </androidx.cardview.widget.CardView>
