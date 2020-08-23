@@ -1,5 +1,9 @@
 # Change-logs
 
+## 18. August 23, 2020
+*Release-tag: 2.7*<br>
+Slightly updated Change-logs and Profile details view. Updated libsu to v3.0.2. Updated gradle build tools and dependencies. Miscellaneous changes.
+
 ## 17. May 16, 2020
 *Release-tag: 2.6*<br>
 Implemented On-Boot service. Added Brand New Change-logs and Profile details view. Miscellaneous changes.

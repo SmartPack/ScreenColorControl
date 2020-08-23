@@ -1,6 +1,6 @@
 # Screen Color Control
 
-[![](https://img.shields.io/badge/Screen%20Color%20Control-v2.5-green)](https://play.google.com/store/apps/details?id=com.smartpack.colorcontrol)
+[![](https://img.shields.io/badge/Screen%20Color%20Control-v2.7-green)](https://play.google.com/store/apps/details?id=com.smartpack.colorcontrol)
 ![](https://img.shields.io/github/contributors/smartpack/ScreenColorControl)
 ![](https://img.shields.io/github/license/smartpack/ScreenColorControl)
 
