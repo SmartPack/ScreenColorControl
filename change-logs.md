@@ -1,5 +1,9 @@
 # Change-logs
 
+## 19. September 08, 2020
+*Release-tag: 2.8*<br>
+Slightly improved app layout. Updated Ad view to avoid interfering with other contents. Miscellaneous changes.
+
 ## 18. August 23, 2020
 *Release-tag: 2.7*<br>
 Slightly updated Change-logs and Profile details view. Updated libsu to v3.0.2. Updated gradle build tools and dependencies. Miscellaneous changes.
