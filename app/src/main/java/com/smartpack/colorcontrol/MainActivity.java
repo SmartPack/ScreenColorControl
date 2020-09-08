@@ -74,12 +74,12 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onAdLoaded() {
                     Utils.mAdLoaded = true;
+                    mAdView.setVisibility(View.VISIBLE);
                 }
             });
             AdRequest adRequest = new AdRequest.Builder()
                     .build();
             mAdView.loadAd(adRequest);
-            mAdView.setVisibility(View.VISIBLE);
         }
 
         mBottomNav = findViewById(R.id.bottom_navigation);

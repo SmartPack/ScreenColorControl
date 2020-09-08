@@ -68,7 +68,6 @@ public abstract class RecyclerViewFragment extends BaseFragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private RecyclerViewAdapter mRecyclerViewAdapter;
-    private RelativeLayout mRecyclerViewLayout;
     private Scroller mScroller;
 
     private View mProgress;
@@ -101,8 +100,9 @@ public abstract class RecyclerViewFragment extends BaseFragment {
 
         mRecyclerView = mRootView.findViewById(R.id.recyclerview);
 
-        if (!Prefs.getBoolean("allow_ads", true, getActivity()) || !Utils.mAdLoaded || !Utils.isNetworkAvailable(requireActivity())) {
-            mRecyclerViewLayout = mRootView.findViewById(R.id.recyclerview_parent);
+        if (!Prefs.getBoolean("allow_ads", true, getActivity()) || !Utils.mAdLoaded
+                || !Utils.isNetworkAvailable(requireActivity())) {
+            RelativeLayout mRecyclerViewLayout = mRootView.findViewById(R.id.recyclerview_parent);
             mRecyclerViewLayout.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
                     RelativeLayout.LayoutParams.MATCH_PARENT));
             RelativeLayout.LayoutParams relativeParams = (RelativeLayout.LayoutParams) mRecyclerViewLayout.getLayoutParams();
