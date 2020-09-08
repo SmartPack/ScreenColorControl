@@ -18,6 +18,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.smartpack.colorcontrol.fragments.AboutFragment;
 import com.smartpack.colorcontrol.fragments.KlapseFragment;
@@ -26,6 +29,7 @@ import com.smartpack.colorcontrol.fragments.ProfileFragment;
 import com.smartpack.colorcontrol.fragments.ScreenColorFragment;
 import com.smartpack.colorcontrol.utils.DRMColor;
 import com.smartpack.colorcontrol.utils.Klapse;
+import com.smartpack.colorcontrol.utils.Prefs;
 import com.smartpack.colorcontrol.utils.ScreenColor;
 import com.smartpack.colorcontrol.utils.UpdateCheck;
 import com.smartpack.colorcontrol.utils.Utils;
@@ -47,9 +51,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        // Initialize App Theme & FaceBook Ads
+        // Initialize App Theme & Google Ads
         Utils.initializeAppTheme(this);
-        Utils.initializeFaceBookAds(this);
+        Utils.initializeGoogleAds(this);
         super.onCreate(savedInstanceState);
         // Set App Language
         Utils.setLanguage(this);
@@ -62,6 +66,20 @@ public class MainActivity extends AppCompatActivity {
             textView.setText(getString(R.string.no_root));
             unsupported.setImageDrawable(ViewUtils.getColoredIcon(R.drawable.ic_help, this));
             return;
+        }
+
+        if (Prefs.getBoolean("allow_ads", true, this)) {
+            AdView mAdView = findViewById(R.id.adView);
+            mAdView.setAdListener(new AdListener() {
+                @Override
+                public void onAdLoaded() {
+                    Utils.mAdLoaded = true;
+                }
+            });
+            AdRequest adRequest = new AdRequest.Builder()
+                    .build();
+            mAdView.loadAd(adRequest);
+            mAdView.setVisibility(View.VISIBLE);
         }
 
         mBottomNav = findViewById(R.id.bottom_navigation);

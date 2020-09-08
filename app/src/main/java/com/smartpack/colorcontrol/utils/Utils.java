@@ -33,7 +33,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.cardview.widget.CardView;
 
-import com.facebook.ads.AudienceNetworkAds;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.snackbar.Snackbar;
 import com.smartpack.colorcontrol.R;
 import com.smartpack.colorcontrol.utils.root.RootFile;
@@ -69,6 +69,7 @@ public class Utils {
     public static AppCompatTextView mTitle;
     public static AppCompatTextView mAppName;
     public static AppCompatTextView mText;
+    public static boolean mAdLoaded = false;
     public static boolean mForegroundActive = false;
     public static CardView mForegroundCard;
 
@@ -96,10 +97,8 @@ public class Utils {
         }
     }
 
-    public static void initializeFaceBookAds(Context context) {
-        if (Prefs.getBoolean("allow_ads", true, context)) {
-            AudienceNetworkAds.initialize(context);
-        }
+    public static void initializeGoogleAds(Context context) {
+        MobileAds.initialize(context, "ca-app-pub-7791710838910455~2525317068");
     }
 
     static void startService(Context context, Intent intent) {

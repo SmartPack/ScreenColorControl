@@ -18,7 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,8 +33,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.viewpager.widget.ViewPager;
 
-import com.facebook.ads.AdSize;
-import com.facebook.ads.AdView;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.smartpack.colorcontrol.R;
@@ -70,6 +68,7 @@ public abstract class RecyclerViewFragment extends BaseFragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private RecyclerViewAdapter mRecyclerViewAdapter;
+    private RelativeLayout mRecyclerViewLayout;
     private Scroller mScroller;
 
     private View mProgress;
@@ -102,11 +101,13 @@ public abstract class RecyclerViewFragment extends BaseFragment {
 
         mRecyclerView = mRootView.findViewById(R.id.recyclerview);
 
-        if (Prefs.getBoolean("allow_ads", true, requireActivity())) {
-            AdView mAdView = new AdView(requireActivity(), "252295782817029_252297259483548", AdSize.BANNER_HEIGHT_50);
-            LinearLayout adContainer = mRootView.findViewById(R.id.banner_container);
-            adContainer.addView(mAdView);
-            mAdView.loadAd();
+        if (!Prefs.getBoolean("allow_ads", true, getActivity()) || !Utils.mAdLoaded || !Utils.isNetworkAvailable(requireActivity())) {
+            mRecyclerViewLayout = mRootView.findViewById(R.id.recyclerview_parent);
+            mRecyclerViewLayout.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
+                    RelativeLayout.LayoutParams.MATCH_PARENT));
+            RelativeLayout.LayoutParams relativeParams = (RelativeLayout.LayoutParams) mRecyclerViewLayout.getLayoutParams();
+            relativeParams.setMargins(0,0,0,0);
+            mRecyclerViewLayout.setLayoutParams(relativeParams);
         }
 
         if (mViewPagerFragments != null) {
@@ -683,5 +684,4 @@ public abstract class RecyclerViewFragment extends BaseFragment {
     Handler getHandler() {
         return mHandler;
     }
-
 }

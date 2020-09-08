@@ -33,16 +33,33 @@
 
     <include layout="@layout/rv_about_view" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:itemIconTint="@color/colorOnPrimary"
-        app:itemRippleColor="?attr/colorSecondary"
-        app:itemTextAppearanceActive="?attr/colorSecondary"
-        app:itemTextColor="?attr/colorSecondary"
-        app:labelVisibilityMode="labeled"
-        android:background="@color/black"
-        app:menu="@menu/bottom_navigation" />
+        android:orientation="vertical" >
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:itemIconTint="@color/colorOnPrimary"
+            app:itemRippleColor="?attr/colorSecondary"
+            app:itemTextAppearanceActive="?attr/colorSecondary"
+            app:itemTextColor="?attr/colorSecondary"
+            app:labelVisibilityMode="labeled"
+            android:background="@color/black"
+            app:menu="@menu/bottom_navigation" />
+
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black"
+            android:visibility="gone"
+            ads:adSize="SMART_BANNER"
+            ads:adUnitId="ca-app-pub-7791710838910455/9669309911">
+        </com.google.android.gms.ads.AdView>
+    </LinearLayout>
 </RelativeLayout>
