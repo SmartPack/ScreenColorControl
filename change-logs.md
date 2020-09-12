@@ -1,5 +1,9 @@
 # Change-logs
 
+## 20. September 12, 2020
+*Release-tag: 2.9*<br>
+Fixed a small layout issue. Again improved Ad layout. Miscellaneous changes.
+
 ## 19. September 08, 2020
 *Release-tag: 2.8*<br>
 Slightly improved app layout. Updated Ad view to avoid interfering with other contents. Miscellaneous changes.
