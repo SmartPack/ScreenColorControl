@@ -18,7 +18,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
-import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,6 +32,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.LoadAdError;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.smartpack.colorcontrol.R;
@@ -98,16 +101,27 @@ public abstract class RecyclerViewFragment extends BaseFragment {
         mRootView = inflater.inflate(R.layout.fragment_recyclerview, container, false);
         mHandler = new Handler();
 
+        AdView mAdView = mRootView.findViewById(R.id.adView);
         mRecyclerView = mRootView.findViewById(R.id.recyclerview);
+        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) mRecyclerView.getLayoutParams();
 
-        if (!Prefs.getBoolean("allow_ads", true, getActivity()) || !Utils.mAdLoaded
-                || !Utils.isNetworkAvailable(requireActivity())) {
-            RelativeLayout mRecyclerViewLayout = mRootView.findViewById(R.id.recyclerview_parent);
-            mRecyclerViewLayout.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
-                    RelativeLayout.LayoutParams.MATCH_PARENT));
-            RelativeLayout.LayoutParams relativeParams = (RelativeLayout.LayoutParams) mRecyclerViewLayout.getLayoutParams();
-            relativeParams.setMargins(0,0,0,0);
-            mRecyclerViewLayout.setLayoutParams(relativeParams);
+        // Initialize Banner Ad
+        if (Prefs.getBoolean("allow_ads", true, getActivity())) {
+            mAdView.setAdListener(new AdListener() {
+                @Override
+                public void onAdLoaded() {
+                    mAdView.setVisibility(View.VISIBLE);
+                }
+                @Override
+                public void onAdFailedToLoad(LoadAdError adError) {
+                    layoutParams.setMargins(0,0,0,0);
+                }
+            });
+            AdRequest adRequest = new AdRequest.Builder()
+                    .build();
+            mAdView.loadAd(adRequest);
+        } else {
+            layoutParams.setMargins(0,0,0,0);
         }
 
         if (mViewPagerFragments != null) {

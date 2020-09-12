@@ -18,9 +18,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.smartpack.colorcontrol.fragments.AboutFragment;
 import com.smartpack.colorcontrol.fragments.KlapseFragment;
@@ -29,7 +26,6 @@ import com.smartpack.colorcontrol.fragments.ProfileFragment;
 import com.smartpack.colorcontrol.fragments.ScreenColorFragment;
 import com.smartpack.colorcontrol.utils.DRMColor;
 import com.smartpack.colorcontrol.utils.Klapse;
-import com.smartpack.colorcontrol.utils.Prefs;
 import com.smartpack.colorcontrol.utils.ScreenColor;
 import com.smartpack.colorcontrol.utils.UpdateCheck;
 import com.smartpack.colorcontrol.utils.Utils;
@@ -46,7 +42,6 @@ import java.util.Objects;
 public class MainActivity extends AppCompatActivity {
 
     private boolean mExit;
-    private BottomNavigationView mBottomNav;
     private Handler mHandler = new Handler();
 
     @Override
@@ -68,22 +63,8 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        if (Prefs.getBoolean("allow_ads", true, this)) {
-            AdView mAdView = findViewById(R.id.adView);
-            mAdView.setAdListener(new AdListener() {
-                @Override
-                public void onAdLoaded() {
-                    Utils.mAdLoaded = true;
-                    mAdView.setVisibility(View.VISIBLE);
-                }
-            });
-            AdRequest adRequest = new AdRequest.Builder()
-                    .build();
-            mAdView.loadAd(adRequest);
-        }
-
-        mBottomNav = findViewById(R.id.bottom_navigation);
-        mBottomNav.setOnNavigationItemSelectedListener(navListener);
+        Utils.mBottomNav = findViewById(R.id.bottom_navigation);
+        Utils.mBottomNav.setOnNavigationItemSelectedListener(navListener);
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -93,9 +74,6 @@ public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener
             = menuItem -> {
-        if (Utils.mForegroundActive) {
-            closeForeGround(mBottomNav);
-        }
         Fragment selectedFragment = null;
 
         switch (menuItem.getItemId()) {
@@ -138,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
         Utils.mBackButton.setVisibility(View.GONE);
         Utils.mTitle .setVisibility(View.GONE);
         Utils.mForegroundCard.setVisibility(View.GONE);
+        Utils.mBottomNav.setVisibility(View.VISIBLE);
         Utils.mForegroundActive = false;
     }
 
@@ -186,12 +165,12 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (RootUtils.rootAccess()) {
             if (Utils.mForegroundActive) {
-                closeForeGround(mBottomNav);
+                closeForeGround(Utils.mBottomNav);
             } else if (mExit) {
                 mExit = false;
                 super.onBackPressed();
             } else {
-                Utils.snackbar(mBottomNav, getString(R.string.press_back));
+                Utils.snackbar(Utils.mBottomNav, getString(R.string.press_back));
                 mExit = true;
                 mHandler.postDelayed(() -> mExit = false, 2000);
             }

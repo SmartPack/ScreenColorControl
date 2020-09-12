@@ -115,6 +115,7 @@ public class AboutFragment extends RecyclerViewFragment {
             Utils.mAppIcon.setVisibility(View.VISIBLE);
             Utils.mAppName.setVisibility(View.VISIBLE);
             Utils.mBackButton.setVisibility(View.VISIBLE);
+            Utils.mBottomNav.setVisibility(View.GONE);
             Utils.mForegroundCard.setVisibility(View.VISIBLE);
         });
 

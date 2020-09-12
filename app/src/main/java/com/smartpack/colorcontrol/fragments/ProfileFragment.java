@@ -176,6 +176,7 @@ public class ProfileFragment extends RecyclerViewFragment {
                                 Utils.mForegroundActive = true;
                                 Utils.mBackButton.setVisibility(View.VISIBLE);
                                 Utils.mTitle.setVisibility(View.VISIBLE);
+                                Utils.mBottomNav.setVisibility(View.GONE);
                                 Utils.mForegroundCard.setVisibility(View.VISIBLE);
                                 break;
                             case 2:

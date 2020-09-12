@@ -34,6 +34,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.cardview.widget.CardView;
 
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.smartpack.colorcontrol.R;
 import com.smartpack.colorcontrol.utils.root.RootFile;
@@ -69,7 +70,7 @@ public class Utils {
     public static AppCompatTextView mTitle;
     public static AppCompatTextView mAppName;
     public static AppCompatTextView mText;
-    public static boolean mAdLoaded = false;
+    public static BottomNavigationView mBottomNav;
     public static boolean mForegroundActive = false;
     public static CardView mForegroundCard;
 
