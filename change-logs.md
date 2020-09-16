@@ -1,5 +1,9 @@
 # Change-logs
 
+## 20. September 16, 2020
+*Release-tag: 3.0*<br>
+Introduced new page to explain no root status. Miscellaneous changes.
+
 ## 20. September 12, 2020
 *Release-tag: 2.9*<br>
 Fixed a small layout issue. Again improved Ad layout. Miscellaneous changes.
