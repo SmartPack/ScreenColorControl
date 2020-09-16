@@ -33,6 +33,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".utils.EditorActivity" />
+        <activity android:name=".utils.NoRootActivity" />
 
         <service
             android:name=".utils.KLapseTile"

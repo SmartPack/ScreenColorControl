@@ -8,14 +8,13 @@
 
 package com.smartpack.colorcontrol;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -26,10 +25,10 @@ import com.smartpack.colorcontrol.fragments.ProfileFragment;
 import com.smartpack.colorcontrol.fragments.ScreenColorFragment;
 import com.smartpack.colorcontrol.utils.DRMColor;
 import com.smartpack.colorcontrol.utils.Klapse;
+import com.smartpack.colorcontrol.utils.NoRootActivity;
 import com.smartpack.colorcontrol.utils.ScreenColor;
 import com.smartpack.colorcontrol.utils.UpdateCheck;
 import com.smartpack.colorcontrol.utils.Utils;
-import com.smartpack.colorcontrol.utils.ViewUtils;
 import com.smartpack.colorcontrol.utils.root.RootUtils;
 import com.smartpack.colorcontrol.views.dialog.Dialog;
 
@@ -54,12 +53,10 @@ public class MainActivity extends AppCompatActivity {
         Utils.setLanguage(this);
         setContentView(R.layout.activity_main);
 
-        AppCompatImageView unsupported = findViewById(R.id.no_root_Image);
-        TextView textView = findViewById(R.id.no_root_Text);
-
         if (!RootUtils.rootAccess()) {
-            textView.setText(getString(R.string.no_root));
-            unsupported.setImageDrawable(ViewUtils.getColoredIcon(R.drawable.ic_help, this));
+            Intent noRoot = new Intent(this, NoRootActivity.class);
+            startActivity(noRoot);
+            finish();
             return;
         }
 
@@ -100,10 +97,6 @@ public class MainActivity extends AppCompatActivity {
 
         return true;
     };
-
-    public void androidRooting(View view) {
-        Utils.launchUrl("https://www.google.com/search?site=&source=hp&q=android+rooting+magisk", this);
-    }
 
     public void closeForeGround(View view) {
         Utils.mForegroundCard = findViewById(R.id.about_card);
