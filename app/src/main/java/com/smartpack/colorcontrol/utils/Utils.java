@@ -35,6 +35,7 @@ import androidx.cardview.widget.CardView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
+import com.smartpack.colorcontrol.BuildConfig;
 import com.smartpack.colorcontrol.R;
 import com.smartpack.colorcontrol.utils.root.RootFile;
 import com.smartpack.colorcontrol.utils.root.RootUtils;
@@ -79,6 +80,7 @@ public class Utils {
     public static StringBuilder mProfile;
 
     public static boolean isDonated(Context context) {
+        if (BuildConfig.DEBUG) return true;
         try {
             context.getPackageManager().getApplicationInfo(DONATION_PACKAGE, 0);
             return true;

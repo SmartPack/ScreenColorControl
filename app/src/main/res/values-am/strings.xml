@@ -3,8 +3,6 @@
 
     <string name="about">ስለ እኛ</string>
     <string name="about_me">የስክሪን ቀለም መቆጣጠሪያ ማለት የ ኬካል/ከ-ጠፍ አገልግሎት ያለዉ ከርነል ያለው ስማርት ስልክዎን የስክሪን ቀለም ጠለቅ ባለ ሁኔታ እንዲቆጣጠሩ ታስቦ የተሰራ መተግበሪያ ነዉ።</string>
-    <string name="allow_ads">ማስታወቂያዎች እንዲታዩ ፍቀድ</string>
-    <string name="allow_ads_message">ማስታወቂያ በመተግበሪያው ላይ እንዲታይ በማድረግዎ በጣም እናመሰግናለን!\n\nግን አንዳንዴ ማስታወቂያዎች እንዲታዩ ማድረግ መተግበሪያዉ ያልተፈለገ ባህሪ እንዲያሳይ ሊያደርግ ይችላል። የሆነ ችግር ካስተዋሉ ማስታወቂያ እንዳይታይ የማድረግ ሙሉ ነፃነት አልዎት።</string>
     <string name="apply">ተግብር</string>
     <string name="apply_question">%s ልተግብር?</string>
     <string name="applying_profile">%s በመተግበር ላይ!</string>
@@ -23,10 +21,8 @@
     <string name="delete">ሰርዝ</string>
     <string name="dimming">በመደብዘዝ ላይ</string>
     <string name="dimming_summary">100: ትክክለኛ የብርሀን መጠን; 50: 50% የአሁን ጊዜ ድምቀት</string>
-    <string name="disable_ads_message">እንኳን ደስ አልዎ! ማስታወቂያዎች ከዚህ በኋላ መታየት ያቆማሉ!\n\nከዚህ ማስታወቂያ የሚገኘዉ ገቢ መተግበሪያውን ለሚያበለፅገው ሰዉ በጣም ጠቃሚ እንደሆነ ማወቅ ተገቢ ነዉ! እርስዎን ብዙም የማይረብሽዎ ከሆነ እባክዎን ማስታወቂያ በመተግበሪያዉ ላይ እንዲታይ በመፍቀድ ይተባበሩን።\n\nእናመሰግናለን!!</string>
     <string name="donate_me">የገንዘብ ድጋፍ ልስጥ</string>
     <string name="donate_me_message">\መተግበሪያዉን ከወደዱት እና መደገፍ ከፈለጉ እባክዎን ልገሳ ማድረግ እንዳይረሱ። እያንዳንዷ ትንሽ እርዳታ የበለጠ እንድሰራ ሀይል ይሰጠኛል። አቅሙ ከሌልዎ ግን እንዳያስቡ፤በነፃነት ይጠቀሙ።\n</string>
-    <string name="donate_me_playstore">\nበፔይፓል ወይም ስማርትፓክ ዶኔሽን ፓኬጅን ከ ፕሌይስቶር በመግዛት ድጋፍ ማድረግ ይችላሉ።\n</string>
     <string name="donate_me_summary">ስራችንን መጠነኛ የሆነ የገንዘብ ልገሳ በማድረግ መደገፍ ይፈልጋሉ? እዚህ ጋር ይጫኑ!</string>
     <string name="donate_nope">አሁን አይደለም</string>
     <string name="edit">አስተካክል</string>
@@ -63,7 +59,6 @@
     <string name="others">ሌሎች</string>
     <string name="other_settings">ሌሎች መቼቶች</string>
     <string name="other_settings_summary">ይህ ገፅ እንደ ጥናጋ ቀለም፣የስክሪን ጥናጋ፣የስክሪን ድምቀት ወ.ዘ.ተ ያሉ ተጨማሪ ጠለቅ ያሉ የማሳያ መቼቶችን እንዲያስፈነጥሩ ያግዞታል።</string>
-    <string name="paypal_donation">ፔይፓል</string>
     <string name="permission_denied_write_storage">ማከማቻ ላይ የመፃፍ ፍቃድ ተከልክሏል!</string>
     <string name="playstore">ፕሌይስቶር</string>
     <string name="playstore_summary">የስክሪን ቀለም መቆጣጠሪያን የጎግል ፕሌይስቶር ገፅ ይጎብኙ።</string>

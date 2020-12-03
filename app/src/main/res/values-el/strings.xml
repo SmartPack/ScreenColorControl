@@ -3,8 +3,6 @@
 
     <string name="about">Σχετικά με</string>
     <string name="about_me"> Το Screen Color Control είναι μία εφαρμογή φτιαγμένη για να προσφέρει προηγμένο έλεγχο στο χρώμα της οθόνης έξυπνων συσκευών που διαθέτουν KCAL/K-lapse υποστήριξη.</string>
-    <string name="allow_ads">Επιτρέψτε τις διαφημίσεις</string>
-    <string name="allow_ads_message">Σας ευχαριστούμε πολύ για τη στήριξη στον προγραμματιστή επιτρέποντας τις διαφημίσεις!\n\nΩστόσο, παρακαλώ να σημειωθεί ότι επιτρέποντας τις διαφημίσεις μερικές φορές έχει αποτέλεσμα περίεργη συμπεριφορά. Εάν, αντιμετωπίζετε τέτοια προβλήματα, μη διστάσετε να τις απενεργοποιήσετε.</string>
     <string name="apply">Εφαρμογή</string>
     <string name="apply_question">Εφαρμογή %s?</string>
     <string name="applying_profile">Εφαρμογή %s!</string>
@@ -23,10 +21,8 @@
     <string name="delete">Διαγραφή</string>
     <string name="dimming">Σκίαση</string>
     <string name="dimming_summary">100: Ακριβής φωτεινότητα; 50: 50% της τρέχουσας έντασης.</string>
-    <string name="disable_ads_message">Συγχαρητήρια! Οι διαφημίσεις θα απενεργοποιηθούν σύντομα!\n\nΩστόσο, παρακαλώ να σημειωθεί ότι τα έσοδα από αυτές τις διαφημίσεις είναι πραγματικά χρήσιμα για τον προγραμματιστή ώστε να συνεχίσει τα έργα προγραμματισμού του στο android πιο ενεργά. Εάν δε σας ενοχλεί ιδιαίτερα, παρακαλώ σκεφτείτε να επιτρέψετε τις διαφημίσεις ώστε να στηρίξετε την ανάπτυξη.</string>
     <string name="donate_me">Κάντε μου δωρεά</string>
     <string name="donate_me_message">\nΕάν επιθυμείτε να εκφράσετε την εκτίμισή σας για τη δουλειά μου, παρακαλώ σκεφτείτε να μου κάνετε κάποια δωρεά καθώς θα είναι χρήσιμη ώστε να συνεχίσω τα έργα μου πιο ενεργά, αν και δεν είναι καθόλου απαραίτητο.\n</string>
-    <string name="donate_me_playstore">\nΠαρακαλώ να σημειωθεί: Μπορώ να δεχτώ δωρεές είτε μέσω PayPal, είτε μέσω του SmartPack Donation Package στο PlayStore.\n</string>
     <string name="donate_me_summary">Θέλετε να εκτιμήσετε τη δουλειά μου με μία Δωρεά; Κάντε κλικ εδώ</string>
     <string name="donate_nope">Όχι Τώρα</string>
     <string name="edit">Τροποποίηση</string>
@@ -64,7 +60,6 @@
     <string name="others">Περισσότερα</string>
     <string name="other_settings">Περισσότερες ρυθμίσεις</string>
     <string name="other_settings_summary">Αυτή η σελίδα σας προσφέρει τη δυνατότητα να ρυθμίσετε κάποιες ακόμη προηγμένες ρυθμίσεις οθόνης, όπως την Απόχρωση Οθόνης, Κορεσμό, Ένταση, κτλ.</string>
-    <string name="paypal_donation">PayPal</string>
     <string name="permission_denied_write_storage">Απορρίφθηκε η άδεια πρόσβασης στον αποθηκευτικό χώρο!</string>
     <string name="playstore">PlayStore</string>
     <string name="playstore_summary">Επισκεφθείτε τη σελίδα του Screen Color Control στο PlayStore</string>

@@ -3,8 +3,6 @@
 
     <string name="about">About</string>
     <string name="about_me">Screen Color Control is an app made to offer advanced control over the screen colour of smart devices having KCAL/K-lapse support.</string>
-    <string name="allow_ads">Allow Ads</string>
-    <string name="allow_ads_message">Thank you very much for supporting the developer by allowing Ads!\n\nHowever, please be noted that allowing Ads sometimes results weired behaviour. If you encounter any such issues, feel free to disable it.</string>
     <string name="apply">Apply</string>
     <string name="apply_question">Apply %s?</string>
     <string name="applying_profile">Applying %s!</string>
@@ -24,10 +22,8 @@
     <string name="details">Details</string>
     <string name="dimming">Dimming</string>
     <string name="dimming_summary">100: Accurate brightness; 50: 50% of current intensity.</string>
-    <string name="disable_ads_message">Congrats! Ads will be disabled soon!\n\nHowever, please be noted that the revenue obtained from these Ads are really helpful for the developer to continue his android development projects more active. If it doesn\'t hurt you much, please consider allowing the Ads to support the development.</string>
     <string name="donate_me">Donate to Me</string>
     <string name="donate_me_message">\nIf you like to appreciate my work, please consider donating to me as it is helpful to continue my projects more active, although it is not at all necessary.\n</string>
-    <string name="donate_me_playstore">\nPlease note: I can accept donations either via PayPal, or through SmartPack Donation Package in PlayStore.\n</string>
     <string name="donate_me_summary">Want to appreciate my work with a Donation? Click here</string>
     <string name="donate_nope">Not Now</string>
     <string name="edit">Edit</string>
@@ -70,7 +66,6 @@
     <string name="others">Others</string>
     <string name="other_settings">Other Settings</string>
     <string name="other_settings_summary">This page offers you to tweak few more advanced display settings, such as Saturation Hue, Saturation, Intensity, etc.</string>
-    <string name="paypal_donation">PayPal</string>
     <string name="permission_denied_write_storage">Permission denied for writing to storage!</string>
     <string name="playstore">PlayStore</string>
     <string name="playstore_summary">Visit Screen Color Control page on PlayStore</string>

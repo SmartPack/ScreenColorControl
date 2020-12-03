@@ -3,8 +3,6 @@
 
     <string name="about">Giới thiệu</string>
     <string name="about_me">Screen Color Control là một ứng dụng cho phép bạn điều chỉnh màu sắc màn hình trên các thiết bị có hỗ trợ KCAL/K-lapse</string>
-    <string name="allow_ads">Cho phép quảng cáo</string>
-    <string name="allow_ads_message">Cảm ơn bạn đã ủng hộ chúng tôi (những người làm nên ứng dụng nay) băng cách bật quảng cáo. Nhưng đôi khi bật "cho phép quảng cáo" có thể gây ra lỗi, nếu bạn gặp tình trạng đó thì có thể tắt nó đi </string>
     <string name="apply">Áp dụng</string>
     <string name="apply_question">Bạn muốn áp dụng những cài đặt này?</string>
     <string name="applying_profile">Đang áp dụng!</string>
@@ -23,10 +21,8 @@
     <string name="details">Chi tiết</string>
     <string name="dimming">Giảm sáng</string>
     <string name="dimming_summary">100: Độ sáng chính xác; 50: 50% độ sáng hiện tại.</string>
-    <string name="disable_ads_message">Xin chúc mừng! Quảng cáo sẽ bị tắt!\n\nTuy nhiên, hãy lưu ý rằng doanh thu thu được từ quảng cáo thực sự hữu ích cho chúng tôi để tiếp tục phát triển các dự án Android của mình một cách tích cực hơn. Nếu nó không làm bạn khó chịu, hãy xem xét bật lại quảng cáo</string>
     <string name="donate_me">Ủng hộ chúng tôi</string>
     <string name="donate_me_message">\nNếu các bạn thấy ứng dụng hay, các bạn có thể ủng hộ chúng tôi vì nó sẽ giúp cho dự án của chúng tôi lớn mạnh và nhiều người được biết tới, và việc ủng hô hoàn toàn không bắt buộc.\n</string>
-    <string name="donate_me_playstore">\nXin lưu ý : Chúng tôi có sử dụng Paypal để nhận ủng hộ hoặc bạn có thể ủng hộ qua việc mua ứng dụng SmartPack Doantion Packages trên Playstore.\n</string>
     <string name="donate_me_summary">Bạn muốn động viên chúng tôi qua sản phẩm này? Ấn vào đây</string>
     <string name="donate_nope">Lúc Khác</string>
     <string name="edit">Chỉnh sửa</string>

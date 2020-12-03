@@ -8,6 +8,7 @@
 
 package com.smartpack.colorcontrol.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,7 +25,6 @@ import com.smartpack.colorcontrol.BuildConfig;
 import com.smartpack.colorcontrol.MainActivity;
 import com.smartpack.colorcontrol.R;
 import com.smartpack.colorcontrol.utils.Prefs;
-import com.smartpack.colorcontrol.utils.Profile;
 import com.smartpack.colorcontrol.utils.UpdateCheck;
 import com.smartpack.colorcontrol.utils.Utils;
 import com.smartpack.colorcontrol.views.dialog.Dialog;
@@ -77,6 +77,7 @@ public class AboutFragment extends RecyclerViewFragment {
         creditsInit(items);
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private void aboutInit(List<RecyclerViewItem> items) {
 
         TitleView about = new TitleView();
@@ -161,23 +162,19 @@ public class AboutFragment extends RecyclerViewFragment {
             Dialog donate_to_me = new Dialog(requireActivity());
             donate_to_me.setIcon(R.mipmap.ic_launcher);
             donate_to_me.setTitle(getString(R.string.donate_me));
-            if (Utils.isDonated(requireActivity())) {
-                donate_to_me.setMessage(getString(R.string.donate_me_message));
-                donate_to_me.setNegativeButton(getString(R.string.donate_nope), (dialogInterface, i) -> {
-                });
-            } else {
-                donate_to_me.setMessage(getString(R.string.donate_me_message) + getString(R.string.donate_me_playstore));
-                donate_to_me.setNegativeButton(getString(R.string.purchase_app), (dialogInterface, i) -> {
-                    Utils.launchUrl("https://play.google.com/store/apps/details?id=com.smartpack.donate", getActivity());
-                });
-            }
-            donate_to_me.setPositiveButton(getString(R.string.paypal_donation), (dialog1, id1) -> {
-                Utils.launchUrl("https://www.paypal.me/menacherry", getActivity());
+            donate_to_me.setMessage(getString(R.string.donate_me_message));
+            donate_to_me.setNegativeButton(getString(R.string.donate_nope), (dialogInterface, i) -> {
+            });
+            donate_to_me.setPositiveButton(getString(R.string.purchase_app), (dialogInterface, i) -> {
+                Utils.launchUrl("https://play.google.com/store/apps/details?id=com.smartpack.donate", getActivity());
             });
             donate_to_me.show();
         });
 
-        items.add(donatetome);
+        if (!Utils.isDonated(requireActivity())) {
+            items.add(donatetome);
+        }
+
         DescriptionView share = new DescriptionView();
         share.setDrawable(getResources().getDrawable(R.drawable.ic_share));
         share.setTitle(getString(R.string.share_app));
@@ -258,20 +255,18 @@ public class AboutFragment extends RecyclerViewFragment {
                 Menu menu = popupMenu.getMenu();
                 menu.add(Menu.NONE, 1, Menu.NONE, getString(R.string.dark_theme)).setCheckable(true)
                         .setChecked(Prefs.getBoolean("dark_theme", true, getActivity()));
-                menu.add(Menu.NONE, 2, Menu.NONE, getString(R.string.allow_ads)).setCheckable(true)
-                        .setChecked(Prefs.getBoolean("allow_ads", true, getActivity()));
                 SubMenu language = menu.addSubMenu(Menu.NONE, 0, Menu.NONE, getString(R.string.language, Utils.getLanguage(getActivity())));
-                language.add(Menu.NONE, 3, Menu.NONE, getString(R.string.language_default)).setCheckable(true)
+                language.add(Menu.NONE, 2, Menu.NONE, getString(R.string.language_default)).setCheckable(true)
                         .setChecked(Utils.languageDefault(getActivity()));
-                language.add(Menu.NONE, 4, Menu.NONE, getString(R.string.language_en)).setCheckable(true)
+                language.add(Menu.NONE, 3, Menu.NONE, getString(R.string.language_en)).setCheckable(true)
                         .setChecked(Prefs.getBoolean("use_en", false, getActivity()));
-                language.add(Menu.NONE, 5, Menu.NONE, getString(R.string.language_ko)).setCheckable(true)
+                language.add(Menu.NONE, 4, Menu.NONE, getString(R.string.language_ko)).setCheckable(true)
                         .setChecked(Prefs.getBoolean("use_ko", false, getActivity()));
-                language.add(Menu.NONE, 6, Menu.NONE, getString(R.string.language_am)).setCheckable(true)
+                language.add(Menu.NONE, 5, Menu.NONE, getString(R.string.language_am)).setCheckable(true)
                         .setChecked(Prefs.getBoolean("use_am", false, getActivity()));
-                language.add(Menu.NONE, 7, Menu.NONE, getString(R.string.language_el)).setCheckable(true)
+                language.add(Menu.NONE, 6, Menu.NONE, getString(R.string.language_el)).setCheckable(true)
                         .setChecked(Prefs.getBoolean("use_el", false, getActivity()));
-                language.add(Menu.NONE, 8, Menu.NONE, getString(R.string.language_vi)).setCheckable(true)
+                language.add(Menu.NONE, 7, Menu.NONE, getString(R.string.language_vi)).setCheckable(true)
                         .setChecked(Prefs.getBoolean("use_vi", false, getActivity()));
                 popupMenu.setOnMenuItemClickListener(item -> {
                     switch (item.getItemId()) {
@@ -286,27 +281,6 @@ public class AboutFragment extends RecyclerViewFragment {
                             restartApp();
                             break;
                         case 2:
-                            if (Prefs.getBoolean("allow_ads", true, getActivity())) {
-                                Prefs.saveBoolean("allow_ads", false, getActivity());
-                                new Dialog(requireActivity())
-                                        .setMessage(R.string.disable_ads_message)
-                                        .setCancelable(false)
-                                        .setPositiveButton(R.string.ok, (dialog, id) -> {
-                                            restartApp();
-                                        })
-                                        .show();
-                            } else {
-                                Prefs.saveBoolean("allow_ads", true, getActivity());
-                                new Dialog(requireActivity())
-                                        .setMessage(R.string.allow_ads_message)
-                                        .setCancelable(false)
-                                        .setPositiveButton(R.string.ok, (dialog, id) -> {
-                                            restartApp();
-                                        })
-                                        .show();
-                            }
-                            break;
-                        case 3:
                             if (!Utils.languageDefault(getActivity())) {
                                 Prefs.saveBoolean("use_en", false, getActivity());
                                 Prefs.saveBoolean("use_ko", false, getActivity());
@@ -316,7 +290,7 @@ public class AboutFragment extends RecyclerViewFragment {
                                 restartApp();
                             }
                             break;
-                        case 4:
+                        case 3:
                             if (!Prefs.getBoolean("use_en", false, getActivity())) {
                                 Prefs.saveBoolean("use_en", true, getActivity());
                                 Prefs.saveBoolean("use_ko", false, getActivity());
@@ -326,7 +300,7 @@ public class AboutFragment extends RecyclerViewFragment {
                                 restartApp();
                             }
                             break;
-                        case 5:
+                        case 4:
                             if (!Prefs.getBoolean("use_ko", false, getActivity())) {
                                 Prefs.saveBoolean("use_en", false, getActivity());
                                 Prefs.saveBoolean("use_ko", true, getActivity());
@@ -336,7 +310,7 @@ public class AboutFragment extends RecyclerViewFragment {
                                 restartApp();
                             }
                             break;
-                        case 6:
+                        case 5:
                             if (!Prefs.getBoolean("use_am", false, getActivity())) {
                                 Prefs.saveBoolean("use_en", false, getActivity());
                                 Prefs.saveBoolean("use_ko", false, getActivity());
@@ -346,7 +320,7 @@ public class AboutFragment extends RecyclerViewFragment {
                                 restartApp();
                             }
                             break;
-                        case 7:
+                        case 6:
                             if (!Prefs.getBoolean("use_el", false, getActivity())) {
                                 Prefs.saveBoolean("use_en", false, getActivity());
                                 Prefs.saveBoolean("use_ko", false, getActivity());
@@ -356,7 +330,7 @@ public class AboutFragment extends RecyclerViewFragment {
                                 restartApp();
                             }
                             break;
-                        case 8:
+                        case 7:
                             if (!Prefs.getBoolean("use_vi", false, getActivity())) {
                                 Prefs.saveBoolean("use_en", false, getActivity());
                                 Prefs.saveBoolean("use_ko", false, getActivity());

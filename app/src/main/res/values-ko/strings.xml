@@ -2,8 +2,6 @@
     <!--Author: SmgKhOaRn <smgkhoarn@gmail.com>-->
 
     <string name="about">정보</string>
-    <string name="allow_ads">광고 활성화</string>
-    <string name="allow_ads_message">개발자를 지원해주셔서 매우 감사합니다!\n\n그러나, 이것을 활성화함으로 인해 문제가 생긴다면, 해제하셔도 문제없습니다. </string>
     <string name="apply">적용</string>
     <string name="apply_question">%s을(를) 적용하시겠어요?</string>
     <string name="applying_profile">%s을 적용하는 중!</string>
@@ -22,10 +20,8 @@
     <string name="delete">제거</string>
     <string name="dimming">디밍</string>
     <string name="dimming_summary">100: 정확한 밝기; 50: 현제 밝기의 50%</string>
-    <string name="disable_ads_message">축하합니다! 광고는 곧 비활성화될 것입니다!\n\n그러나, 광고에서 나오는 수익은 개발자에게 있어 더 활발하게 프로젝트를 이어나갈 수 있게 합니다. 만약 크게 거슬리지 않는다면, 프로젝트를 지원하기 위해 광고를 활성화하는 것을 고려해보세요.</string>
     <string name="donate_me">저에게 기부하기</string>
     <string name="donate_me_message">\n만약 여러분이 제 작업을 좋아하신다면, 기부해주시는 건 어떤가요? 프로젝트 개발에 큰 도움이 됩니다. 물론 필수는 아니에요.\n</string>
-    <string name="donate_me_playstore">\n알아두기: PayPal, 혹은 플레이 스토어에 있는 SmartPack Donation 앱을 통해 기부할 수 있습니다.\n</string>
     <string name="donate_me_summary">기부로 제 프로젝트에 도움을 주시고 싶으세요? 여기를 누르세요.</string>
     <string name="donate_nope">지금은 아니에요</string>
     <string name="edit">수정</string>
