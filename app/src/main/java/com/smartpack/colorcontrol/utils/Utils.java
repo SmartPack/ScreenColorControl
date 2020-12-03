@@ -33,7 +33,6 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.cardview.widget.CardView;
 
-import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.smartpack.colorcontrol.R;
@@ -96,10 +95,6 @@ public class Utils {
             AppCompatDelegate.setDefaultNightMode(
                     AppCompatDelegate.MODE_NIGHT_NO);
         }
-    }
-
-    public static void initializeGoogleAds(Context context) {
-        MobileAds.initialize(context, "ca-app-pub-7791710838910455~2525317068");
     }
 
     static void startService(Context context, Intent intent) {
