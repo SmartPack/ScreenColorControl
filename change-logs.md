@@ -1,5 +1,9 @@
 # Change-logs
 
+## 21. December 03, 2020
+*Release-tag: 3.1*<br>
+Completely remove Ads from app. Updated b uild tools. Miscellaneous changes.
+
 ## 20. September 16, 2020
 *Release-tag: 3.0*<br>
 Introduced new page to explain no root status. Miscellaneous changes.
