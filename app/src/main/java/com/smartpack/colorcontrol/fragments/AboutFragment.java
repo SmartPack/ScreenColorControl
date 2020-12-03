@@ -25,7 +25,6 @@ import com.smartpack.colorcontrol.BuildConfig;
 import com.smartpack.colorcontrol.MainActivity;
 import com.smartpack.colorcontrol.R;
 import com.smartpack.colorcontrol.utils.Prefs;
-import com.smartpack.colorcontrol.utils.UpdateCheck;
 import com.smartpack.colorcontrol.utils.Utils;
 import com.smartpack.colorcontrol.views.dialog.Dialog;
 import com.smartpack.colorcontrol.views.recyclerview.DescriptionView;
@@ -122,29 +121,13 @@ public class AboutFragment extends RecyclerViewFragment {
 
         items.add(changelogs);
 
-        if (UpdateCheck.isPlayStoreInstalled(requireActivity())) {
-            DescriptionView playstore = new DescriptionView();
-            playstore.setDrawable(getResources().getDrawable(R.drawable.ic_playstore));
-            playstore.setTitle(getString(R.string.playstore));
-            playstore.setSummary(getString(R.string.playstore_summary));
-            playstore.setOnItemClickListener(item -> Utils.launchUrl("https://play.google.com/store/apps/details?id=com.smartpack.colorcontrol", requireActivity()));
+        DescriptionView playstore = new DescriptionView();
+        playstore.setDrawable(getResources().getDrawable(R.drawable.ic_playstore));
+        playstore.setTitle(getString(R.string.playstore));
+        playstore.setSummary(getString(R.string.playstore_summary));
+        playstore.setOnItemClickListener(item -> Utils.launchUrl("https://play.google.com/store/apps/details?id=com.smartpack.colorcontrol", requireActivity()));
 
-            items.add(playstore);
-        } else {
-            DescriptionView updateCheck = new DescriptionView();
-            updateCheck.setDrawable(getResources().getDrawable(R.drawable.ic_update));
-            updateCheck.setTitle(getString(R.string.update_check));
-            updateCheck.setSummary(getString(R.string.update_check_summary));
-            updateCheck.setOnItemClickListener(item -> {
-                if (!Utils.isNetworkAvailable(requireActivity())) {
-                    Utils.snackbar(getRootView(), getString(R.string.no_internet));
-                    return;
-                }
-                UpdateCheck.updateCheck(getActivity());
-            });
-
-            items.add(updateCheck);
-        }
+        items.add(playstore);
 
         DescriptionView sourcecode = new DescriptionView();
         sourcecode.setDrawable(getResources().getDrawable(R.drawable.ic_source));

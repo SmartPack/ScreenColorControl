@@ -32,7 +32,6 @@
     <string name="fadeback_time_summary">The number of minutes before End Time when RGB should start going back to Daytime colors.</string>
     <string name="flow_freq">Flow Frequency</string>
     <string name="flow_freq_summary">The amount of milliseconds after which 1 RGB frame is shifted.</string>
-    <string name="get_it">Get it</string>
     <string name="got_it">Got it</string>
     <string name="grayscale_mode">Grayscale Mode</string>
     <string name="green">Green</string>
@@ -105,12 +104,6 @@
     <string name="sure_question">Delete %s?</string>
     <string name="time_mode_warning">Due to the K-lapse time schedule settings, it will take some time to get this change in full effect. For immediate effect, please disable K-Lapse and try again.</string>
     <string name="unknown">Unknown</string>
-    <string name="update_check">Check for update</string>
-    <string name="update_check_failed">Failed to get latest version information!</string>
-    <string name="update_check_summary">Check for a new versions of Screen Color Control</string>
-    <string name="update_available">New update available!\nv</string>
-    <string name="update_available_summary">%s\n\n**Important: Please download and manually update the app!**</string>
-    <string name="uptodate_message">Congrats! You are up-to-date.</string>
     <string name="version">Version</string>
     <string name="wrong_extension">Please select a file with %s extension.</string>
     <string name="wrong_profile">%s is not a proper Color Control profile! Aborting.</string>

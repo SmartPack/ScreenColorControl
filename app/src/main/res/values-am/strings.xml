@@ -31,7 +31,6 @@
     <string name="fadeback_time_summary">በመድረሻ ጊዜ፤አርጂቢ ወደ ቀንጊዜ ቀለም ከመለወጡ በፊት ያለ የደቂቃዎች ቁጥር።</string>
     <string name="flow_freq">የፍሰት ድግግሞሽ</string>
     <string name="flow_freq_summary">ከአንድ አርጂቢ አውታር ለውጥ በኋላ ያለ የሚሊሰከንዶች መጠን።</string>
-    <string name="get_it">አግኝቸዋለሁ</string>
     <string name="got_it">ገብቶኛል</string>
     <string name="grayscale_mode">ግሬይስኬል ስልት</string>
     <string name="green">አረንጓዴ</string>
@@ -95,12 +94,6 @@
     <string name="sure_question">%s ላጥፋ?</string>
     <string name="time_mode_warning">በ ከ-ጠፍ የጊዜ ሰሌዳ መቼቶች የተነሳ የተደረጉት ለውጦች ሙሉ በሙሉ የሚፈለገውን ውጤት ለማሳየት የተወሰነ ጊዜ ሊወስድ ይችላል። ውጤቱን በቶሎ ማየት ከፈለጉ እባክዎን ከ-ጠፍን ያጥፉና እንደገና ይሞክሩ።</string>
     <string name="unknown">የማይታወቅ</string>
-    <string name="update_check">አዲስ የመተግበሪያ እትም ከወጣ አረጋግጥ</string>
-    <string name="update_check_failed">ስለ አዲሱ እትም መረጃ ማግኘት አልተቻለም!</string>
-    <string name="update_check_summary">አዲስ የስክሪን ቀለም መቆጣጠሪያ እትም ከወጣ አረጋግጥ</string>
-    <string name="update_available">አዲስ የመተግበሪያ እትም ተገኝቷል!\nv</string>
-    <string name="update_available_summary">%s\n\n**ማስታወሻ: እባክዎን መተግበሪያዉን በማዉረድ በራስዎ ይጫኑ!**</string>
-    <string name="uptodate_message">እንኳን ደስ አልዎት! የሚጠቀሙት መተግበሪያ የመጨረሻ እትም ነዉ።</string>
     <string name="version">እትም</string>
     <string name="wrong_extension">እባክዎን %s የሆነ ቅጥያ ያለው ፋይል ይምረጡ!</string>
     <string name="wrong_profile">%s ትክክለኛ የቀለም መቆጣጠሪያ ነባር-ማህደር አይደለም! በማቋረጥ ላይ</string>

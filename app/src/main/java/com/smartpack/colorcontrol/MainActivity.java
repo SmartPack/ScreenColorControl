@@ -27,7 +27,6 @@ import com.smartpack.colorcontrol.utils.DRMColor;
 import com.smartpack.colorcontrol.utils.Klapse;
 import com.smartpack.colorcontrol.utils.NoRootActivity;
 import com.smartpack.colorcontrol.utils.ScreenColor;
-import com.smartpack.colorcontrol.utils.UpdateCheck;
 import com.smartpack.colorcontrol.utils.Utils;
 import com.smartpack.colorcontrol.utils.root.RootUtils;
 import com.smartpack.colorcontrol.views.dialog.Dialog;
@@ -134,22 +133,6 @@ public class MainActivity extends AppCompatActivity {
         if (!Klapse.supported() && !ScreenColor.getInstance().supported()
                 && !DRMColor.supported()) {
             noSupport();
-            return;
-        }
-
-        if (!Utils.isDownloadBinaries()) {
-            return;
-        }
-
-        // Initialize manual Update Check, if play store not found
-        if (!UpdateCheck.isPlayStoreInstalled(this)) {
-            if (!Utils.checkWriteStoragePermission(this)) {
-                return;
-            }
-            if (!Utils.isNetworkAvailable(this)) {
-                return;
-            }
-            UpdateCheck.autoUpdateCheck(this);
         }
     }
 

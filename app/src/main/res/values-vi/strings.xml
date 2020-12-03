@@ -88,12 +88,6 @@
     <string name="sure_question">Xóa %s?</string>
     <string name="time_mode_warning">Do cài đặt lịch trình thời gian K-lapse, sẽ mất một thời gian để thay đổi này có hiệu lực. Để có hiệu lực ngay lập tức, vui lòng tắt K-Lapse và thử lại.</string>
     <string name="unknown">Không biết</string>
-    <string name="update_check">Kiểm tra bản update</string>
-    <string name="update_check_failed">Không thể lấy được thông tin bản update!</string>
-    <string name="update_check_summary">Hãy xem phiên bản mới của app Screen Color Control</string>
-    <string name="update_available">ĐÃ CÓ BẢN CẬP NHẬT MỚI!\nv</string>
-    <string name="update_available_summary">%s\n\n**QUAN TRỌNG: Hãy tải app và update nó một cách thủ công!**</string>
-    <string name="uptodate_message">CHÚC MỪNG! Ứng dụng của bạn đã được update.</string>
     <string name="version">Phiên bản</string>
     <string name="wrong_extension">Hãy chọn một file mà có phẩn mở rộng %s này.</string>
     <string name="wrong_profile">%s đây không phải màu màn hình phù hợp! Đang thoát.</string>

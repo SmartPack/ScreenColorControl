@@ -31,7 +31,6 @@
     <string name="fadeback_time_summary">Ο αριθμός των λεπτών πριν την Ώρα Λήξης όταν το RGB πρέπει να αρχίσει να πηγαίνει πίσω στα χρώματα Ημέρας.</string>
     <string name="flow_freq">Συχνότητα Ροής</string>
     <string name="flow_freq_summary">Το ποσό των χιλιοστών του δευτερολέπτου μετά τα οποία 1 καρέ RGB αλλάζει.</string>
-    <string name="get_it">Λήψη</string>
     <string name="got_it">Το κατάλαβα</string>
     <string name="grayscale_mode">Λειτουργία κλίμακας του γκρι</string>
     <string name="green">Πράσινο</string>
@@ -96,12 +95,6 @@
     <string name="sure_question">Διαγραφή %s?</string>
     <string name="time_mode_warning">Εξαιτίας των ρυθμίσεων χρονοδιαγράμματος του K-lapse, θα πάρει κάποιο χρόνο για να αποκτήσετε αυτήν την αλλαγή σε πλήρη εφαρμογή. Για άμεσο αποτέλεσμα, παρακαλώ απενεργοποιήστε το K-Lapse και προσπαθήστε ξανά.</string>
     <string name="unknown">Άγνωστο</string>
-    <string name="update_check">Έλεγχος για ενημέρωση</string>
-    <string name="update_check_failed">Αποτυχία λήψης πληροφοριών τελευταίας έκδοσης!</string>
-    <string name="update_check_summary">Ελέγχος για νεα έκδοση του Screen Color Control</string>
-    <string name="update_available">Νέα ενημέρωση διαθέσιμη!\nv</string>
-    <string name="update_available_summary">%s\n\n**Σημαντικό:Παρακαλώ κατεβάστε κι ενημερώστε την εφαρμογή χειροκίνητα!**</string>
-    <string name="uptodate_message">Συγχαρητήρια! Είστε ενημερωμένος.</string>
     <string name="version">Έκδοση</string>
     <string name="wrong_extension">Παρακαλώ επιλέξτε ένα αρχείο με %s προέκταση.</string>
     <string name="wrong_profile">%s δεν είναι κατάλληλο προφίλ για το Color Control! Διακοπή.</string>
