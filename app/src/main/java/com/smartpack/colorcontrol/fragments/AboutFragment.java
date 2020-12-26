@@ -157,24 +157,9 @@ public class AboutFragment extends RecyclerViewFragment {
         if (!Utils.isDonated(requireActivity())) {
             items.add(donatetome);
         }
-
-        DescriptionView share = new DescriptionView();
-        share.setDrawable(getResources().getDrawable(R.drawable.ic_share));
-        share.setTitle(getString(R.string.share_app));
-        share.setSummary(getString(R.string.share_app_summary));
-        share.setOnItemClickListener(item -> {
-            Intent shareapp = new Intent()
-                    .setAction(Intent.ACTION_SEND)
-                    .putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name))
-                    .putExtra(Intent.EXTRA_TEXT, getString(R.string.share_app_message, BuildConfig.VERSION_NAME))
-                    .setType("text/plain");
-            Intent shareIntent = Intent.createChooser(shareapp, null);
-            startActivity(shareIntent);
-        });
-
-        items.add(share);
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private void creditsInit(List<RecyclerViewItem> items) {
 
         TitleView credits = new TitleView();
