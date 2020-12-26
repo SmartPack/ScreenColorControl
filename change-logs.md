@@ -1,8 +1,12 @@
 # Change-logs
 
+## 22. December 26, 2020
+*Release-tag: 3.1*<br>
+Show Project discontinued status on About page. Removed share option from about page. Updated build tools.
+
 ## 21. December 03, 2020
 *Release-tag: 3.1*<br>
-Completely remove Ads from app. Updated b uild tools. Miscellaneous changes.
+Completely remove Ads from app. Updated build tools. Miscellaneous changes.
 
 ## 20. September 16, 2020
 *Release-tag: 3.0*<br>
