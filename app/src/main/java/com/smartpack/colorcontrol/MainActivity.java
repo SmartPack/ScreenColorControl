@@ -26,6 +26,7 @@ import com.smartpack.colorcontrol.fragments.ScreenColorFragment;
 import com.smartpack.colorcontrol.utils.DRMColor;
 import com.smartpack.colorcontrol.utils.Klapse;
 import com.smartpack.colorcontrol.utils.NoRootActivity;
+import com.smartpack.colorcontrol.utils.Prefs;
 import com.smartpack.colorcontrol.utils.ScreenColor;
 import com.smartpack.colorcontrol.utils.Utils;
 import com.smartpack.colorcontrol.utils.root.RootUtils;
@@ -115,9 +116,15 @@ public class MainActivity extends AppCompatActivity {
         Dialog alert = new Dialog(Objects.requireNonNull(this));
         alert.setIcon(R.mipmap.ic_launcher);
         alert.setTitle(getString(R.string.app_name));
-        alert.setMessage(getString(R.string.no_support, "KCAL/K-lapse"));
+        if (!Klapse.supported() && !ScreenColor.getInstance().supported()
+                && !DRMColor.supported()) {
+            alert.setMessage(getString(R.string.no_support, "KCAL/K-lapse") + "\n\n" + getString(R.string.project_abundant_message));
+        } else {
+            alert.setMessage(getString(R.string.project_abundant_message));
+        }
         alert.setCancelable(false);
         alert.setPositiveButton(getString(R.string.got_it), (dialog, id) -> {
+            Prefs.saveBoolean("hide_abundant_message", true, this);
         });
 
         alert.show();
@@ -130,8 +137,7 @@ public class MainActivity extends AppCompatActivity {
         if (!RootUtils.rootAccess()) {
             return;
         }
-        if (!Klapse.supported() && !ScreenColor.getInstance().supported()
-                && !DRMColor.supported()) {
+        if (!Prefs.getBoolean("hide_abundant_message", false, this)) {
             noSupport();
         }
     }

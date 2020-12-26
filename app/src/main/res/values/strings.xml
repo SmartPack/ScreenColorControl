@@ -2,7 +2,7 @@
     <string name="app_name" translatable="false">Screen Color Control</string>
 
     <string name="about">About</string>
-    <string name="about_me">Screen Color Control is an app made to offer advanced control over the screen colour of smart devices having KCAL/K-lapse support.</string>
+    <string name="about_me">Screen Color Control is an app made to offer advanced control over the screen colour of smart devices having KCAL/K-lapse support.\n(Please Note: This project is no more maintained!)</string>
     <string name="apply">Apply</string>
     <string name="apply_question">Apply %s?</string>
     <string name="applying_profile">Applying %s!</string>
@@ -74,6 +74,7 @@
     <string name="profile_applied">Profile applied successfully!</string>
     <string name="profile_exists">A profile named %s is already exists! Aborting.</string>
     <string name="profile_summary">In this section, you can create, import, view and easily apply Screen Color profiles within few clicks.</string>
+    <string name="project_abundant_message">Please Note: This project is no more maintained. Please consider switching to SmartPack-Kernel Manager (offers KCAL/K-lapse support) or another application meeting your need!</string>
     <string name="pulse_freq">Pulse Frequency</string>
     <string name="pulse_freq_summary">The number of milliseconds after which klapse_pulse is called.</string>
     <string name="purchase_app">Donation App</string>
